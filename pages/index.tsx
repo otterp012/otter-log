@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 
 const Home: NextPage = () => {
-  return <div className="flex">123</div>
+  return <div>123</div>
 }
 
 export default Home
