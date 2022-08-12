@@ -4,13 +4,13 @@ import Layout from "components/layout/layout";
 const Blog = () => {
   return (
     <Layout>
-      <form className='w-[80%] mx-auto'>
+      <form className='px-5 w-full mx-auto'>
         <label htmlFor='search' />
         <input
           id='search'
           type='text'
           className='w-full h-14 focus:outline-none mx-auto px-5 py-5'
-          placeholder='검색할 내용을 입력해 주세요.'
+          placeholder='검색기능은 아직 추가하지 못했어요.'
         />
       </form>
       <div className='px-3'>

@@ -1,6 +1,6 @@
 const FeaturedCard = () => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col w-full'>
       <div className='h-full'>
         {/* <Image
         src='/test5.jpeg'

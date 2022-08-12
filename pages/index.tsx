@@ -9,8 +9,8 @@ const Home: NextPage = () => {
       <Layout>
         <FeaturedCard />
         {/* RECENT post */}
-        <div className='mt-10 w-full px-3'>
-          <h2 className='font-bold text-3xl text-center italic'>
+        <div className='mt-10 w-full'>
+          <h2 className='font-bold text-3xl text-center italic mb-8 md:mb-10'>
             RECENT POSTS
           </h2>
 

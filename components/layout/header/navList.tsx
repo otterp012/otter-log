@@ -15,7 +15,7 @@ const NavList: React.FC<NavListProps> = ({ query, title }) => {
         <a
           className={`${
             pathname === query && "text-blue-900"
-          } md:text-xl font-semibold`}
+          } md:text-xl font-semibold hover:text-blue-500`}
         >
           {title}
         </a>

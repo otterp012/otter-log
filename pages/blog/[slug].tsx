@@ -5,7 +5,7 @@ const BlogDetail = () => {
     <Layout>
       <section className='px-5'>
         <div className='flex items-end justify-between'>
-          <h2 className='text-3xl max-w-[80%] break-all md:text-5xl'>
+          <h2 className='text-3xl max-w-[80%] break-all font-semibold md:text-5xl'>
             NEXT로 블로그 만들기
           </h2>
           <time className='font-bold text-xs text-gray-300'>2022.08.10</time>
@@ -13,7 +13,7 @@ const BlogDetail = () => {
 
         <div className=''>
           {/*  img */}
-          <img src='test1.jpeg' alt='test' className='w-[60%] mx-auto mt-5' />
+          <img src='/test1.jpeg' alt='test' className='w-[70%] mx-auto mt-7' />
         </div>
 
         <div className='mt-10 break-words'>
