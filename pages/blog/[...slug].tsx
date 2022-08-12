@@ -4,7 +4,6 @@ import { GetStaticProps, NextPage } from "next";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 const BlogDetail: NextPage = ({ data }) => {
-  console.log(data);
   const MDXComponent = useMDXComponent(data.body.code);
   return (
     <Layout>

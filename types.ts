@@ -3,4 +3,5 @@ export type MDXProps = {
   description: string;
   publishedAt: string;
   thumnailImg: string;
+  slug: string;
 };
