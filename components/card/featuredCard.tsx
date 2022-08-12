@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MDXProps } from "types";
 
-const FeaturedCard: React.FC<MDXProps> = ({
+const FeaturedCard = ({
   title,
   description,
   publishedAt,

@@ -1,13 +1,7 @@
 import Link from "next/link";
 import { MDXProps } from "types";
 
-const Card: React.FC<MDXProps> = ({
-  title,
-  publishedAt,
-  description,
-  thumnailImg,
-  slug,
-}) => {
+const Card = ({ title, publishedAt, description, thumnailImg, slug }) => {
   return (
     <Link href={slug}>
       <div className='w-full h-30 flex border-b mt-5 pb-5 md:h-53 last:border-none'>
