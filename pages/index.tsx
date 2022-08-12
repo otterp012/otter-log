@@ -4,7 +4,7 @@ import FeaturedCard from "components/card/featuredCard";
 import Card from "components/card/card";
 import { allArticles, allFeatureds, Article } from "contentlayer/generated";
 
-const Home: NextPage<MDXProps> = ({
+const Home: NextPage = ({
   featuredPost,
   recentPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
