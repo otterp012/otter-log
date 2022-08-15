@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { MDXProps } from "types";
 
-const FeaturedCard = ({
+const FeaturedCard: React.FC<MDXProps> = ({
   title,
   description,
   publishedAt,
-  thumnailImg,
+  thumbnailImg,
   slug,
 }) => {
   return (
@@ -13,7 +13,7 @@ const FeaturedCard = ({
       <section className='flex flex-col w-full hover:cursor-pointer'>
         <div className='h-full'>
           <img
-            src={thumnailImg}
+            src={thumbnailImg}
             alt={title}
             className='object-cover w-full h-[420px] md:h-[560px]'
           />

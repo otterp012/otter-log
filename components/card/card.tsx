@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { MDXProps } from "types";
 
-const Card = ({ title, publishedAt, description, thumnailImg, slug }) => {
+const Card: React.FC<MDXProps> = ({
+  title,
+  publishedAt,
+  description,
+  thumbnailImg,
+  slug,
+}) => {
   return (
     <Link href={slug}>
-      <div className='w-full h-30 flex border-b mt-5 pb-5 md:h-53 last:border-none'>
+      <section className='w-full h-30 flex border-b mt-5 pb-5 md:h-53 last:border-none'>
         <div>
           <img
-            src={thumnailImg}
+            src={thumbnailImg}
             alt='test'
             className='object-cover w-[120px] h-[120px] md:w-48 md:h-48'
           />
@@ -26,7 +32,7 @@ const Card = ({ title, publishedAt, description, thumnailImg, slug }) => {
             {description}
           </p>
         </div>
-      </div>
+      </section>
     </Link>
   );
 };

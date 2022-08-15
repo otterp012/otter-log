@@ -15,7 +15,7 @@ const Home: NextPage = ({
           title={featuredPost.title}
           description={featuredPost.description}
           publishedAt={featuredPost.publishedAt}
-          thumnailImg={featuredPost.thumnailImg}
+          thumbnailImg={featuredPost.thumbnailImg}
           slug={featuredPost._raw.flattenedPath}
         />
         {/* RECENT post */}
@@ -28,7 +28,7 @@ const Home: NextPage = ({
               title={recentPost.title}
               description={recentPost.description}
               publishedAt={recentPost.publishedAt}
-              thumnailImg={recentPost.thumnailImg}
+              thumbnailImg={recentPost.thumbnailImg}
               key={recentPost.title}
               slug={recentPost._raw.flattenedPath}
             />
