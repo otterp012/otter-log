@@ -10,25 +10,25 @@ const Card: React.FC<MDXProps> = ({
 }) => {
   return (
     <Link href={slug}>
-      <section className='w-full h-30 flex border-b mt-5 pb-5 md:h-53 last:border-none'>
+      <section className='h-30 md:h-53 mt-5 flex w-full border-b pb-5 last:border-none md:px-5'>
         <div>
           <img
             src={thumbnailImg}
             alt='test'
-            className='object-cover w-[120px] h-[120px] md:w-48 md:h-48'
+            className='h-[180px] w-[180px] object-cover md:h-48 md:w-48'
           />
         </div>
 
-        <div className='min-h-full w-[65%] ml-5 md:py-1'>
-          <div className='min-h-[50%] mb-3'>
+        <div className='ml-5 min-h-full w-[65%] md:py-1'>
+          <div className='mb-3 min-h-[50%]'>
             <time className='text-xs font-bold text-gray-400 md:text-sm'>
               {publishedAt}
             </time>
-            <h3 className='text-md font-bold break-all line-clamp-2 md:text-2xl'>
+            <h3 className='break-all text-xl font-bold line-clamp-2 md:text-2xl'>
               {title}
             </h3>
           </div>
-          <p className='break-words line-clamp-2 text-sm md:text-lg md:mt-8 w-[90%]'>
+          <p className='w-[90%] break-words text-sm line-clamp-2 md:mt-8 md:text-lg'>
             {description}
           </p>
         </div>
