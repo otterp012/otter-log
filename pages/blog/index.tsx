@@ -1,10 +1,10 @@
 import Card from "components/card/card";
 import Layout from "components/layout/layout";
-import { allArticles, allFeatureds, Article } from "contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useState } from "react";
 
-const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [posts, setPosts] = useState(3);
   const viwed = data.slice(0, posts);
 
@@ -21,7 +21,7 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </form>
       <div className='px-3'>
         <h2 className='text-4xl pt-5 italic'>BLOG...</h2>
-        {viwed.map((recentPost: Article) => (
+        {viwed.map((recentPost) => (
           <Card
             title={recentPost.title}
             description={recentPost.description}
@@ -46,15 +46,15 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   );
 };
 
-export default Blog;
+export default Blogs;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allBlogs = [...allArticles, ...allFeatureds].sort(
+  const allBlogsByDate = allBlogs.sort(
     (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
   );
   return {
     props: {
-      data: allBlogs,
+      data: allBlogsByDate,
     },
   };
 };
