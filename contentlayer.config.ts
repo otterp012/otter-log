@@ -5,8 +5,8 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import GithubSlugger from "github-slugger";
 
-export const Blog = defineDocumentType(() => ({
-  name: "Blog",
+export const Post = defineDocumentType(() => ({
+  name: "Post",
   contentType: "mdx",
   filePathPattern: `blog/*.mdx`,
   fields: {
@@ -16,8 +16,14 @@ export const Blog = defineDocumentType(() => ({
     seoDescription: { type: "string", required: false },
     thumbnailImg: { type: "string", required: true },
     isFeatured: { type: "boolean", required: false },
+    tags: { type: "list", of: { type: "string" }, required: false },
+    series: { type: "string", of: { type: "list" }, required: false },
   },
   computedFields: {
+    path: {
+      type: "string",
+      resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    },
     slug: {
       type: "string",
       resolve: (doc) =>
@@ -53,7 +59,11 @@ export const Blog = defineDocumentType(() => ({
     publishedAtFormatted: {
       type: "string",
       resolve: (doc) => {
-        return new Date(doc.publishedAt).toLocaleDateString();
+        return new Date(doc.publishedAt).toLocaleDateString("ko-kr", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
       },
     },
   },
@@ -61,7 +71,7 @@ export const Blog = defineDocumentType(() => ({
 
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog],
+  documentTypes: [Post],
   mdx: {
     esbuildOptions(options) {
       options.target = "esnext";

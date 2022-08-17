@@ -1,9 +1,9 @@
 import PostHeader from "./PostHeader";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { Blog } from "contentlayer/generated";
+import type { Post as PostType } from "contentlayer/generated";
 
 type PostSectionProps = {
-  postData: Blog;
+  postData: PostType;
 };
 
 const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
@@ -12,6 +12,7 @@ const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
     publishedAtFormatted,
     thumbnailImg,
     body: { code },
+    tags,
   } = postData;
   const MDXComponent = useMDXComponent(code);
   return (
@@ -20,6 +21,7 @@ const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
         title={title}
         publishedAtFormatted={publishedAtFormatted}
         thumbnailImg={thumbnailImg}
+        tags={tags}
       />
       <div className='prose mx-auto mt-5 max-w-none prose-a:no-underline'>
         <MDXComponent />

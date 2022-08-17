@@ -7,14 +7,14 @@ const Nav = () => {
     <nav className='flex space-x-2 md:space-x-3'>
       {/* <div className='flex space-x-2 md:space-x-3'> */}
       <NavLists isOpen={isOpen} />
-      <button className='text-xl font-semibold bg-black text-white px-2 py-1 rounded-xl'>
+      <button className='rounded-xl bg-black px-2 py-1 text-xl font-semibold text-white'>
         DARK
       </button>
 
-      <label className='btn btn-circle swap swap-rotate md:hidden bg-transparent'>
+      <label className='swap-rotate btn swap btn-circle bg-transparent md:hidden'>
         <input type='checkbox' />
         <svg
-          className='swap-off fill-current fill-slate-500'
+          className='swap-off fill-slate-500'
           xmlns='http://www.w3.org/2000/svg'
           width='32'
           height='32'
@@ -23,7 +23,7 @@ const Nav = () => {
           <path d='M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z' />
         </svg>
         <svg
-          className='swap-on fill-current fill-slate-500'
+          className='swap-on fill-slate-500'
           xmlns='http://www.w3.org/2000/svg'
           width='32'
           height='32'

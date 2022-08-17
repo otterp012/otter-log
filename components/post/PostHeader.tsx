@@ -1,13 +1,17 @@
+import Tags from "./Tags";
+
 type PostHeaderProps = {
   title: string;
   publishedAtFormatted: string;
   thumbnailImg: string;
+  tags: string[] | undefined;
 };
 
 const PostHeader: React.FC<PostHeaderProps> = ({
   title,
   publishedAtFormatted,
   thumbnailImg,
+  tags,
 }) => {
   return (
     <header>
@@ -16,14 +20,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({
           {title}
         </h2>
         <div className='flex items-end justify-between'>
-          <div className='xl:mt-2'>
-            <span className='mr-3 text-sm font-semibold italic xl:mr-0 xl:rounded-xl xl:px-3 xl:py-2 xl:hover:cursor-pointer xl:hover:bg-slate-400'>
-              #REACT
-            </span>
-            <span className='mr-3 text-sm font-semibold italic xl:mr-0 xl:rounded-xl xl:px-3 xl:py-2 xl:hover:cursor-pointer xl:hover:bg-slate-400'>
-              #NEXT
-            </span>
-          </div>
+          <Tags tags={tags}></Tags>
           <time className='mt-2 inline-block text-xs font-bold text-gray-700'>
             {publishedAtFormatted}
           </time>

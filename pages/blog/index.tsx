@@ -1,13 +1,13 @@
 import Card from "components/card/card";
 import Layout from "components/layout/layout";
-import { allBlogs } from "contentlayer/generated";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { allPosts } from "contentlayer/generated";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useState } from "react";
-import { Blog as Blogtpyes } from "contentlayer/generated";
+import type { Post as PostType } from "contentlayer/generated";
 
 const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [posts, setPosts] = useState(3);
-  const viwed = data.slice(0, posts);
+  const displayedPosts = data.slice(0, posts);
 
   return (
     <Layout>
@@ -22,14 +22,14 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </form>
       <div className='px-3'>
         <h2 className='pt-5 text-4xl italic'>BLOG...</h2>
-        {viwed.map((recentPost: Blogtpyes) => (
+        {displayedPosts.map((displayedPost: PostType) => (
           <Card
-            title={recentPost.title}
-            description={recentPost.description}
-            publishedAt={recentPost.publishedAt}
-            thumbnailImg={recentPost.thumbnailImg}
-            key={recentPost.title}
-            slug={recentPost._raw.flattenedPath}
+            title={displayedPost.title}
+            description={displayedPost.description}
+            publishedAt={displayedPost.publishedAtFormatted}
+            thumbnailImg={displayedPost.thumbnailImg}
+            key={displayedPost.title}
+            slug={displayedPost.path}
           />
         ))}
       </div>
@@ -50,8 +50,8 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 export default Blogs;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allBlogsByDate = allBlogs.sort(
-    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  const allBlogsByDate = allPosts.sort(
+    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
   );
   return {
     props: {
