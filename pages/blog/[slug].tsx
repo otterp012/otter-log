@@ -1,28 +1,50 @@
 import Layout from "components/layout/layout";
+import { allPosts } from "contentlayer/generated";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { ParsedUrlQuery } from "querystring";
+import TOC from "components/post/TOC";
+import PostSection from "components/post/PostSection";
 
-const BlogDetail = () => {
+const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { title, headings } = data;
   return (
     <Layout>
-      <section className='px-5'>
-        <div className='flex items-end justify-between'>
-          <h2 className='text-3xl max-w-[80%] break-all font-semibold md:text-5xl'>
-            NEXT로 블로그 만들기
-          </h2>
-          <time className='font-bold text-xs text-gray-300'>2022.08.10</time>
-        </div>
-
-        <div className=''>
-          {/*  img */}
-          <img src='/test1.jpeg' alt='test' className='w-[70%] mx-auto mt-7' />
-        </div>
-
-        <div className='mt-10 break-words'>
-          text..
-          12312321312321312312312312312312312321312321312321312312312312321312312321321.213213123123312321312321
-        </div>
-      </section>
+      <div className='flex w-full px-3 md:px-5 xl:px-0'>
+        <PostSection postData={data} />
+        <TOC headings={headings} title={title} />
+      </div>
     </Layout>
   );
 };
 
-export default BlogDetail;
+export default Blog;
+
+type Params = {
+  slug: string | string[] | ParsedUrlQuery | undefined;
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as Params;
+  const data = allPosts.find((blog) => blog.slug === slug);
+
+  return {
+    props: {
+      data,
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const allPaths = allPosts.map(({ slug }) => {
+    return {
+      params: {
+        slug,
+      },
+    };
+  });
+
+  return {
+    paths: allPaths,
+    fallback: false,
+  };
+};

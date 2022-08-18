@@ -1,33 +1,36 @@
-const FeaturedCard = () => {
-  return (
-    <div className='flex flex-col w-full'>
-      <div className='h-full'>
-        {/* <Image
-        src='/test5.jpeg'
-        alt='test'
-        layout='fill'
-        objectFit='cover'
-        className='w-[420px] h-[420px] md:h-[560px]'
-      /> */}
-        <img
-          src='test5.jpeg'
-          alt='test'
-          className='object-cover w-full h-[420px] md:h-[560px]'
-        />
-      </div>
+import Link from "next/link";
+import { MDXProps } from "types";
 
-      <div className='px-5 flex flex-col items-end mt-3 md:items-center'>
-        <div className='text-right md:text-center mb-2'>
-          <time className='text-sm text-gray-400 font-bold'>2022.07.22</time>
-          <h2 className='text-4xl break-words font-semibold'>
-            NEXT로 블로그 만들기
-          </h2>
+const FeaturedCard: React.FC<MDXProps> = ({
+  title,
+  description,
+  publishedAt,
+  thumbnailImg,
+  slug,
+}) => {
+  return (
+    <Link href={slug}>
+      <section className='hover:cursor-pointer'>
+        <div className='h-full'>
+          <img
+            src={thumbnailImg}
+            alt={title}
+            className='mx-auto h-[420px] w-full object-cover md:h-[570px] md:w-[80%]'
+          />
         </div>
-        <p className='break-all text-sm md:text-center w-[60%] text-right text-gray-400 line-clamp-2'>
-          12312312312312312312312312312312312321312312323143241
-        </p>
-      </div>
-    </div>
+        <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
+          <div className='mb-2 text-right md:text-center'>
+            <time className='text-sm font-bold text-gray-400'>
+              {publishedAt}
+            </time>
+            <h2 className='break-words text-4xl font-semibold'>{title}</h2>
+          </div>
+          <p className='w-[60%] break-all text-right text-sm text-gray-400 line-clamp-2 md:text-center'>
+            {description}
+          </p>
+        </div>
+      </section>
+    </Link>
   );
 };
 

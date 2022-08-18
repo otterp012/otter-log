@@ -1,0 +1,169 @@
+---
+title: useRef, Object is Possibly null
+publishedAt: 2022-06-03
+description: useRef 오류하나 수정하다가 타입부터 너무 깊이 들어가버린 이야기
+thumbnailImg: https://velog.velcdn.com/images/otterp/post/d65e5d36-24d9-436f-96c5-44ade0f16e1e/image.png
+isFeatured: false
+tags:
+  - react
+  - useRef
+  - error
+---
+
+이번에 진행하는 `airbnb` 클론 코딩미션을 관련해서 양방향 레인지 버튼을 구현했다. `input` 값을 `range`로 관리하고 이러한 인풋을 두개 만들어 겹치고, `div` 를 위에 올리고 재미있었다.
+
+그런데 타입스크립트로 코드를 수정하는 중에 `useRef`를 사용하는 부분에서 `Object is Possibly null` 오류가 계속해서 발생했다. 이 오류를 해결하려고 타고타고 올라다 보니 이건 `useRef` 자체를 공부해봐야겠는데? 라는 생각이 들었다. 그리고 무엇보다 `useRef`를 잘 모르니 저 오류를 해결할 수 없었다.
+
+**혹여 해결방법만 찾으시는 분들은 맨 마지막에 정리되어 있습니다!**
+
+## useRef
+
+### 그러면, `useRef`는 왜 쓰는걸까?
+
+```js
+const refContainer = useRef(initialValue);
+```
+
+React 공식문서에 따르면, `useRef`는 프로퍼티에 변경 가능한 값을 담고 있는 '상자'와 같다고 한다.
+
+![](https://velog.velcdn.com/images/otterp/post/ed0e2a60-956f-4f8e-bda6-af3fce10e3f8/image.png)
+
+`useRef`는 생성되면 `current` 라는 객체를 만든다. 아무생각 없이 만들었던 'current', 'current.value'는 위에 있는 저 객체가 만들어짐으로써 사용 가능하게 되었던 것이다. 그리고 이렇게 한번 만들어진 객체는 다른 렌더링이 발생하더라도 바뀌지 않고 고유한 객체를 유지한다. 그 객체를 새로 만들지 않고 한번 만들어둔 객체를 계속해서 사용한다는 것이다.
+
+이렇게 `ref`는 `current` 라는 객체를 만들어서 그 객체만 사용하니 다른 렌더링에 영향을 받지도 않고, 렌더링에 영향을 끼치지도 않는다. 따라서, ref의 변경은 감지되지도 않으니 `useEffet`의 디펜던시로도 사용할 수 없다.
+
+### 그런데 `current` 객체는 언제 만들어지나
+
+~~당연히 컴포넌트 평가될때 바로 만들어지는 거 아닌가?~~
+
+```jsx
+// input값의 value를 ref로 관리하려고 했다.
+// 아무런 use함수 없이 그냥 콘솔을 출력해보았다.
+const minPriceRef = useRef < HTMLInputElement > null;
+console.log(minPriceRef);
+
+// result : {current: null}
+```
+
+_**`useRef`로 선언되고 컴포넌트의 실행되고 평가가 진행되는 시점에서는 `current` 객체는 `null`로 평가된다.**_
+이거, 초기값에 전달을 아무것도 안해놔서 그런거 아닌가? 싶을 수도 있지만 초기값에 어떠한 값을 전달해 두더라도 `null`이 출력된다.
+
+> _**Object is Possibly null **_
+> 아 그래서 저게 null일 수도 있다는 거구나..?
+
+#### useEffect 로 확인해보기
+
+그러면 컴포넌트가 다 렌더링 되고 난후에는 만들어 졌을까 한번 확인해 보면,
+
+```jsx
+const minPriceRef = useRef < HTMLInputElement > null;
+
+useEffect(() => {
+  console.log(minPriceRef);
+}, []);
+// reuslt : {current: input#minPrice.sc-iIPllB.kzGxaq}
+```
+
+`useEffect` 로 확인을 해보면 컴포넌트의 렌더링이 완료된 후에는 `current` 객체가 만들어져 있음을 알 수 있다.
+이를 통해 컴포넌트 평가 - 컴포넌트 렌더링이 이루어지고 적어도 `useEffect`가 실행되기 전에는 `current` 객체가 만들어졌음을 짐작할 수 있다.
+그러면 이 문제는 그냥 `useEffect` 쓰면 해결할 수 있겠다! 싶은데,
+
+그런데 이렇게 `useEffect`로 문제를 해결하면 다음과 같은 문제가 있다.
+`useEffect`는 컴포넌트가 렌더링된 후에 시작되므로 일단 렌더링 시점에서는 아주 잠깐이지만 아무런 값도 보이지 않을 것이다. (아주 미세해서 눈치채지 못하겠지만)
+
+### useLayoutEffect 사용해보기
+
+리액트 공식문서에서 따르면 `useLayoutEffect`는 `useEffect`와 거의 동일하지만 렌더링와 동기적으로 일어난다. 다시말해 컴포넌트 평가 - useLayoutEffect - useEffect 순으로 일어난다.
+이러한 점을 생각해보면 바로 위의, `useEffect`의 사소하지만 중요한 문제를 해결 할 수 있다.
+
+**결과적으로 `useLayoutEffect`를 사용해서 `ref`의 `current` 를 사용한다면 제가 없다는 것이다.**
+
+## 조금만 더 살펴보기
+
+### ref의 반환 타입
+
+**이 부분은 오류의 소지가 많은 부분입니다! 기록을 위해서 남겨두었고, 추후에 수정하려고 합니다.**
+
+```ts
+function useRef<T>(initialValue: T | null): RefObject<T>;
+// convenience overload for potentially undefined initialValue / call with 0 arguments
+// has a default to stop it from defaulting to {} instead
+/**
+ * `useRef` returns a mutable ref object whose `.current` property is initialized to the passed argument
+ * (`initialValue`). The returned object will persist for the full lifetime of the component.
+ *
+ * Note that `useRef()` is useful for more than the `ref` attribute. It’s handy for keeping any mutable
+ * value around similar to how you’d use instance fields in classes.
+ *
+ * @version 16.8.0
+ * @see https://reactjs.org/docs/hooks-reference.html#useref
+ */
+```
+
+솔직히 이거 봐도 잘 모르겠다. 분명 영어를 읽고 해석은 하는건 문제가 없는데
+(아마 null이 될 수 있는 타입일 경우인 것 같다)
+그러면 코드를 보자
+
+```ts
+const { minPrice, maxPrice } = usePriceStateContext();
+// minPrice는 context에서 초기화된 값으로, number | null의 속성을 가진다.
+const minPriceRef = useRef<number>(minPrice);
+
+const onClickHandler = () => {
+  minPriceRef.current += 1;
+  console.log(minPriceRef);
+};
+```
+
+마치 문제 없이 출력될 것 같지만, `readonly` 라는 오류가 난다.
+![](https://velog.velcdn.com/images/otterp/post/05f3cd23-18e5-475d-b1c9-941fbee1a361/image.png)
+
+이때 `ref`의 반환값을 보면 `RefObject`가 지정되어 있음을 알 수 있다.
+![](https://velog.velcdn.com/images/otterp/post/d65e5d36-24d9-436f-96c5-44ade0f16e1e/image.png)
+
+```ts
+function useRef<T>(initialValue: T): MutableRefObject<T>;
+// convenience overload for refs given as a ref prop as they typically start with a null value
+/**
+ * `useRef` returns a mutable ref object whose `.current` property is initialized to the passed argument
+ * (`initialValue`). The returned object will persist for the full lifetime of the component.
+ *
+ * Note that `useRef()` is useful for more than the `ref` attribute. It’s handy for keeping any mutable
+ * value around similar to how you’d use instance fields in classes.
+ *
+ * Usage note: if you need the result of useRef to be directly mutable, include `| null` in the type
+ * of the generic argument.
+ *
+ * @version 16.8.0
+ * @see https://reactjs.org/docs/hooks-reference.html#useref
+ */
+```
+
+제네릭에 선언한 타입과, initialValue의 타입이 같으면 `MutableRefObject`로 반환되고 이는 위와 다르게 값이 바뀔 수 있다.
+
+- 그런데 이부분은 아직 잘 모르겠다. `refObject`라고 무조건 값이 바뀌지 않는 것도 아니고.
+  `ref`의 `mutable`과 `immutable` 개념이 조금 혼란스럽다.
+  나중에 공부를 더 하고 추가하기로 하자.
+
+## Object is Possibly null 오류 해결하기
+
+이 오류를 해결하려면 두가지 방법이 있다.
+
+첫번째로는 `useLayoutEffect` 훅을 사용하는 방법이다.
+이렇게 사용함으로써 렌더링 하면서-ref를 연결해 ref의 current 객체가 만들어져서 current 객체가 생성되지 않을 가능성 없이 ref를 사용할 수 있다.
+
+두번째는, `ref`를 사용할때마다 `null` 체크를 해주는 것이다.
+
+```ts
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    ...
+    if (e.target.id === 'minPrice') {
+      if (!isValidRatio && minPriceRef.current) {
+        	// 여기서 current 객체가 있을때만 작동하게 해준다.
+        minPriceRef.current.value = String(currentMaxRatio - MIN_BETWEEN_RATIO);
+        return;
+      }
+    }
+```
+
+이런 방식으로 `current` 객체를 사용할 때마다 null 여부를 확인하면 오류 없이 문제를 해결할 수 있다.

@@ -1,0 +1,191 @@
+---
+title: REACT virtual DOM
+publishedAt: 2022-08-08
+description: 리액트를 `key`를 이해하려고 공부하다 보니 virtual DOM에 도달했다.
+thumbnailImg: https://velog.velcdn.com/images/otterp/post/0f267b56-ad87-43b6-9ecc-90c412485dd2/image.gif
+isFeatured: true
+tags:
+  - react
+  - important
+---
+
+시간에 쫓기듯 리액트를 공부하던 중 제대로 이해하지 못하고 넘어간 부분이 많다는 생각이 들었다. `key` 와 관련한 오류는, 그냥 이유는 모르겠고 고유한 값을 넣으라니까 넣어서 해결했다. 또 이유는 기억 안나지만 (아마 이건 수업때 배웠던 것 같은데) `index` 는 쓰면 안된다. 그냥 그렇게 배웠다. 공식문서에도 그렇게 쓰여있다.
+
+컴포넌트 변경시점이 언제인지 제대로 알지도 못하지만, `state` 를 바꾸고 `props` 을 바꾸니까 화면단이 잘 바꼈다. 그래서 그냥 진행했다. 공식문서에 써져있는 코드를 공부하며 상태를 바꿔보니까 그냥 되더라.
+
+이런식으로 진행하다보니 나는 코드만 쓸줄 알고 **이게 어느 시점에 렌더링 되고 어떤 계기로 렌더링 되는지, 또 `key` 는 왜 중요한지 전혀 알지 못하고 있다는 생각**이 들었다.
+
+## 브라우저 렌더링
+
+- 리액트는, 가상돔을 기반으로 렌더링된다고 배웠다. 리액트는 왜 가상돔을 이용해서 렌더링 하는걸까?
+
+1. DOM Tree 생성
+   - `HTML` 을 파싱하여 `DOM` 노드로 이루어진 트리를 생성한다.
+2. Render Tree 생성
+   - `css` 파일과, `inline` 스타일을 파싱하고 `DOM` 트리에 이걸 붙인다.
+   - `attach` 라는 노드들이 가진 메서드를 통해 스타일 정보를 계산해 객체 형태로 반환한다.
+   - 렌더 트리가 완성된다.
+3. Layout (reflow)
+   - 노드들에 스크린 좌표가 주어져, 위치가 결정된다.
+   - position, size 등이 결정된다.
+4. Paint
+   - 실제 화면에 그리기
+
+브라우저 렌더링은 위와 같은 4가지 단계를 거쳐 진행되는데, 이러한 방식은 다음과 같은 문제가 있다.
+
+1. `DOM` 에 새로운 요소가 삽입되게 되면, 위외 같은 렌더링 단계를 모두 거쳐서 **_모든 NODE를 다시 렌더링_**한다.
+   - 극단적으로 `DOM` 요소를 30번 바꾼다면, 최대 30번의 리렌더링이 일어난다.
+2. 실제 `DOM` 에 브라우저에 그려야 하는 모든 정보가 담겨져 있기 때문에, `DOM` 을 조작하는 작업이 상대적으로 무겁다.
+
+---
+
+## 리액트 요소 이해하기
+
+```jsx
+const element = () => {
+  return (
+    <a key="key1" style={{ background: 'red' }} href="http://google.com">
+      Click Here
+    </a>
+  );
+};
+
+// 이런 jsx 코드가 있다.
+
+console.log(element);
+
+{ ("a",
+	{
+		key: 'key1',
+		ref: null,
+    style: {
+      background: 'red'
+    },
+    href: "http://google.com",
+    children: "Click Here",
+		// 만약 이 노드가, 다른 노드를 가지고 있다면
+		// 여기서
+    // [ { "p",
+					{ ...
+				}]
+		// 로 자식 노드가 연결되어 있음을 확인할 수 있다.
+		...
+}
+
+// 콘솔로 찍어보면 이런 모양의 객체가 나오게 된다.
+```
+
+- 각 컴포넌트는 이런 방식으로 개별적으로 정보를 객체형태로 가지고 있다.
+- 만약, 이 `element` 객체가 하위 노드를 가지게 된다면, `children` 에 하위노드의 정보가 출력된다.
+- 게다가 이렇기 때문에 `props.children` 이 어떻게 쓰이는지도 알 수 있다.
+- 리액트 엘리먼트는 DOM요소의 가상 버전으로 가볍고, 상태를 가지지 않으며 불변성을 가진다.
+- 이러한 점때문에, 리액트가 비교를 하는 것이 쉽다.
+
+---
+
+## Virtual DOM
+
+![스크린샷 2022-05-15 오후 9.31.15.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/385599e9-65d5-4d14-8b06-4525ec290920/스크린샷_2022-05-15_오후_9.31.15.png)
+
+- 리액트 공식문서에 따르면, virtual DOM은
+  Virtual DOM (VDOM)은 UI의 **이상적인 또는 “가상”적인 표현을 메모리에 저장**하고 **ReactDOM과 같은 라이브러리에 의해 “실제” DOM과 동기화**하는 프로그래밍 개념이라고 한다.
+- virtual DOM은 위와 같은 객체를 기반으로, 작동한다.
+  - 실제 DOM을 가상적이고 추상적인 표현으로 재구성해 메모리에 저장해 사용한다는 걸 알 수 있다.
+  - 이러한 정보는 자바스크립트의 객체 형태로 저장되고, 메모리 상에서 수행되기 때문에 훨씬 더 빠르게 동작할 수 있다.
+- virtual DOM은 실제로 렌더링되지 않는다.
+  - virtual DOM은 위와 같은 객체 정보만을 다루기 때문에 비용이 적다.
+- 렌더링은 virtual DOM이 이러한 추상적인 정보를 React DOM으로 전달해줌으로써 실제 렌더링은 React DOM에서 이루어진다.
+
+---
+
+### virtual DOM 렌더링 과정
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/48b6b230-b318-41a1-8a89-15aabd48b755/Untitled.png)
+
+- data가 바뀌면, virtual DOM은,
+
+  1. 전체 UI를 객체형태로 이루어진 추상적인 정보들을 virtual DOM에 먼저 리렌더링 한다.
+  2. diff 알고리즘을 통해, virtual DOM과 현재 내용(실제 DOM)을 비교한다.
+
+     (이를 재조정이라고 한다.)
+
+  3. React DOM에 렌더링해야 하는 부분의 정보를 전달한다.
+
+- 이렇게, 변경에 대한 전/후 엘리먼트 트리를 비교하고 필요한 부분만을 찾아 업데이트하는 것을 재조정이라고 한다.
+- 이런식으로, 실제 DOM이 바뀌게 된다면 DOM을 조작하는 비용이 줄어든다. (실제로 바뀌는 부분만 업데이트 하기 때문에)
+
+---
+
+## diff 알고리즘
+
+virtual DOM은 `diff` 알고리즘을 통해 realdom 과 virtual dom을 비교하게 되는데,
+
+리액트 공식문서에 따르면 `diff` 알고리즘의 기준은 같다.
+
+- 서로 다른 타입의 두 엘리먼트는 서로 다른 트리를 만들어낸다.
+- 개발자가 key prop을 통해서 여러 렌더링 사이에서 어떤 자식 엘리먼트가 변경되지 않아야 할지 표시해줄 수 있다.
+
+이러한 부분을 기반에 두고, diff 알고리즘이 진행되는 걸 확인해 보면,
+![](https://velog.velcdn.com/images/otterp/post/cfbde8d3-7e0b-4647-8f56-a4fd973cb566/image.png)
+
+- 상태가 변경되면, 리액트는 해당 컴포넌트를 `dirty` 라고 표시한다.
+  ![](https://velog.velcdn.com/images/otterp/post/4c9fb7a1-78a5-4454-a81b-360181803829/image.png)
+
+- `dirty` 로 표시된 컴포넌트와 실제 돔을 `level by level` 로 비교하고 변경점에 대해 다시 렌더한다.
+- 또한, toast 문서를 보면 dff 알고리즘은 다음과 같을때 다른 방식으로 비교한다.
+  1. 같은 위치에서 엘리먼트의 타입이 다른 경우
+     1. 기존 트리를 제거 후 새로운 트리 만든다.
+     2. 기존 트리 제거시 트리 내부의 엘리먼트/컴포넌트들은 모두 제거한다.
+     3. 새로운 트리를 만들 때 내부 엘리먼트/컴포넌트들도 모두 새로 만든다.
+  2. 같은 위치에서 엘리먼트가 DOM을 표현하고 그 타입이 같은 경우,
+     1. 엘리먼트의 attributes를 비교한다.
+     2. 변경된 attributes만 업데이트한다.
+     3. 자식 엘리먼트들에 diff 알고리즘을 재귀적으로 적용한다.
+  3. 같은 위치에서 엘리먼트가 컴포넌트를 표현하고 그 타입이 같은 경우
+     1. 컴포넌트 인스턴스 자체는 변하지 않는다.(때문에 컴포넌트의 state가 유지된다.)
+     2. 컴포넌트 인스턴스의 업데이트 전 라이프 사이클 메서드들이 호출되며 props가 업데이트된다.
+     3. `render()`를 호출하고, 컴포넌트의 이전 엘리먼트 트리와 다음 엘리먼트 트리에 대해 diff 알고리즘을 재귀적으로 적용한다.
+
+이를 통해 보면, 우리는 컴포넌트를 만들어야 하는 이유를 알 수 있다.
+
+위의 알고리즘 기준을 보면, 같은 위치의 같은 컴포넌트라면 비교는 끝나고 자식요소를 탐색해서 계속해서 비교하지 않을 수 있기 때문이다.
+
+![](https://velog.velcdn.com/images/otterp/post/b5ee26da-961e-41f2-bcbd-3179cf7578b2/image.png)
+
+- 미리 컴포넌트를 만들어 둔다면 재조정 시간이 줄어들 수 있다.
+- 단순 `div` 로 비교한다면, 다른 부분까지 비교를 계속해서 하게된다.
+
+또한 `key` 에 고유한 값을 적어야 하는 이유를 알 수 있다.
+
+![](https://velog.velcdn.com/images/otterp/post/170958ce-6177-4f2e-805f-a5dca3052cf8/image.png)
+
+- virtual DOM 과 real DOM을 비교하는 diff 알고리즘에서 `key` 를 통해 해당 노드의 재조정이 필요한지 알 수 있기 때문이다.
+- `key` 에 고유한 값을 적어 두어야만, virtual DOM은 해당 노드를 구분하고 바뀐점이 있는지 확인할 수 있다.
+- 또한 `key` 에 `index` 를 적으면 안되는 이유도 알 수 있다.
+  - `key` 에 `index` 를 넣으면 불필요한, 잘못된 재조정을 통해 re-render를 유발할 수 있다.
+
+---
+
+## 무조건 좋지만은 않다.
+
+- 위와 같이 `diff` 알고리즘을 통해 재귀적으로 자식들까지 계속해서 비교한다.
+- 이는 곧, 이 비교가 끝날때 까지 다른 무언가의 행위를 할 수 없다는 것이다.
+- 이러한 점 때문에 React fiber가 등장하게 되었다.
+
+React fiber는 다음과 같은 기능을 제공한다.
+
+- pause work and come back to it later.
+- assign priority to different types of work.
+- reuse previously completed work.
+- abort work if it’s no longer needed.
+
+---
+
+## Reference
+
+- [https://ko.reactjs.org/docs/reconciliation.html#the-diffing-algorithm](https://ko.reactjs.org/docs/reconciliation.html#the-diffing-algorithm)
+- [https://velopert.com/3236](https://velopert.com/3236)
+- 실전 리액트 프로그래밍
+- [https://calendar.perfplanet.com/2013/diff/](https://calendar.perfplanet.com/2013/diff/)
+- [https://meetup.toast.com/posts/110](https://meetup.toast.com/posts/110)
+- [https://codesquad-yoda.medium.com/남다른-개선방법을-다시-보여준-페이스북의-react-fiber-80b7ca5bd9bb](https://codesquad-yoda.medium.com/%EB%82%A8%EB%8B%A4%EB%A5%B8-%EA%B0%9C%EC%84%A0%EB%B0%A9%EB%B2%95%EC%9D%84-%EB%8B%A4%EC%8B%9C-%EB%B3%B4%EC%97%AC%EC%A4%80-%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81%EC%9D%98-react-fiber-80b7ca5bd9bb)

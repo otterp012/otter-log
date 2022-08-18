@@ -1,0 +1,475 @@
+---
+title: REACT TS WEBPACK5 환경설정하기
+publishedAt: 2022-07-12
+description: CRA에서 탈출해서 나만의 설정을 만들어보기.
+thumbnailImg: https://velog.velcdn.com/images/otterp/post/ae6f1e89-38e2-4997-8f9c-98f30b7102e4/image.jpeg
+isFeatured: false
+tags:
+  - react
+  - webpack
+---
+
+얼마전 웹팩공부를 살짝 끝마치고, 블로그를 보면서 단순히 따라치는 설정이 아니고 내가 직접 보일러플레이트를 만들어보고 싶다는 생각이 들었다. 물론 다른 블로그 글을 참고하지 않을 수는 없었지만, 웹팩의 내용과 이 부분이 왜 필요한지를 고민하면서 하나하나씩 해보면서 기록해보려고 한다.
+
+## 그런데 웹팩을 왜 쓰는걸까?
+
+일단 환경을 설정하기 위해, 웹팩을 사용해야 하는데 이걸 왜 써야하는 걸까? 어떠한 장점이 있길래 이걸 사용하는 거겠지 싶은데, 웹팩을 사용하는 이유는 다음과 같다.
+
+```html
+<!-- index.html -->
+<html>
+  <head>
+    <!-- ... -->
+  </head>
+  <body>
+    <!-- ... -->
+    <script src="./app.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
+```
+
+기존에 자바스크립트의 모듈을 나누어 작성하면 위와 같이 `index.html`에 자바스크립트들을 일일이 넣어주어야 했다. 그런데 이는 다음과 같은 문제를 가진다.
+
+- 자바스크립트의 모듈 파일이 늘어날때마다 넣어주어야 한다.
+- 자바스크립트의 `import` 순서에 따른 종속성의 문제가 있다.
+  예를들어, 위와 같은 경우에 `main.js`에서 선언해둔 함수를 `app.js`에서 실행하려면 문제가 발생할 것이다. 따라서 우리는 `script` 태그로 넣어줄 뿐만 아니라 이런 모듈들의 의존성도 신경써야만 했다.
+- 변수의 문제가 있다.
+  위의 `index`를 예들을어, `app.js`에서 선언한 변수를 아래에 있는 다른 자바스크립트 파일에서 다시 선언한다면, 우리는 변수를 부를때 원하는 결과를 기대할 수 없다.
+
+웹팩은 위와같은 문제점을 해결할 수 있어 등장하였고 이러한 문제를 해결해주었을 뿐만 아니라 `css`나 이미지들을 압축시켜 번들링해주는 이점도 제공해준다.
+
+---
+
+## react, typescript 설치하기
+
+기본적인 react를 설치하자.
+
+```
+yarn init -y
+yarn add react react-dom reacr-router-dom
+// react는 프로덕션 단계에서도 필요한 디펜던시이므로, devdependencies로 설치하지 않는다.
+```
+
+그리고 우리는 타입스크립트 기반으로 작성할 것이므로 타입스크립트를 설치한다.
+
+```
+yarn add -D @types/react @types/react-dom typescript
+// typescript는 컴파일에만 사용하고, 프로덕션단계에선
+// 사용하지 않으므로 devdependencies로 설치하자.
+```
+
+이 부분을 할 때에 주의할 점은 devdependencies와 그냥 dependencies를 나누는 것이다.
+
+---
+
+## 웹팩 설치하기
+
+```
+yarn add -D webpack webpack-cli webpack-merge
+
+// webpack-merge는 webpack의 prod, dev단계를 나누고 common 설정을 만들고자 설치했다.
+```
+
+이렇게 웹팩 설치를 끝내고, webpack의 설정을 시작하자.
+
+### webpack.common.js 설정하기
+
+이 부분에는 prod, dev 단계에서 공통적으로 필요한 설정을 적용할 것이다.
+그리고, `webpack-merge`를 사용해서 설정을 묶어주려고 한다.
+![](https://velog.velcdn.com/images/otterp/post/76440a3b-ee77-432d-b2db-b5b6d8b3d189/image.png)
+현재 디렉토리 구조이다. `config`파일이 3개가 될 예정이라, webpack config를 모아두는 폴더를 만들었다.
+
+### entry, output
+
+```js
+// webpack.common.js
+// 이 부분에는 prod, dev가 공통적으로 사용할 설정을 작성한다.
+
+module.exports = {
+  entry: path.resolve(__dirname, "../src/index.tsx"),
+  // entry는 시작점으로 할 파일을 가리킨다.
+  // 이 프로젝트에는 `index.tsx`가 entry이다.
+  resolve: {
+    extensions: [".js", ".ts", ".tsx"],
+  },
+  output: {
+    path: path.resolve(__dirname, "../dist"),
+    filename: "bundle.js",
+    // output은 build된 파일이 위치하게 될 경로를 작성한다.
+    // 파일이름 또한 작성해준다.
+  },
+};
+```
+
+---
+
+### asset module 적용하기
+
+Asset Module은 다양한 종류의 이미지, 글꼴 또는 일반 텍스트 파일 등을 webpack을 통해서 처리할 수 있도록 한다. Asset Module은 4가지 타입이 존재한다. 이 asset module은 webpack이 기본적으로 내장하고 있으므로 별도의 플러그인을 설치하지 않아도 된다.
+
+#### 이미지, 글꼴 적용하기
+
+일반적으로, 파일의 크기가 큰 이미지나 글꼴의 경우 `asset/resource`를 이용한다.
+`asset/resource`는 `dist` 폴더에 새로운 파일을 생성한다.
+
+```js
+  module: {
+    rules: [
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        // test에 정규표현식을 넣어주고, 이 test가 true일 경우
+        // 다음 type으로 작동한다.
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+```
+
+그런데, 위와 같이 둘다 `asset/resource`로 그냥 할 수 있지만 용량이 적은 경우에는 `inline`으로 하는 방법도 존재한다. 다음과 같이 설정할 수 있다.
+
+```js
+
+// 이렇게도 할 수 있다.
+{
+        test: /\.(png|jpg|jpeg)$/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            // inline으로 할지 resource로 할지 결정한다.
+            maxSize: 3 * 1024,
+              // 정해둔 maxSize보다 크다면, resource로 들어간다.
+              // maxSize보다 적다면, inline으로 들어간다.
+          },
+
+          // parser 속성을 적용하지 않으면, 자동으로 8KB를 기준으로 작동한다.
+        },
+      },
+```
+
+일단, 아래에 있는 방법보다 모든 이미지와 폰트는 크다는 가정 하에 `resource`로 넣어주는 방식을 사용했다.
+
+#### svg 파일 적용하기
+
+svg파일을 위한 별도의 플러그인을 설치할 수도 있지만, asset module을 활용할 수도 있다.
+asset/inline속성인데, 이는 `dist` 폴더에 새로운 파일을 만들지 않고 `base64` 기반의 문자열로 이루어진 내용으로 이미지를 표현한다. 만약, 이미지의 크기가 크다면 `base64` 기반 코드도 커져 번들의 크기가 커질 수 있지만 일반적으로 파일의 크기가 작은 `svg`같은 경우에는 `inline`으로 사용하기 적절하다.
+또한, 무수한 개수의 `svg`가 필요할 경우에 이미지가 작으므로 http요청을 보내는 것보다 적은 자원으로 적용할 수 있다.
+
+![](https://velog.velcdn.com/images/otterp/post/9e643979-2bce-40b2-a380-087acf68b181/image.png)
+이렇게 표현된다. 이제 이걸, webpack에 적용해주자.
+
+```js
+      {
+        test: /\.svg$/,
+        type: 'asset/inline',
+      },
+```
+
+---
+
+## babel 설정하기
+
+아직 할 건 많이 남았지만, `babel` 관련은 `common`에 들어가야 한다. `babel`은 `js`의 최신문법이나 타입스크립트, `jsx` 문법들에 대한 호환성 문제를 해결해주므로 꼭 사용해야 한다. `babel`을 사용하지 않으면 특정 브라우저에서는 작동하지 않거나, 오류가 나는 문제가 발생할 수 있기 때문이다.
+
+```
+yarn add -D @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader
+```
+
+```
+webpack.common.js
+
+      {
+        test: /\.(ts|tsx|js|jsx)$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+
+ // module에 적용해주자.
+ // test에 맞는 확장자로 끝나는 파일은 babel-loader을 이용한다.
+```
+
+그리고, 루트 디렉토리에 `babel`의 설정파일인 `.babelrc`를 작성한다.
+
+```
+// .babelrc
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ],
+    "@babel/preset-typescript"
+  ]
+}
+```
+
+---
+
+## Html 파일 동적 생성하기
+
+그런데 지금 문제가 하나 있다. 우리가 지금 작성한 설정에 따르면 `index.html` 파일은 동적으로 생성되지 않는다. 이로써 테스트를 해보려고 하면 `public` 폴더에 있는 `index.html`을 `dist` 폴더에 있는 `bundle.js`와 연결해야 한다.
+
+그리고 사실 이 부분은, 앞으로 번들 파일을 브라우저의 캐시로 이용할 것이기 때문에 더더욱 필요하다. 번들링 속도를 빠르게 하기 위해서 기존 내용과 변경이 없을 경우 새로운 `bundle`을 만들지 않도록 하고, 변경이 있을 경우에만 새로운 `bundle`을 만드는 설정을 하고자 하는데, 이를 한다면 `bundle`파일의 이름이 해쉬값으로 계속해서 바뀐다.
+
+이러한 경우를 위해 동적으로 생성되는 `bundle`을 자동적으로 가져올 수 있는 `html` 파일을 만들어 줄 수 있다.
+
+```
+yarn add -D html-webpack-plugin
+```
+
+```
+// webpack.common.js
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: `${path.resolve(__dirname, "../src/public")}/index.html`,
+    }),
+]
+
+// 이 내용을 추가해줌으로써 우리는 동적으로 build를 할때
+// html 파일을 만들어줄 수 있다.
+// template로 public폴더에 있는 index.html을 사용한다.
+```
+
+---
+
+## 번들된 파일 지우기
+
+위에 따르면, 아직 하진 않았지만 내용이 바뀔경우에만 `hash`값이 다른 `bundel`파일을 생성할텐데 이전 번들이 계속 남아있으면 보기 힘들 것이니 이걸 지워주는 설정을 해주자. 사실 아직 `hash` 설정을 안해놨기 때문에 와닿기 힘들 수도 있지만 필요하다.
+
+```
+ yarn add -D clean-webpack-plugin
+```
+
+```
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: `${path.resolve(__dirname, '../src/public')}/index.html`,
+    }),
+    new CleanWebpackPlugin({}),
+  ],
+```
+
+---
+
+## common 완료
+
+여기까지 해서, common의 설정은 끝났다.
+css로더 등의 설정은 `dev`, `prod`에 따라 조금씩 달라질 수 있어 나누고 진행하려고 한다.
+
+```js
+// webpack.common.js
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+module.exports = {
+  entry: path.resolve(__dirname, "../src/index.js"),
+  resolve: {
+    extensions: [".js", ".ts", ".tsx"],
+  },
+  output: {
+    path: path.resolve(__dirname, "../dist"),
+    filename: "bundle.js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: "asset/resource",
+      },
+      {
+        test: /\.svg$/,
+        type: "asset/inline",
+      },
+      {
+        test: /\.(ts|tsx|js|jsx)$/,
+        use: "babel-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: `${path.resolve(__dirname, "../src/public")}/index.html`,
+    }),
+    new CleanWebpackPlugin({}),
+  ],
+};
+```
+
+---
+
+## webpack.prod.js
+
+이제 prod.js 설정을 하자.
+우선 지금까지 미뤄왔던 `css` 관련 `loader`를 설치해야 한다.
+
+```
+ yarn add -D css-loader css-minimizer-webpack-plugin mini-css-extract-plugin style-loader sass sass-loader
+```
+
+이제, `css` 관련 설정을 해주자.
+여기서, mini-css-extract-plugin이나, css-minimizer-webpack-plugin은 `css`의 번들 크기를 줄여주고 최적화를 하기 위해 사용하는 플러그인인데, 이는 prod 단계에서만 사용하는 것이 좋다.
+dev단계에서는 빠른 빌드를 통해 어떻게 되었는지 확인하는 것이 중요한데, 위의 플러그인을 통해 `css`를 최적화하는 것도 시간이 들고 자원을 소모하기 때문이다. 반면, prod단계에서는 번들의 크기가 축소되면 사용자 입장에서 받아올 파일의 크기가 줄어든다는 의미이므로 꼭 사용해야 한다.
+
+```
+// webpack.prod.js
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common');
+const path = require('path');
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+module.exports = merge(common, {
+  mode: 'production',
+  devtool: 'cheap-module-source-map',
+  output: {
+    filename: 'bundle.[contenthash].js',
+     // 이렇게 함으로써, 앞으로 번들은 내용이 바뀔때만 hash를 가지고 동작한다.
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: './',
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
+  plugins: [new MiniCssExtractPlugin()],
+  optimization: {
+    usedExports: true,
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+});
+```
+
+또, 위의 `terserPlugin`이나 `splitChunks`등을 통해 번들의 크기를 줄일 수 있으므로, 꼭 설치해서 적용해야 한다. 그런데 이것 또한 `dev`단계에서는 필요없다. 위에 적혀있는 이유와 같다.
+
+---
+
+## webpack.dev.js
+
+```
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common');
+
+module.exports = merge(common, {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    open: false,
+    hot: true,
+    compress: true,
+    port: 8081,
+    historyApiFallback: true,
+    liveReload: true,
+  },
+  output: {
+    filename: 'bundle.[contenthash].js',
+    publicPath: '/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+});
+```
+
+그래서, `webpack.dev.js`에서는 위에 있던 내용에서 내용이 좀 줄어든다. 다만, 웹팩서버를 켜서 진행과정을 계속 볼 수 있도록 `devServer`를 설정해주자.
+
+```
+yarn add -D webpack-dev-server
+```
+
+---
+
+## TS 설정하기
+
+마지막으로 `typescript` 설정을 하자.
+
+```js
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es5",
+    // 어떤 부분의 javascript 로 바꿔줄지 정하는 부분
+    "module": "esnext",
+    // import 문법을 구현하는 부분
+    // commonJs는 require, es2015, esnext는 import 문법을 사용한다.
+    // 원래 IE를 지원하려면, commonjs로 했어야했겠지만..
+
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+
+    // any 타입이 의도치않게 발생할 경우 에러를 띄운다.
+
+    "strictNullChecks": true, //null, undefined 타입에 이상한 짓 할시 에러내기
+    "strictFunctionTypes": true,
+    // function prop 타입에 오류
+
+    "noUnusedLocals": true, //쓰지않는 지역변수 있으면 에러내기
+    "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기
+    "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
+    "noFallthroughCasesInSwitch": true, //switch문 이상하면 에러내기
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": ["src"]
+}
+
+```
+
+ts 컴파일 설정은 아주 많으니 필요한 것만 사용하면 된다.
+
+---
+
+## Ref
+
+https://koras02.tistory.com/42?category=967574
+https://ryuhojin.tistory.com/19
