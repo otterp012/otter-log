@@ -20,6 +20,7 @@ const RecentCards: React.FC<RecentCardsProps> = ({ recentPosts }) => {
           thumbnailImg={recentPost.thumbnailImg}
           key={recentPost.title}
           slug={recentPost.path}
+          tags={recentPost.tags}
         />
       ))}
     </div>

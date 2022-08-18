@@ -5,4 +5,5 @@ export type MDXProps = {
   thumbnailImg: string;
   slug: string;
   isFeatured?: boolean;
+  tags?: string[];
 };

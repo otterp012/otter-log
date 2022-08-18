@@ -29,9 +29,9 @@ const Home: NextPage = ({
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const featuredPost = allPosts.filter((blog) => blog.isFeatured)[0];
+  const featuredPost = allPosts.filter((post) => post.isFeatured)[0];
   const recentPosts = allPosts
-    .filter((blog) => !blog.isFeatured)
+    .filter((post) => !post.isFeatured)
     .sort(
       (a, b) =>
         Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),

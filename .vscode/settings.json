@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["contentlayer", "lazyload", "tailwindcss"]
+  "cSpell.words": [
+    "contentlayer",
+    "esbuild",
+    "lazyload",
+    "rehype",
+    "sluggified",
+    "tailwindcss"
+  ]
 }

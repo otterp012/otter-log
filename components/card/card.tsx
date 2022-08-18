@@ -1,3 +1,4 @@
+import HashTags from "components/UI/hashTags";
 import Link from "next/link";
 import { MDXProps } from "types";
 
@@ -7,6 +8,7 @@ const Card: React.FC<MDXProps> = ({
   description,
   thumbnailImg,
   slug,
+  tags,
 }) => {
   return (
     // <Link href={slug}>
@@ -29,14 +31,7 @@ const Card: React.FC<MDXProps> = ({
               <h3 className='break-all text-xl font-bold line-clamp-2 md:text-2xl'>
                 {title}
               </h3>
-              <div className='mt-3'>
-                <span className='text-md mr-1 rounded-lg py-2 px-3 font-semibold italic hover:cursor-pointer hover:bg-slate-500'>
-                  #react
-                </span>
-                <span className='text-md mr-1 rounded-lg py-2 px-3 font-semibold italic hover:cursor-pointer hover:bg-slate-500'>
-                  #next
-                </span>
-              </div>
+              <HashTags tags={tags} />
             </div>
             <div>
               <p className='w-[90%] text-sm text-gray-500 line-clamp-2 md:mt-8 '>
