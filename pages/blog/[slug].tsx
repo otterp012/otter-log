@@ -7,6 +7,7 @@ import PostSection from "components/post/PostSection";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings } = data;
+
   return (
     <Layout>
       <div className='flex w-full px-3 md:px-5 xl:px-0'>

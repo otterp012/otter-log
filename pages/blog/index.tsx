@@ -2,9 +2,10 @@ import Card from "components/card/card";
 import Layout from "components/layout/layout";
 import { allPosts } from "contentlayer/generated";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import type { Post as PostType } from "contentlayer/generated";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
+
 const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const observedTarget = useRef<HTMLParagraphElement>(null);
   const { len: postLength } = useInfiniteScroll(

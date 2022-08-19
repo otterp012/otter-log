@@ -1,5 +1,4 @@
 const Tags: React.FC<{ tags: string[] | undefined }> = ({ tags }) => {
-  console.log(tags);
   return (
     <div className='xl:mt-2'>
       {tags &&

@@ -9,7 +9,6 @@ const useInfiniteScroll = (
   const [len, setLen] = useState(initialDisplayedLen);
 
   const observer = useRef<IntersectionObserver>();
-  const target = useRef(null);
 
   useEffect(() => {
     observer.current = new IntersectionObserver(intersectionObserver);
@@ -19,14 +18,13 @@ const useInfiniteScroll = (
   }, []);
 
   useEffect(() => {
-    if (!target.current) return;
-    if (len > maxDisplayedLen) observer.current?.unobserve(target.current);
+    if (!targetRef.current) return;
+    if (len > maxDisplayedLen) observer.current?.unobserve(targetRef.current);
   }, [len, maxDisplayedLen]);
 
   const intersectionObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log("isInterSection..");
         setLen((prev) => prev + increasedByIntersecting);
       }
     });
