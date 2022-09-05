@@ -1,5 +1,8 @@
-const { withContentlayer } = require("next-contentlayer")
+const { withContentlayer } = require("next-contentlayer");
 const nextConfig = {
   reactStrictMode: true,
-}
-module.exports = withContentlayer(nextConfig)
+  images: {
+    domains: ["velog.velcdn.com"],
+  },
+};
+module.exports = withContentlayer(nextConfig);

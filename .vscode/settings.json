@@ -5,6 +5,8 @@
     "lazyload",
     "rehype",
     "sluggified",
-    "tailwindcss"
+    "tailwindcss",
+    "velcdn",
+    "velog"
   ]
 }

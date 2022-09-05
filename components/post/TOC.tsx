@@ -64,13 +64,14 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
               >
                 <Link href={`#${v.slug}`} key={v.slug}>
                   <a
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document &&
-                        document.getElementById(v.slug)?.scrollIntoView({
-                          behavior: "smooth",
-                        });
-                    }}
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   document &&
+                  //     document.getElementById(v.slug)?.scrollIntoView({
+                  //       behavior: "smooth",
+                  //     });
+                  // }}
+                  // prevent default 때문인지 url이 바뀌지 않음
                   >
                     {v.text}
                   </a>

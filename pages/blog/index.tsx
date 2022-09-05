@@ -5,6 +5,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRef } from "react";
 import type { Post as PostType } from "contentlayer/generated";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
+import Link from "next/link";
 
 const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const observedTarget = useRef<HTMLParagraphElement>(null);
@@ -41,9 +42,14 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           />
         ))}
       </div>
-      <p ref={observedTarget}>
-        {postLength > data.length ? "마지막 포스트입니다" : ""}
-      </p>
+      <div className='text-center'>
+        <p ref={observedTarget}>
+          {postLength > data.length ? "마지막 포스트입니다" : ""}
+        </p>
+        <Link href='#top' replace={true}>
+          <a className='bg-red-300 px-3 py-5'>맨 위로가기</a>
+        </Link>
+      </div>
     </Layout>
   );
 };
