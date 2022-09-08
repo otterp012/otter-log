@@ -9,8 +9,9 @@ export default class MyDocument extends Document {
           document.documentElement.classList.remove('dark')
         }
       `;
+
     return (
-      <Html className='w-[450px] sm:w-full'>
+      <Html className='w-[480px] sm:w-full'>
         <Head>
           <link href='/static/favicon.ico' rel='shortcut icon' />
         </Head>

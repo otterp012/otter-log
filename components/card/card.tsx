@@ -1,7 +1,8 @@
-import HashTags from "components/UI/hashTags";
 import Link from "next/link";
 import { MDXProps } from "types";
 import Image from "next/image";
+import Tags from "components/post/Tags";
+
 const Card: React.FC<MDXProps> = ({
   title,
   publishedAt,
@@ -11,7 +12,7 @@ const Card: React.FC<MDXProps> = ({
   tags,
 }) => {
   return (
-    <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-500 pb-5 last:border-none hover:cursor-pointer md:px-5'>
+    <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-200 pb-5 last:border-none hover:cursor-pointer md:px-5'>
       <Link href={slug} passHref>
         <div className='flex w-full'>
           <div className='z-0 mx-auto w-28 translate-y-4 md:w-[240px] md:translate-y-0'>
@@ -32,7 +33,7 @@ const Card: React.FC<MDXProps> = ({
               <h3 className='text-md break-all font-bold line-clamp-2 md:text-2xl'>
                 {title}
               </h3>
-              <HashTags tags={tags} />
+              <Tags tags={tags} />
             </div>
             <div>
               <p className='w-[90%] text-sm text-gray-500 line-clamp-2 md:mt-8 '>
