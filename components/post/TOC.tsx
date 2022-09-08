@@ -26,7 +26,6 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
   const callback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log(entry.target);
         setIsVisible(entry.target.id);
       }
     });

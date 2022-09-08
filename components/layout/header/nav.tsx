@@ -1,14 +1,34 @@
-import { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import NavLists from "./navLists";
 
 const Nav = () => {
   const [isOpen, toggleIsOpen] = useState(false);
+
+  const [themeIsDark, setThemeIsDark] = useState(false);
+
+  const themeModeHandle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    localStorage.theme = localStorage.theme === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark");
+    setThemeIsDark(!themeIsDark);
+  };
+
+  useEffect(() => {
+    if (localStorage.theme === "dark") {
+      setThemeIsDark(true);
+    } else {
+      setThemeIsDark(false);
+    }
+  }, []);
+
   return (
     <nav className='flex space-x-2 md:space-x-3'>
-      {/* <div className='flex space-x-2 md:space-x-3'> */}
       <NavLists isOpen={isOpen} />
-      <button className='rounded-xl bg-black px-2 py-1 text-xl font-semibold text-white'>
-        DARK
+      <button
+        className='rounded-xl bg-black px-2 py-1 text-xl font-semibold text-white dark:bg-white dark:text-black'
+        onClick={themeModeHandle}
+      >
+        {themeIsDark ? "LIGHT" : "DARK"}
       </button>
 
       <label className='swap-rotate btn swap btn-circle bg-transparent md:hidden'>
