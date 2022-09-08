@@ -11,10 +11,10 @@ const Card: React.FC<MDXProps> = ({
   tags,
 }) => {
   return (
-    <section className='h-30 md:h-53 mt-5 flex w-full border-b pb-5 last:border-none hover:cursor-pointer md:px-5'>
+    <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-500 pb-5 last:border-none hover:cursor-pointer md:px-5'>
       <Link href={slug} passHref>
         <div className='flex w-full'>
-          <div className='mx-auto w-28 translate-y-4 md:w-[240px] md:translate-y-0'>
+          <div className='z-0 mx-auto w-28 translate-y-4 md:w-[240px] md:translate-y-0'>
             <Image
               src={thumbnailImg}
               alt='test'

@@ -26,7 +26,6 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
   const callback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log(entry.target);
         setIsVisible(entry.target.id);
       }
     });
@@ -56,22 +55,24 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
             {headings.map((v) => (
               <li
                 key={v.slug}
-                className={`mb-1 hover:text-red-900 ${
-                  v.slug == isVisible && "font-bold text-blue-900"
-                } ${v.heading === "heading3" && "ml-3 text-sm"} ${
-                  v.heading === "heading4" && "ml-5 text-xs"
-                } h-full w-[250px]`}
+                className={`mb-1 hover:text-blue-500 dark:hover:text-yellow-300 
+                ${
+                  v.slug == isVisible &&
+                  "font-bold text-blue-300 dark:text-yellow-200"
+                } ${v.heading === "heading3" && "ml-3 text-sm"}
+                  ${
+                    v.heading === "heading4" && "ml-5 text-xs"
+                  } h-full w-[250px]`}
               >
                 <Link href={`#${v.slug}`} key={v.slug}>
                   <a
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  //   document &&
-                  //     document.getElementById(v.slug)?.scrollIntoView({
-                  //       behavior: "smooth",
-                  //     });
-                  // }}
-                  // prevent default 때문인지 url이 바뀌지 않음
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document &&
+                        document.getElementById(v.slug)?.scrollIntoView({
+                          behavior: "smooth",
+                        });
+                    }}
                   >
                     {v.text}
                   </a>

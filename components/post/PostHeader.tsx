@@ -16,7 +16,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({
   return (
     <header>
       <div className='space-y-2'>
-        <h2 className='w-[80%] text-4xl font-semibold md:text-5xl' id='top'>
+        <h2 className='w-[90%] text-4xl font-semibold md:text-5xl' id='top'>
           {title}
         </h2>
         <div className='flex items-end justify-between'>
