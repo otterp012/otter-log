@@ -14,8 +14,9 @@ const NavList: React.FC<NavListProps> = ({ query, title }) => {
       <Link href={query}>
         <a
           className={`${
-            router.pathname.includes(query) && "text-blue-900"
-          } md:text-xl font-semibold hover:text-blue-500`}
+            router.pathname.includes(query) &&
+            "text-blue-900 dark:text-yellow-200"
+          } font-semibold hover:text-blue-500 dark:hover:text-yellow-300 md:text-xl`}
         >
           {title}
         </a>
