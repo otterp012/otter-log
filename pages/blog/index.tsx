@@ -42,12 +42,9 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           />
         ))}
       </div>
-      <div className='text-center'>
-        <p ref={observedTarget}>
-          {postLength > data.length ? "마지막 포스트입니다" : ""}
-        </p>
+      <div className='mt-20 text-center' ref={observedTarget}>
         <Link href='#top' replace={true}>
-          <a className='bg-red-300 px-3 py-5'>맨 위로가기</a>
+          <a className='px-3 py-5 italic'>맨 위로가기 ⬆️⬆️</a>
         </Link>
       </div>
     </Layout>

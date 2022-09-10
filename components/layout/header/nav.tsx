@@ -39,6 +39,7 @@ const Nav = () => {
         isOpen={dropDownIsOpen}
         onChangeHandler={() => setDropDownIsOpen(!dropDownIsOpen)}
       />
+      
       {dropDownIsOpen && (
         <div className='fixed right-0 top-20 z-50 h-full w-full bg-white dark:bg-black md:hidden'>
           <ul className='absolute right-5 mt-5 flex flex-col items-end space-y-3 text-3xl text-black dark:text-white md:hidden'>
