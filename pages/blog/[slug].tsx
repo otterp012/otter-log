@@ -1,4 +1,4 @@
-import Layout from "components/layout/layout";
+import Layout from "components/layout";
 import { allPosts } from "contentlayer/generated";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";

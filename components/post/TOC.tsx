@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+
 type TOCProps = {
   headings: {
     slug: string;
@@ -33,7 +34,7 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
 
   return (
     <aside className='relative hidden xl:block'>
-      <div className='sticky top-[200px] right-5 ml-10 w-[280px] border-l-2 border-black'>
+      <div className='sticky top-[200px] right-5 ml-10 w-[280px] border-l-2 border-gray-200'>
         <div className='py-2 pl-5'>
           <h4 className='mb-3 inline-block text-xl font-bold'>
             <Link href='#top'>
@@ -58,7 +59,7 @@ const TOC: React.FC<TOCProps> = ({ headings, title }) => {
                 className={`mb-1 hover:text-blue-500 dark:hover:text-yellow-300 
                 ${
                   v.slug == isVisible &&
-                  "font-bold text-blue-300 dark:text-yellow-200"
+                  "font-bold text-blue-800 dark:text-yellow-200"
                 } ${v.heading === "heading3" && "ml-3 text-sm"}
                   ${
                     v.heading === "heading4" && "ml-5 text-xs"

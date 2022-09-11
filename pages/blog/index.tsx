@@ -1,5 +1,5 @@
 import Card from "components/card/card";
-import Layout from "components/layout/layout";
+import Layout from "components/layout";
 import { allPosts } from "contentlayer/generated";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRef } from "react";
@@ -29,7 +29,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         />
       </form> */}
       <div className='px-3'>
-        <h2 className='pt-5 text-4xl italic'>BLOG...</h2>
+        <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
         {displayedPosts.map((displayedPost: PostType) => (
           <Card
             title={displayedPost.title}
@@ -42,12 +42,9 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           />
         ))}
       </div>
-      <div className='text-center'>
-        <p ref={observedTarget}>
-          {postLength > data.length ? "마지막 포스트입니다" : ""}
-        </p>
+      <div className='mt-20 text-center' ref={observedTarget}>
         <Link href='#top' replace={true}>
-          <a className='bg-red-300 px-3 py-5'>맨 위로가기</a>
+          <a className='px-3 py-5 italic'>맨 위로가기 ⬆️⬆️</a>
         </Link>
       </div>
     </Layout>

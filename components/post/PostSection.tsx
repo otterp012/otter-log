@@ -14,6 +14,7 @@ const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
     body: { code },
     tags,
   } = postData;
+  
   const MDXComponent = useMDXComponent(code);
   return (
     <section className='mt-5 w-full xl:min-w-[780px]'>

@@ -1,28 +1,42 @@
-import Layout from "components/layout/layout";
+import Layout from "components/layout";
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from "next";
 import FeaturedCard from "components/card/featuredCard";
 import { allPosts, Post as PostType } from "contentlayer/generated";
-import RecentCards from "components/card/recentCards";
+
+import Card from "components/card/card";
 
 const Home: NextPage = ({
   featuredPost,
   recentPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <>
-      <Layout>
-        <section className='mt-5 w-full px-3 md:px-0'>
-          <FeaturedCard
-            title={featuredPost.title}
-            description={featuredPost.description}
-            publishedAt={featuredPost.publishedAtFormatted}
-            thumbnailImg={featuredPost.thumbnailImg}
-            slug={featuredPost.path}
+    <Layout>
+      <section className='mt-5 w-full px-3 md:px-0'>
+        <FeaturedCard
+          title={featuredPost.title}
+          description={featuredPost.description}
+          publishedAt={featuredPost.publishedAtFormatted}
+          thumbnailImg={featuredPost.thumbnailImg}
+          slug={featuredPost.path}
+        />
+      </section>
+      <section className='mx-auto mt-10 md:max-w-[70%]'>
+        <h2 className='mb-8 text-center text-3xl font-bold italic md:mb-10'>
+          RECENT POSTS
+        </h2>
+        {recentPosts.map((recentPost: PostType) => (
+          <Card
+            title={recentPost.title}
+            description={recentPost.description}
+            publishedAt={recentPost.publishedAtFormatted}
+            thumbnailImg={recentPost.thumbnailImg}
+            key={recentPost.title}
+            slug={recentPost.path}
+            tags={recentPost.tags}
           />
-        </section>
-        <RecentCards recentPosts={recentPosts} />
-      </Layout>
-    </>
+        ))}
+      </section>
+    </Layout>
   );
 };
 

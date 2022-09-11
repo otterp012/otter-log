@@ -1,5 +1,5 @@
 import FeaturedCard from "components/card/featuredCard";
-import Layout from "components/layout/layout";
+import Layout from "components/layout";
 
 const Projects = () => {
   return (
