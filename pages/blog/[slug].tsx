@@ -1,8 +1,8 @@
 import Layout from "components/layout";
 import { allPosts } from "contentlayer/generated";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { ParsedUrlQuery } from "querystring";
-import TOC from "components/post/TOC";
+import type { Params } from "types";
+import TOC from "components/toc";
 import PostSection from "components/post/PostSection";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -19,10 +19,6 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export default Blog;
-
-type Params = {
-  slug: string | string[] | ParsedUrlQuery | undefined;
-};
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as Params;

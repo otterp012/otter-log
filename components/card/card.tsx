@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { MDXProps } from "types";
 import Image from "next/image";
+
 import Tags from "components/post/Tags";
+
+import type { MDXProps } from "types";
 
 const Card: React.FC<MDXProps> = ({
   title,
