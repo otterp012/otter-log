@@ -9,7 +9,7 @@ const FeaturedCard: React.FC<MDXProps> = ({
   slug,
 }) => {
   return (
-    <Link href={slug}>
+    <Link href={slug} passHref>
       <section className='hover:cursor-pointer'>
         <div className='h-full'>
           <img
