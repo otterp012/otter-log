@@ -1,0 +1,119 @@
+---
+title: OAuth 2.0
+publishedAt: 2022-06-18
+description: 인증과 인가에 부터, oauth 알아보기
+thumbnailImg: https://velog.velcdn.com/images/otterp/post/edc1181b-ed5b-4d25-9806-d2eb7e71189f/image.png
+isFeatured: false
+tags:
+  - react
+---
+
+이번, 새로운 프로젝트를 진행하면서 로그인 기능을 추가해야 했다. 백엔드를 통해서 로그인 기능을 진행하는데 github oauth를 기반으로 작업했다. 사실 백엔드와의 기능을 추가하기 전에 파이어베이스 인증 탭을 이용해서 간단한 회원가입 폼을 만들어 본적이 있어서 쉽게 할 수 있겠다 예단했다. 그런데 엄청 고생했다.
+
+결과적으론 잘 구현했다. 엄청난 삽질의 기록들 속에서, 이게 뭐고 저게 뭔진 모르겠지만 여기저기 블로그를 따라서 조합하니까 되긴 했다.** 그런데 OAuth가 무엇이냐? 말하면 대답할 순 없었다.** 그냥 구현만 했을 뿐. 그래서 이거 한번 정리해야겠다는 생각이 들었다.
+
+## OAuth는 무엇인가?
+
+OAuth는, 인터넷 사용자들이 비밀번호를 제공하지 않고 다른 웹사이트 상의 자신들의 정보에 대해 웹사이트나 애플리케이션의 접근 권한을 부여할 수 있는 공통적인 수단으로서 사용되는, 접근 위임을 위한 개방형 표준이다.
+ref : https://ko.wikipedia.org/wiki/OAuth
+
+이 위키피디아의 정의를 보고 한문장씩 정리해보면,
+OAuth는 Open Authorization의 준말이다.
+인터넷 사용자들은 비밀번호를 제공하지 않는다.
+다른 웹사이트 상의 자신들의 정보에 대해 접근 권한을 부여할 수 있는 공통적인 수단이다.
+이는 접근 위임을 위한 개방형 표준이다.
+
+그러면 실제로 무엇인가 알아보기 전에, 관련된 두가지 단어를 살펴보자.
+
+### Authentication (인증)
+
+인증은, 유저가 누구인지 확인하는 절차이다.
+사용자가 자신이 사용자라고 주장할때, 그 사용자가 맞는지 확인하는 과정이다.
+
+예를들어, 어떤 회사에 방문한 사람이 있다면 그 사람이 입장이 가능한지 자체를 확인하는 과정이다.
+회원가입이나, 로그인 등에서 인증이 필요하다. 그리고 로그인이면 비밀번호가 필요하겠다.
+
+### Authorization (인가 : 접근 권한을 부여)
+
+권한을 부여하는 절차이다.
+사용자가 접근하고 싶은 자원이 접근이 가능한지의 여부를 확인하고,
+접근이 가능하다면 권한을 부여한다.
+
+예를 들어, 어떤 회사에 접근이 가능한 부분이 권한에 따라 다르다면 특정 부분에 대한 권한을 부여하는 과정이다.
+
+ref: https://dolphinsarah.tistory.com/44
+
+## 과정을 알아보자.
+
+사실 이부분을 글로 적으려고 열심히 노력했는데 뭔가 보기 힘든 것 같아서 그림을 그려봤다.
+
+### 인증이 이루어지는 과정
+
+일단, 무엇보다도 인증이 이루어져야 할 것이다.
+요즘 사이트들을 보다보면 아래에 google로 로그인, github로 로그인 등의 버튼이 자주 있다.
+그걸 생각하면 이해하기 쉬웠다.
+
+![](https://velog.velcdn.com/images/otterp/post/33724b14-24f6-40d3-8c56-84057858b093/image.png)
+
+1. 내가 진행하고 있는 프로젝트에 github로 로그인 버튼이 있고 그 url은 github에서 제공하는 OAuth URL로 연결된다.
+2. 사용자는 기존 아이디 비밀번호로도 인증할 수 있지만, github로그인을 요청했다.
+   ![](https://velog.velcdn.com/images/otterp/post/2b6d7095-b390-4c50-96ff-762319507207/image.png)
+3. 그러면 이 URL로 옮겨지면서 gitgub에서 인증을 진행한다. (사용자가 맞는지의 여부를 여기서 확인하는 것이다.)
+4. 사용자의 인증이 잘 끝나면 미리 설정한 redirect URL로 code를 넘겨준다.
+   ![](https://velog.velcdn.com/images/otterp/post/fbad8f9b-2c14-4146-badb-8bce62e48249/image.png)
+   github같은 경우에는 url에 code 정보를 옮겨주고 미리 설정한 redirect URL로 redirect 시킨다.
+   여기서 이 code를 얻었다고 끝난 것이 아니다.
+   이는 권한 부여 승인 code로, 사용자와 - 서비스 제공자 간의 인증만 끝난 상태이다.
+   서비스 제공자는 아직 내가만든 이 APP을 사용자가 사용하고자 하는지 알지 못한다.
+
+- github login을 진행하면서 생각이 든건, 실제로 여기까지의 과정에서 App에서 서비스제공자인 github에 따로 요청을 보내는 내용이 없다. 사실 a태그로 url을 사용자에게 전해주었을 뿐인다.
+
+### 이제 access token을 얻자.
+
+![](https://velog.velcdn.com/images/otterp/post/edc1181b-ed5b-4d25-9806-d2eb7e71189f/image.png)
+
+1. 위에서 우리는 권한 부여 승인 code를 얻었다.
+2. 이 code를, 서비스 제공자(여기선 github)의 Authorization server에 보낸다.
+3. 그러면, github의 Auth server은 code를 확인하고, access token을 발급해준다.
+4. 이 발급된 access token을 통해서 우리는 사용자 개인의 정보가 담겨져 있어 `인가` 가 필요한 Resource Server에 접근할 수 있다.
+
+- 이래서 접근 권한을 부여하는 수단이라고 하는 걸 이해했다.
+- 별개의 App도 이를 통해 resouce server에 접근할 수 있게 되었다.
+
+## 백엔드와의 협업 과정에선 이랬다.
+
+위와 같은 과정에서, code를 얻는 과정까지는 프론트엔드 부분에서 처리했다.
+그리고 그 code를 가지고 승인을 받아 access token을 발급받거나, access token을 통해 resource server에 접근하는 과정은 백엔드에서 처리했다.
+
+~~근데 왜 나눴을까? 나눠야만 하는 이유가 있는 것일까? 그냥 해도 될것같은데..? 라는 이상한 생각을 잠깐 했는데~~
+
+나누는 이유는 보안상의 이유였다. 사실 이걸 공부하기 전에 jwt 토큰을 공부했다. 그래서 jwt토큰에 대해서는 어느정도 느낌만 알고 있었다는데 이상하게 이거랑 연관짓질 못하고 있었다. (당연히 여길 모르니까 이해가 안가는게 당연했던 것 같다.)
+
+### jwt token
+
+프론트쪽에서, access token을 가지고 있다면 보안상의 문제점이 일어날 수 있을 것이다.
+그런데, 이걸 백엔드에서 처리하게 되면 다음과 같은 프로세스가 진행된다. (사실 백엔드도 access token을 저장해두고 사용하는 것은 아니다)
+
+1. 프론트에서는 위에서 진행하던 부분 중 code만을 받고 백엔드로 전달한다.
+2. 백엔드에서는 code를 받고 서비스 제공자의 인가 서버에 access token을 전달한다.
+3. 백엔드에서 access token을 `서버만 아는 키로` 해싱해서 프론트로 보내준다.
+4. 프론트는 백엔드가 보내준 이 jwt token만 알고 있고, access token은 모른다.
+5. 프론트는 사용자의 리소스에 접근할 일이 있으면 이 jwt token을 담에 백엔드 서버로 요청한다.
+6. 백엔드 서버는, jwt token을 다시 access token으로 변환해 (백엔드도 이를 저장해두지 않고 변환하는 함수만을 저장하는 느낌이다) 사용자의 리소스 서버에 데이터를 요청한다.
+7. 데이터를 받으면 백엔드 서버는 프론트 서버로 데이터를 보내주고, 프론트는 이를 사용한다
+
+결과적으로 백과 프론트 둘다 access token을 담고있지 않게 된다.
+마치 홍철없는 홍철팀처럼 access token이 뭔진 모르지만 둘다 잘 사용할 수 있게된다.
+이를 통해 보안상의 이점을 가지게 된다.
+
+### 마지막으로 고민할 점은, 그래서 이 jwt token을 어디다 저장해 둘 것인가이다.
+
+- 쿠키에 저장할 것인가, 또는 로컬스토리지에 저장할 것인가?
+- 둘다 해보고 다음에 포스트 해보려고 한다.
+
+## ref
+
+https://github.com/binghe819/TIL/blob/master/Network/OAuth%202.0/OAuth2.0.md#oauth%EC%9D%98-%ED%83%84%EC%83%9D%EA%B3%BC-%EC%82%AC%EC%9A%A9
+https://github.com/codingspecialist/Springboot-JWT-React-OAuth2.0-Eazy
+https://ko.wikipedia.org/wiki/OAuth
+https://dolphinsarah.tistory.com/44
