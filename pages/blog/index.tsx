@@ -19,15 +19,6 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <Layout>
-      {/* <form className='mx-auto w-full px-5'>
-        <label htmlFor='search' />
-        <input
-          id='search'
-          type='text'
-          className='mx-auto h-14 w-full px-5 py-5 focus:outline-none'
-          placeholder='검색기능은 아직 추가하지 못했어요.'
-        />
-      </form> */}
       <div className='px-3'>
         <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
         {displayedPosts.map((displayedPost: PostType) => (
