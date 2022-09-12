@@ -1,13 +1,13 @@
 import Tags from "./Tags";
 
-type PostHeaderProps = {
+type props = {
   title: string;
   publishedAtFormatted: string;
   thumbnailImg: string;
   tags: string[] | undefined;
 };
 
-const PostHeader: React.FC<PostHeaderProps> = ({
+const PostHeader: React.FC<props> = ({
   title,
   publishedAtFormatted,
   thumbnailImg,

@@ -1,6 +1,6 @@
 import Layout from "components/layout";
-import { allPosts } from "contentlayer/generated";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { allProjects } from "contentlayer/generated";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types";
 import TOC from "components/toc";
 import PostSection from "components/post/PostSection";
@@ -22,7 +22,7 @@ export default Blog;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as Params;
-  const data = allPosts.find((blog) => blog.slug === slug);
+  const data = allProjects.find((blog) => blog.slug === slug);
 
   return {
     props: {
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const allPaths = allPosts.map(({ slug }) => {
+  const allPaths = allProjects.map(({ slug }) => {
     return {
       params: {
         slug,

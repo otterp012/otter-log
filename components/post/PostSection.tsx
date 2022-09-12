@@ -2,11 +2,11 @@ import PostHeader from "./PostHeader";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { Post as PostType } from "contentlayer/generated";
 
-type PostSectionProps = {
+type props = {
   postData: PostType;
 };
 
-const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
+const PostSection: React.FC<props> = ({ postData }) => {
   const {
     title,
     publishedAtFormatted,
@@ -14,7 +14,7 @@ const PostSection: React.FC<PostSectionProps> = ({ postData }) => {
     body: { code },
     tags,
   } = postData;
-  
+
   const MDXComponent = useMDXComponent(code);
   return (
     <section className='mt-5 w-full xl:min-w-[780px]'>

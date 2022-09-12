@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-type TOCProps = {
+type props = {
   headings: {
     slug: string;
     heading: string;
@@ -10,7 +10,7 @@ type TOCProps = {
   title: string;
 };
 
-const TOC: React.FC<TOCProps> = ({ headings, title }) => {
+const TOC: React.FC<props> = ({ headings, title }) => {
   const [isVisible, setIsVisible] = useState("");
   const observer = useRef<IntersectionObserver>();
 

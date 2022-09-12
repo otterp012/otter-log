@@ -1,9 +1,9 @@
-type ToggleIconProps = {
+type props = {
   isOpen: boolean;
   onChangeHandler: () => void;
 };
 
-const ToggleIcon: React.FC<ToggleIconProps> = ({ isOpen, onChangeHandler }) => {
+const ToggleIcon: React.FC<props> = ({ isOpen, onChangeHandler }) => {
   return (
     <div>
       <label className='bg-transparent md:hidden'>
