@@ -9,12 +9,10 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings } = data;
 
   return (
-    <Layout>
-      <div className='flex w-full px-3 md:px-5 xl:px-0'>
-        <PostSection postData={data} />
-        <TOC headings={headings} title={title} />
-      </div>
-    </Layout>
+    <div className='flex w-full px-3 md:px-5 xl:px-0'>
+      <PostSection postData={data} />
+      <TOC headings={headings} title={title} />
+    </div>
   );
 };
 

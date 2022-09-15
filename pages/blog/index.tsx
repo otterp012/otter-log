@@ -1,5 +1,4 @@
 import Card from "components/card/card";
-import Layout from "components/layout";
 import { allPosts } from "contentlayer/generated";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRef } from "react";
@@ -18,7 +17,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const displayedPosts = data.slice(0, postLength);
 
   return (
-    <Layout>
+    <>
       <div className='px-3'>
         <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
         {displayedPosts.map((displayedPost: PostType) => (
@@ -38,7 +37,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <a className='px-3 py-5 italic'>맨 위로가기 ⬆️⬆️</a>
         </Link>
       </div>
-    </Layout>
+    </>
   );
 };
 

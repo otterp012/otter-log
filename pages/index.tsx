@@ -1,4 +1,3 @@
-import Layout from "components/layout";
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from "next";
 import FeaturedCard from "components/card/featuredCard";
 import { allPosts, Post as PostType } from "contentlayer/generated";
@@ -10,7 +9,7 @@ const Home: NextPage = ({
   recentPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout>
+    <>
       <section className='mt-5 w-full px-3 md:px-0'>
         <FeaturedCard
           title={featuredPost.title}
@@ -36,7 +35,7 @@ const Home: NextPage = ({
           />
         ))}
       </section>
-    </Layout>
+    </>
   );
 };
 
