@@ -19,8 +19,6 @@ const FeaturedCard: React.FC<MDXProps> = ({
           width={1000}
           height={1000}
           loading='eager'
-          placeholder='blur'
-          blurDataURL={thumbnailImg}
         />
 
         <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
