@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/future/image";
 import type { MDXProps } from "types";
 
 const FeaturedCard: React.FC<MDXProps> = ({
@@ -12,13 +12,17 @@ const FeaturedCard: React.FC<MDXProps> = ({
   return (
     <Link href={slug} passHref>
       <section className='hover:cursor-pointer'>
-        <div className='h-full'>
-          <img
-            src={thumbnailImg}
-            alt={title}
-            className='mx-auto h-[420px] w-full object-cover md:h-[570px] md:w-[80%]'
-          />
-        </div>
+        <Image
+          src={thumbnailImg}
+          alt={title}
+          className='object-cove mx-auto h-[600px] w-full object-cover md:h-[75vh] md:w-[80%]'
+          width={1000}
+          height={1000}
+          loading='eager'
+          placeholder='blur'
+          blurDataURL={thumbnailImg}
+        />
+
         <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
           <div className='mb-2 text-right md:text-center'>
             <time className='text-sm font-bold text-gray-400'>
@@ -34,5 +38,4 @@ const FeaturedCard: React.FC<MDXProps> = ({
     </Link>
   );
 };
-
 export default FeaturedCard;

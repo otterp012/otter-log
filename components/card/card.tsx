@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/future/image";
 
 import Tags from "components/post/Tags";
 
@@ -17,16 +17,16 @@ const Card: React.FC<MDXProps> = ({
     <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-200 pb-5 last:border-none hover:cursor-pointer md:px-5'>
       <Link href={slug} passHref>
         <div className='flex w-full'>
-          <div className='z-0 mx-auto w-28 translate-y-4 md:w-[240px] md:translate-y-0'>
-            <Image
-              src={thumbnailImg}
-              alt='test'
-              width={540}
-              height={540}
-              objectFit='cover'
-              layout='responsive'
-            />
-          </div>
+          <Image
+            src={thumbnailImg}
+            alt={title}
+            width={900}
+            height={900}
+            className='z-0 mx-auto h-[150px] w-[150px] object-cover md:h-[240px] md:w-[240px]'
+            blurDataURL={thumbnailImg}
+            placeholder='blur'
+          />
+
           <div className='ml-5 flex min-h-full w-[65%] flex-col space-y-2 md:py-1'>
             <div className='mb-3 min-h-[60%] md:min-h-[30%]'>
               <time className='text-xs font-bold text-gray-400 md:text-sm'>

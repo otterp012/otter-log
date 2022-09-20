@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/future/image";
 
 type props = {
   title: string;
@@ -12,10 +13,12 @@ const ProjectCard: React.FC<props> = ({ title, thumbnailImg, slug }) => {
       <Link href={`/projects/${slug}`}>
         <a>
           <div className='w-full'>
-            <img
+            <Image
               src={thumbnailImg}
               alt={title}
               className='h-[350px] w-full rounded-t-lg object-cover md:w-[350px]'
+              width={1000}
+              height={1000}
             />
           </div>
           <span className='flex flex-col px-5 py-5 text-center text-lg font-bold italic text-black'>
