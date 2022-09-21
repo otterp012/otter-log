@@ -12,12 +12,6 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <>
-      <CustomMeta
-        title={title}
-        description={description}
-        url={slug}
-        image={thumbnailImg}
-      />
       <div className='flex w-full px-3 md:px-5 xl:px-0'>
         <PostSection postData={data} />
         <TOC headings={headings} title={title} />
