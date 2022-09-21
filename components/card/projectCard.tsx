@@ -10,7 +10,7 @@ type props = {
 const ProjectCard: React.FC<props> = ({ title, thumbnailImg, slug }) => {
   return (
     <section className='mt-10 flex min-h-[420px] flex-col rounded-lg bg-gray-300 shadow-2xl hover:scale-[1.03] hover:bg-gray-500 hover:ease-in dark:border-black'>
-      <Link href={`/projects/${slug}`}>
+      <Link href={`/projects/${slug}`} passHref>
         <a>
           <div className='w-full'>
             <Image

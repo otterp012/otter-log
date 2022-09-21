@@ -10,7 +10,7 @@ const Home: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <section className='mt-5 w-full px-3 md:px-0'>
+      <div className='mt-5 w-full px-3 md:px-0'>
         <FeaturedCard
           title={featuredPost.title}
           description={featuredPost.description}
@@ -18,8 +18,8 @@ const Home: NextPage = ({
           thumbnailImg={featuredPost.thumbnailImg}
           slug={featuredPost.path}
         />
-      </section>
-      <section className='mx-auto mt-10 md:max-w-[70%]'>
+      </div>
+      <div className='mx-auto mt-10 md:max-w-[70%]'>
         <h2 className='mb-8 text-center text-3xl font-bold italic md:mb-10'>
           RECENT POSTS
         </h2>
@@ -34,7 +34,7 @@ const Home: NextPage = ({
             tags={recentPost.tags}
           />
         ))}
-      </section>
+      </div>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/future/image";
 
-import Tags from "components/post/Tags";
+import Tags from "components/tags";
 
 import type { MDXProps } from "types";
 

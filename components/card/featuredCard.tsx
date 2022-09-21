@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/future/image";
+
 import type { MDXProps } from "types";
 
 const FeaturedCard: React.FC<MDXProps> = ({

@@ -8,7 +8,7 @@ type props = {
 const TocTitle: React.FC<props> = ({ title }) => {
   return (
     <h4
-      className='word-break mb-3 inline-block w-[70%] text-xl font-bold'
+      className='word-break mb-3 inline-block text-xl font-bold'
       style={wordBreak}
     >
       <Link href='#top'>

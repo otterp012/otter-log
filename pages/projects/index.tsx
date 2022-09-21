@@ -1,9 +1,9 @@
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { MDXProps } from "types";
+
 import ProjectCard from "components/card/projectCard";
 
 import { allProjects } from "contentlayer/generated";
-
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { MDXProps } from "types";
 
 const Projects = ({ allProjects }: InferGetStaticPropsType<GetStaticProps>) => {
   return (

@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
       `;
 
     return (
-      <Html className='w-[480px] sm:w-full'>
+      <Html className='w-[480px] sm:w-full' lang='ko'>
         <Head>
           <link href='/static/favicon.ico' rel='shortcut icon' />
         </Head>

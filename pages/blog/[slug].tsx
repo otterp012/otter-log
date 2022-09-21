@@ -1,17 +1,28 @@
-import { allPosts } from "contentlayer/generated";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types";
+
 import TOC from "components/toc";
-import PostSection from "components/post/PostSection";
+import PostSection from "components/section";
+import CustomMeta from "components/customMeta";
+
+import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { title, headings } = data;
+  const { title, headings, description, slug, thumbnailImg } = data;
 
   return (
-    <div className='flex w-full px-3 md:px-5 xl:px-0'>
-      <PostSection postData={data} />
-      <TOC headings={headings} title={title} />
-    </div>
+    <>
+      <CustomMeta
+        title={title}
+        description={description}
+        url={slug}
+        image={thumbnailImg}
+      />
+      <div className='flex w-full px-3 md:px-5 xl:px-0'>
+        <PostSection postData={data} />
+        <TOC headings={headings} title={title} />
+      </div>
+    </>
   );
 };
 

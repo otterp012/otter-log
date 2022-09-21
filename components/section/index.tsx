@@ -1,4 +1,4 @@
-import PostHeader from "./PostHeader";
+import PostHeader from "./header";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { Post as PostType } from "contentlayer/generated";
 
