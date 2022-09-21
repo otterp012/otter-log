@@ -36,7 +36,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
     <aside className='relative hidden xl:block'>
       <div className='sticky top-[200px] right-5 ml-10 w-[280px] border-l-2 border-gray-200'>
         <div className='py-2 pl-5'>
-          <h4 className='mb-3 inline-block text-xl font-bold'>
+          <h4 className='word-break mb-3 inline-block text-xl font-bold'>
             <Link href='#top'>
               <a
                 onClick={(e) => {
