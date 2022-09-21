@@ -12,9 +12,7 @@ export default class MyDocument extends Document {
 
     return (
       <Html className='w-[480px] sm:w-full' lang='ko'>
-        <Head>
-          <link href='/static/favicon.ico' rel='shortcut icon' />
-        </Head>
+        <Head />
         <body className='w-full dark:bg-black dark:text-white'>
           <script dangerouslySetInnerHTML={{ __html: setThemeMode }} />
           <Main />

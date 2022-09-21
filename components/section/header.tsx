@@ -6,8 +6,8 @@ import { wordBreak } from "../../styles/extraStyle";
 type props = {
   title: string;
   publishedAtFormatted: string;
-  thumbnailImg: string | undefined;
-  tags: string[] | undefined;
+  thumbnailImg: string;
+  tags: string[];
 };
 
 const PostHeader: React.FC<props> = ({
