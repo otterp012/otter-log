@@ -6,5 +6,6 @@
   html {
     @apply scroll-pt-20;
     @apply select-none;
+    @apply overflow-x-hidden;
   }
 }
