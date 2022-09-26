@@ -4,12 +4,19 @@ import Layout from "components/layout";
 import { Fragment } from "react";
 import CustomMeta from "components/customMeta";
 import useSavedScroll from "hooks/useSavedScroll";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useSavedScroll();
   return (
     <Fragment>
-      <CustomMeta />
+      <Head>
+        <title>otter-log</title>
+        <meta
+          name='description'
+          content='프론트엔드를 공부하는 otter의 기록들'
+        />
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
