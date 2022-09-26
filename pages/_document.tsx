@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
       `;
 
     return (
-      <Html className='w-[480px] sm:w-full' lang='ko'>
+      <Html className='min-w-[640px] sm:w-full' lang='ko'>
         <Head />
         <body className='w-full dark:bg-black dark:text-white'>
           <script dangerouslySetInnerHTML={{ __html: setThemeMode }} />

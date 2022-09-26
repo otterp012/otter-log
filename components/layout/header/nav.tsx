@@ -34,6 +34,7 @@ const Nav = () => {
   const onClickHandler = useCallback(() => {
     setDropDownIsOpen(false);
   }, []);
+
   return (
     <nav className='flex space-x-2 md:space-x-3'>
       <ul className='hidden items-center justify-end space-x-3 md:flex'>

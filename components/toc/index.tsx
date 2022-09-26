@@ -3,7 +3,7 @@ import type { HeadingsType } from "./types";
 import TocContainer from "./container";
 import TocList from "./list";
 import TocTitle from "./title";
-import useTocIsVisible from "hooks/useTocIsVisible";
+import useTocHighLight from "../../hooks/useTocHighLight";
 
 type props = {
   headings: HeadingsType;
@@ -11,7 +11,7 @@ type props = {
 };
 
 const TOC: React.FC<props> = ({ headings, title }) => {
-  const { visibleList } = useTocIsVisible();
+  const { visibleList } = useTocHighLight();
 
   return (
     <TocContainer>

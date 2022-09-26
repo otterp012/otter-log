@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { memo } from "react";
 import Logo from "./logo";
 import Nav from "./nav";
