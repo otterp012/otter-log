@@ -1,36 +1,50 @@
-import Card from "components/card/card";
-import { allPosts } from "contentlayer/generated";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRef } from "react";
-import type { Post as PostType } from "contentlayer/generated";
-import useInfiniteScroll from "hooks/useInfiniteScroll";
 import Link from "next/link";
+
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { Post as PostType } from "contentlayer/generated";
+
+import { allPosts } from "contentlayer/generated";
+import useSavedInfiniteScroll from "hooks/useSavedInfiniteScroll";
+
+import Card from "components/card/card";
 
 const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const observedTarget = useRef<HTMLParagraphElement>(null);
-  const { len: postLength } = useInfiniteScroll(
+  const { len: postLength } = useSavedInfiniteScroll(
     3,
     data.length,
     3,
     observedTarget,
+    "visibleCardsLength",
   );
+
   const displayedPosts = data.slice(0, postLength);
 
   return (
     <>
       <div className='px-3'>
         <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
-        {displayedPosts.map((displayedPost: PostType) => (
-          <Card
-            title={displayedPost.title}
-            description={displayedPost.description}
-            publishedAt={displayedPost.publishedAtFormatted}
-            thumbnailImg={displayedPost.thumbnailImg}
-            key={displayedPost.title}
-            slug={displayedPost.path}
-            tags={displayedPost.tags}
-          />
-        ))}
+        {displayedPosts.map(
+          ({
+            title,
+            description,
+            publishedAtFormatted,
+            thumbnailImg,
+            path,
+            tags,
+          }: PostType) => (
+            <Card
+              title={title}
+              description={description}
+              publishedAt={publishedAtFormatted}
+              thumbnailImg={thumbnailImg}
+              key={title}
+              slug={path}
+              tags={tags}
+            />
+          ),
+        )}
       </div>
       <div className='mt-20 text-center' ref={observedTarget}>
         <Link href='#top' replace={true}>

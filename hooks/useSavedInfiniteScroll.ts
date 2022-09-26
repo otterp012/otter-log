@@ -1,17 +1,22 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-function saveIntersectionCount(key: string, count: number) {
-  sessionStorage.setItem(key, JSON.stringify(count));
-}
-const useInfiniteScroll = (
+import useSessionStorage from "./useSessionStorage";
+
+const useSavedInfiniteScroll = (
   initialDisplayedLen: number,
   maxDisplayedLen: number,
   increasedByIntersecting: number,
   targetRef: RefObject<Element>,
+  sessionStorageKey: string,
 ) => {
-  const [len, setLen] = useState(initialDisplayedLen);
   const router = useRouter();
   const observer = useRef<IntersectionObserver>();
+
+  const {
+    storedValue: storedValueInSession,
+    setValue: setSessionStorageValue,
+  } = useSessionStorage(sessionStorageKey, initialDisplayedLen);
+  const [len, setLen] = useState(storedValueInSession);
 
   const callback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -32,22 +37,21 @@ const useInfiniteScroll = (
   }, [targetRef, callback]);
 
   useEffect(() => {
-    sessionStorage.setItem("test", String(len));
     if (!targetRef.current) return;
     if (len > maxDisplayedLen) observer.current?.unobserve(targetRef.current);
   }, [len, maxDisplayedLen, targetRef]);
 
   useEffect(() => {
-    function onRouteChangeStart() {
-      saveIntersectionCount("test2", len);
-    }
+    const onRouteChangeStart = () => {
+      setSessionStorageValue(len);
+    };
 
     router.events.on("routeChangeStart", onRouteChangeStart);
 
     return () => router.events.off("routeChangeStart", onRouteChangeStart);
-  }, [router, len]);
+  }, [router, len, setSessionStorageValue]);
 
   return { len };
 };
 
-export default useInfiniteScroll;
+export default useSavedInfiniteScroll;

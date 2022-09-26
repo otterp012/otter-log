@@ -3,7 +3,6 @@ import type { Params } from "types";
 
 import TOC from "components/toc";
 import PostSection from "components/section";
-import CustomMeta from "components/customMeta";
 
 import { allProjects } from "contentlayer/generated";
 
