@@ -21,10 +21,11 @@ const Card: React.FC<MDXProps> = ({
           <Image
             src={thumbnailImg}
             alt={title}
-            width={900}
-            height={900}
+            width={300}
+            height={300}
             className='z-0 mx-auto h-[150px] w-[150px] object-cover md:h-[240px] md:w-[240px]'
-            loading='lazy'
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='
           />
 
           <div className='ml-5 flex min-h-full w-[65%] flex-col space-y-2 md:py-1'>

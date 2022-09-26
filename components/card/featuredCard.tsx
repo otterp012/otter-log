@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/future/image";
 
 import type { MDXProps } from "types";
+import { Suspense } from "react";
 
 const FeaturedCard: React.FC<MDXProps> = ({
   title,
@@ -17,9 +18,11 @@ const FeaturedCard: React.FC<MDXProps> = ({
           src={thumbnailImg}
           alt={title}
           className='object-cove mx-auto h-[600px] w-full object-cover md:h-[75vh] md:w-[80%]'
-          width={1000}
-          height={1000}
+          width={500}
+          height={500}
           loading='eager'
+          placeholder='blur'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='
         />
 
         <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
