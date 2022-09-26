@@ -19,7 +19,7 @@ const PostSection: React.FC<props> = ({ postData }) => {
 
   const MDXComponent = useMDXComponent(code);
   return (
-    <section className='mt-5 w-full xl:min-w-[780px]'>
+    <section className='mt-5 w-full overflow-x-hidden xl:min-w-[780px]'>
       <PostHeader
         title={title}
         publishedAtFormatted={publishedAtFormatted}
