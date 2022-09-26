@@ -3,6 +3,7 @@
     "contentlayer",
     "esbuild",
     "lazyload",
+    "msapplication",
     "rehype",
     "sluggified",
     "tailwindcss",

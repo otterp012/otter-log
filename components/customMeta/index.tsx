@@ -15,13 +15,11 @@ const CustomMeta: React.FC<props> = ({
   image,
   tags,
 }) => {
+  const DEFAULT_META_CONTENT = "otter : fronted";
   return (
     <Head>
       <title>{`otter-log : ${title}` || "otter-log"}</title>
-      <meta name='description' content={description || "otter : fronted"} />
-      <meta property='og:locale' content='ko_KR' />
-      <meta property='og:site_name' content='otter | frontend || writer' />
-      <meta content='width=device-width, initial-scale=1' name='viewport' />
+      <meta name='description' content={description || DEFAULT_META_CONTENT} />
       <meta
         property='og:title'
         content={`otter-log: ${title}` || "otter-log"}
@@ -34,11 +32,11 @@ const CustomMeta: React.FC<props> = ({
       <meta property='og:image' content={image} />
       <meta
         property='og:image:alt'
-        content={description || "otter : fronted"}
+        content={description || DEFAULT_META_CONTENT}
       />
       <meta
         property='og:description'
-        content={description || "otter : fronted"}
+        content={description || DEFAULT_META_CONTENT}
       />
     </Head>
   );

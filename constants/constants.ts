@@ -1,5 +1,5 @@
 export const NAV_PATHS = [
-  { path: "/blog", title: "BLOG" },
+  { path: "/post", title: "POST" },
   { path: "/projects", title: "PROJECTS" },
   { path: "/search", title: "SEARCH" },
 ];
