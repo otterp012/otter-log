@@ -3,6 +3,7 @@ import type { HeadingsType } from "./types";
 import TocContainer from "./container";
 import TocList from "./list";
 import TocTitle from "./title";
+
 import useTocHighLight from "../../hooks/useTocHighlight";
 
 type props = {

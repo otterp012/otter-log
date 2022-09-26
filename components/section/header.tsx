@@ -1,6 +1,7 @@
 import Tags from "../tags";
-import { wordBreak } from "../../styles/extraStyle";
 import MainImage from "./mainImage";
+
+import { wordBreak } from "../../styles/extraStyle";
 
 type props = {
   title: string;

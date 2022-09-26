@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import Link from "next/link";
 
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -22,7 +22,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const displayedPosts = data.slice(0, postLength);
 
   return (
-    <>
+    <Fragment>
       <div className='px-3'>
         <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
         {displayedPosts.map(
@@ -51,7 +51,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <a className='px-3 py-5 italic'>맨 위로가기 ⬆️⬆️</a>
         </Link>
       </div>
-    </>
+    </Fragment>
   );
 };
 

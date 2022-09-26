@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/future/image";
 
 import type { MDXProps } from "types";
-import { Suspense } from "react";
 
 const FeaturedCard: React.FC<MDXProps> = ({
   title,

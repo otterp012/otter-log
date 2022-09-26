@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { setEnvironmentData } from "worker_threads";
 
 type props = {
   title?: string;
@@ -17,6 +16,7 @@ const CustomMeta: React.FC<props> = ({
   seo,
 }) => {
   const DEFAULT_META_CONTENT = "otter : fronted";
+
   return (
     <Head>
       <title>{`otter-log : ${title}` || "otter-log"}</title>

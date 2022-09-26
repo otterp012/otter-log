@@ -1,6 +1,8 @@
 import PostHeader from "./header";
-import { useMDXComponent } from "next-contentlayer/hooks";
+
 import type { Post as PostType } from "contentlayer/generated";
+
+import { useMDXComponent } from "next-contentlayer/hooks";
 
 type props = {
   postData: PostType;

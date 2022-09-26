@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import type { HeadingsType } from "./types";
 
 type props = {

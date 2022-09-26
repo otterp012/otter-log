@@ -8,12 +8,12 @@ import { allProjects } from "contentlayer/generated";
 const Projects = ({ allProjects }: InferGetStaticPropsType<GetStaticProps>) => {
   return (
     <div className='flex min-h-[720px] flex-col px-5 md:flex-row md:items-center md:justify-center md:space-x-3'>
-      {allProjects.map((project: MDXProps) => (
+      {allProjects.map(({ title, thumbnailImg, slug }: MDXProps) => (
         <ProjectCard
-          key={project.title}
-          title={project.title}
-          thumbnailImg={project.thumbnailImg}
-          slug={project.slug}
+          key={title}
+          title={title}
+          thumbnailImg={thumbnailImg}
+          slug={slug}
         />
       ))}
     </div>

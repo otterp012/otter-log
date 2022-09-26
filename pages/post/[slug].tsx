@@ -1,17 +1,19 @@
+import { Fragment } from "react";
+
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types";
 
 import TOC from "components/toc";
 import PostSection from "components/section";
-import CustomMeta from "components/customMeta";
+import CustomMeta from "components/meta/customMeta";
 
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings, description, slug, thumbnailImg, seo } = data;
-  console.log(data);
+
   return (
-    <>
+    <Fragment>
       <CustomMeta
         title={title}
         description={description}
@@ -23,7 +25,7 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <PostSection postData={data} />
         <TOC headings={headings} title={title} />
       </div>
-    </>
+    </Fragment>
   );
 };
 

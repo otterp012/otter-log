@@ -7,15 +7,13 @@ import PostSection from "components/section";
 import { allProjects } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { title, headings, description, slug, thumbnailImg } = data;
+  const { title, headings } = data;
 
   return (
-    <>
-      <div className='flex w-full px-3 md:px-5 xl:px-0'>
-        <PostSection postData={data} />
-        <TOC headings={headings} title={title} />
-      </div>
-    </>
+    <div className='flex w-full px-3 md:px-5 xl:px-0'>
+      <PostSection postData={data} />
+      <TOC headings={headings} title={title} />
+    </div>
   );
 };
 
