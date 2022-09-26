@@ -1,12 +1,11 @@
-import Image from "next/future/image";
-
 import Tags from "../tags";
 import { wordBreak } from "../../styles/extraStyle";
+import MainImage from "./mainImage";
 
 type props = {
   title: string;
   publishedAtFormatted: string;
-  thumbnailImg: string;
+  thumbnailImg?: string;
   tags: string[];
 };
 
@@ -20,7 +19,7 @@ const PostHeader: React.FC<props> = ({
     <header>
       <div className='space-y-2'>
         <h2
-          className='w-[90%] text-4xl font-semibold md:text-5xl'
+          className='w-[80%] text-4xl font-semibold md:text-5xl'
           id='top'
           style={wordBreak}
         >
@@ -33,15 +32,7 @@ const PostHeader: React.FC<props> = ({
           </time>
         </div>
       </div>
-      <div className='mx-auto mt-5 h-[200px] w-[70%] md:h-[420px]'>
-        <Image
-          src={thumbnailImg}
-          alt={title}
-          className='h-full w-full object-cover'
-          width={1000}
-          height={1000}
-        />
-      </div>
+      {thumbnailImg && <MainImage thumbnailImg={thumbnailImg} title={title} />}
     </header>
   );
 };

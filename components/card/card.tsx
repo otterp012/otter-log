@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/future/image";
 
-import Tags from "components/tags";
-
 import type { MDXProps } from "types";
+
+import Tags from "components/tags";
+import { wordBreak } from "../../styles/extraStyle";
 
 const Card: React.FC<MDXProps> = ({
   title,
@@ -37,7 +38,10 @@ const Card: React.FC<MDXProps> = ({
               <Tags tags={tags} />
             </div>
             <div>
-              <p className='w-[90%] text-sm text-gray-500 line-clamp-2 md:mt-8 '>
+              <p
+                className='w-[90%] text-sm text-gray-500 line-clamp-2 md:mt-8'
+                style={wordBreak}
+              >
                 {description}
               </p>
             </div>
