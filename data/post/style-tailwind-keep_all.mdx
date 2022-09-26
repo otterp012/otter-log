@@ -1,0 +1,87 @@
+---
+title: tailwind에서도 Keep-all 쓰고싶어
+publishedAt: 2022-09-26
+description: 테일윈드 css를 사용하는 중 keep-all이 너무너무 쓰고싶어서 쓰게된 이야기
+thumbnailImg: https://velog.velcdn.com/images/otterp/post/2af39f5c-17e7-49ea-bcc6-71d81ccae7d4/image.png
+isFeatured: false
+tags:
+  - tailwind
+  - css
+seo:
+  - tailwind
+  - css
+  - keep-all
+  - word-break
+  - 단어 줄바꿈
+---
+
+프론트엔드 개발을 할 때에 문자를 다루는 일은 아주 많다. 따라서 문자에 설정되는 `css` 설정도 아주 많다. 그중에 내가 제일 좋아하는 설정은 `word-break : keep-all` 설정이었다. 이, 속성을 사용하면 한글을 인식해 줄바꿈을 적절하게 해주기 때문이다. 위와같은 악랄한 제목을 보자. 아주 거슬린다.
+
+## tailwind에 keep-all이 없다.
+
+`tailwind`를 스타일링 스택으로 사용해 프로젝트를 진행하고 있었던 나는, `keep-all`을 찾아서 공식문서를 뒤지기 시작했다. 그런데, `keep-all` 속성만 없었다. 설마 없겠어..? 속으로 생각하며 일단 존재하는 속성만으로 어떻게 해보려고 했는데.
+
+![](https://velog.velcdn.com/images/otterp/post/a4480df2-89d5-49dd-951e-572110c27915/image.png)
+
+되는 설정은 없었다.
+
+`tailwind` 깃허브에 이슈에 검색해 보았다. 그러니 다음과 같았다.
+![](https://velog.velcdn.com/images/otterp/post/1be8e5d5-f363-4d9a-b916-1c9a8e7471a9/image.png)
+https://github.com/tailwindlabs/tailwindcss/discussions/6273
+아.. 없는게 맞았다. ~~what a useless library..~~
+
+## 다른 방법으로 keep-all 적용하기
+
+하지만, 이 속성빼곤 모든 속성에서 문제점이 없었고 이미 대부분의 코드가 테일윈드를 기반으로 작성되어져 있었기에 테일윈드의 사용을 멈출 수는 없었다. 나에게 남은 옵션은 다음과 같았다.
+
+- `styled component`로 해당부분 컴포넌트 만들어주기.
+- `keep-all` 사용 부분만, `className` 넣어주기 (기본적인 css스타일링).
+- `inline` 스타일로 해당부분에만 넣어주기.
+
+일단, 내가 선택한 방법은 세번째 `inline` 스타일로 해당부분만 넣어주는 방식이었다.
+
+첫번째 방식은, `keep-all` 속성 하나 때문에 라이브러리를 하나 설치하는 것이 너무 과해 보였다. 규모가 큰 라이브러리를 이 속성 하나를 사용하기 위해 매번 설치해주고, 불러와야하는 것이 좋지 않다고 느껴졌다. 만약, 내가 어느정도 `styled component`로 만들어진 컴포넌트를 같이 사용하고 있었다면 몰랐겠지만 지금까지 작성한 코드는 100% 테일윈드로만 작성되어져 있었다. 그래서 이 부분에서 다른 라이브러리의 사용은 기각.
+
+두번째, 방식은 그래도 어렵지 않고 바로 작성 가능했다. 테일윈드의 `base` 속성을 이용할 수도 있고 `import` 되는 `css` 파일은 이미 존재하므로 해당 파일에 넣어만 주면 되는 부분이었다. 그런데 이 부분을 기각한 이유는, 테일윈드에서 `layer`로 만든 클래스 이름과 `css` 파일에 존재하는 클래스 이름에서 다음에 볼때 혼동이 올 수 있다고 생각했다.
+
+그래서, 무난한 세번째 인라인방식을 선택했다. 현재 사용하는 스타일 라이브러리가 어차피 테일윈드이므로 스타일링을 위해서 `tsx`에 해당 태그를 보면 스타일이 보인다는 것이 다른 사람이 볼때 직관적일 것이라 생각했고 새로운 라이브러리를 사용하지 않아도 되었기 때문이다.
+
+### 그래서, 이렇게 적용했다.
+
+```js
+// tailwind가 wordBreak keep-all을 지원하지 않아 임시로 만든 부분
+// 일부러 주석을 달아주었다. 일반적 방법이 아니니까
+
+import type { CSSProperties } from "react";
+
+export const wordBreak: CSSProperties = {
+  wordBreak: "keep-all",
+};
+```
+
+이렇게 파일을 하나 만들어, 해당 스타일을 객체로 만들어주고
+
+```
+        <h2
+          className='w-[80%] text-4xl font-semibold md:text-5xl'
+          id='top'
+          style={wordBreak}
+        >
+          {title}
+        </h2>
+```
+
+이런 식으로 `style`에 inline`으로 넣어주었다.
+
+![](https://velog.velcdn.com/images/otterp/post/d5ab6a65-4d7f-4447-9862-65e569f1df25/image.png)
+
+이렇게 `keep-all`이 적상적으로 적용되었다. 보기도 훨씬 좋고 디자인적으로도 어떤 면에서도 훨씬 좋다고 생각한다.
+
+## 마무리
+
+_**그런데 최신버전에서 `break-keep`이란 이름으로 `keep-all` 이 생긴 것 같다!**_
+2022, 9월 기준으로 아직 공식문서에서 업데이트 되진 않았는데 깃허브에 이렇게 추가도 되어있고,
+![](https://velog.velcdn.com/images/otterp/post/b5e5da7c-6d0a-49bf-bfd0-76980c2971cf/image.png)
+
+https://github.com/tailwindlabs/tailwindcss/pull/9393
+위 이슈에 따르면 브라우저 호환성에 문제가 있다고 하여 아직 이 기능을 사용하진 않았다.

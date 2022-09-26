@@ -13,11 +13,11 @@ export const Post = defineDocumentType(() => ({
     title: { type: "string", required: true },
     publishedAt: { type: "string", required: true },
     description: { type: "string", required: true },
-    seoDescription: { type: "string", required: false },
     thumbnailImg: { type: "string", required: true },
     isFeatured: { type: "boolean", required: false },
     tags: { type: "list", of: { type: "string" }, required: true },
     series: { type: "string", of: { type: "list" }, required: false },
+    seo: { type: "list", of: { type: "string" }, required: false },
   },
   computedFields: {
     path: {

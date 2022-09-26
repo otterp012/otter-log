@@ -8,8 +8,8 @@ import CustomMeta from "components/customMeta";
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { title, headings, description, slug, thumbnailImg } = data;
-
+  const { title, headings, description, slug, thumbnailImg, seo } = data;
+  console.log(data);
   return (
     <>
       <CustomMeta
@@ -17,6 +17,7 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         description={description}
         url={slug}
         image={thumbnailImg}
+        seo={seo && seo}
       />
       <div className='flex w-full px-3 md:px-5 xl:px-0'>
         <PostSection postData={data} />

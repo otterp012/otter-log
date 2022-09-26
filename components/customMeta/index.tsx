@@ -1,11 +1,12 @@
 import Head from "next/head";
+import { setEnvironmentData } from "worker_threads";
 
 type props = {
   title?: string;
   description?: string;
   url?: string;
   image?: string;
-  tags?: string[];
+  seo?: string[];
 };
 
 const CustomMeta: React.FC<props> = ({
@@ -13,7 +14,7 @@ const CustomMeta: React.FC<props> = ({
   description,
   url,
   image,
-  tags,
+  seo,
 }) => {
   const DEFAULT_META_CONTENT = "otter : fronted";
   return (
@@ -38,6 +39,9 @@ const CustomMeta: React.FC<props> = ({
         property='og:description'
         content={description || DEFAULT_META_CONTENT}
       />
+      {seo?.map((item) => (
+        <meta property='article:tag' content={item} key={item} />
+      ))}
     </Head>
   );
 };
