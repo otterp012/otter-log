@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect, Dispatch } from "react";
 
+type value = string | number;
 const useSessionStorage = <T>(key: string, initialValue: T) => {
   const getValue = useCallback(() => {
     if (typeof window === "undefined") return initialValue;
@@ -22,8 +23,7 @@ const useSessionStorage = <T>(key: string, initialValue: T) => {
     try {
       const newValue = JSON.stringify(storedValue);
       window.sessionStorage.setItem(key, newValue);
-
-      setStoredValue(newValue as T);
+      setStoredValue(storedValue);
     } catch {
       console.warn("Error setting sessionStorage");
     }
