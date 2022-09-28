@@ -33,7 +33,10 @@ const Card: React.FC<MDXProps> = ({
               <time className='text-xs font-bold text-gray-400 md:text-sm'>
                 {publishedAt}
               </time>
-              <h3 className='text-md break-all font-bold line-clamp-2 md:text-2xl'>
+              <h3
+                className='text-md break-all font-bold line-clamp-2 md:text-2xl'
+                style={wordBreak}
+              >
                 {title}
               </h3>
               <Tags tags={tags} />
