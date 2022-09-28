@@ -16,9 +16,9 @@ const FeaturedCard: React.FC<MDXProps> = ({
         <Image
           src={thumbnailImg}
           alt={title}
-          className='object-cove mx-auto h-[600px] w-full object-cover md:h-[75vh] md:w-[80%]'
-          width={500}
-          height={500}
+          className='mx-auto h-[50vh] w-full border-b border-gray-700 object-none md:h-[75vh] md:w-[80%]'
+          width={1000}
+          height={1000}
           loading='eager'
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='

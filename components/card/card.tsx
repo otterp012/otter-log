@@ -15,7 +15,7 @@ const Card: React.FC<MDXProps> = ({
   tags,
 }) => {
   return (
-    <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-200 pb-5 last:border-none hover:cursor-pointer md:px-5'>
+    <section className='h-30 md:h-53 mt-5 flex w-full border-b border-gray-700 pb-5 last:border-none hover:cursor-pointer md:px-5'>
       <Link href={slug} passHref>
         <div className='flex w-full'>
           <Image
