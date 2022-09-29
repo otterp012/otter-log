@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import type { HeadingsType } from "./types";
 
+import { wordBreak } from "../../styles/extraStyle";
+
 type props = {
   headings: HeadingsType;
   visibleList: string;
@@ -18,6 +20,7 @@ const TocList: React.FC<props> = ({ headings, visibleList }) => {
           slug === visibleList && "font-bold text-blue-800 dark:text-yellow-200"
         } ${heading === "heading3" && "ml-3 text-sm"}
           ${heading === "heading4" && "ml-5 text-xs"} h-full w-[250px]`}
+          style={wordBreak}
         >
           {/* todo 이부분 수정하기 */}
           <Link href={`#${slug}`} key={slug}>
