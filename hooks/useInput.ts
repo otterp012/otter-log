@@ -1,7 +1,7 @@
 import { useState, useRef, useLayoutEffect } from "react";
 
-const UseInput = (inputValidator: (value: string) => boolean) => {
-  const [searchStr, setSearchStr] = useState("");
+const UseInput = (inputValidator: (value: number) => boolean) => {
+  const [searchValue, setSearchValue] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -11,9 +11,9 @@ const UseInput = (inputValidator: (value: string) => boolean) => {
     if (!inputRef.current) return;
 
     const currentValue = e.target.value;
-    setSearchStr(currentValue);
+    setSearchValue(currentValue);
 
-    if (inputValidator(currentValue)) {
+    if (inputValidator(currentValue.length)) {
       setIsValid(true);
     } else setIsValid(false);
   };
@@ -33,7 +33,7 @@ const UseInput = (inputValidator: (value: string) => boolean) => {
     inputRef,
     isValid,
     isFocus,
-    searchStr,
+    searchValue,
   };
 };
 
