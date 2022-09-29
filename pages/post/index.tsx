@@ -24,7 +24,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Fragment>
       <div className='px-3'>
-        <h2 className='pt-5 text-4xl font-bold italic'>BLOG...</h2>
+        <h2 className='pt-5 text-4xl font-bold italic'>POSTS...</h2>
         {displayedPosts.map(
           ({
             title,
