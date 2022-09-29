@@ -4,31 +4,23 @@ import Card from "components/card/card";
 import { allPosts } from "contentlayer/generated";
 import type { Post as PostType } from "contentlayer/generated";
 import useDebounce from "hooks/useDebounce";
+import UseInput from "hooks/useInput";
 const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [searchStr, setSearchStr] = useState("");
-  const [isValid, setIsValid] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+  const inputValidator = (value: string) => {
+    return value.length > 2 ? true : false;
+  };
+  const {
+    searchStr,
+    isValid,
+    inputRef,
+    isFocus,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = UseInput(inputValidator);
+
   const debouncedValue = useDebounce(searchStr, 500);
   const [filteredData, setFilteredData] = useState<PostType[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const onChangeHandler = (e: React.ChangeEvent) => {
-    if (!(e.target instanceof HTMLInputElement)) return;
-    if (!inputRef.current) return;
-
-    setSearchStr(e.target.value);
-    inputRef.current.value = e.target.value;
-    if (e.target.value.length < 2) {
-      setIsValid(false);
-      setFilteredData([]);
-      inputRef.current.value = "";
-    } else setIsValid(true);
-  };
-
-  useLayoutEffect(() => {
-    if (!inputRef.current) return;
-    inputRef.current.focus();
-  }, []);
 
   useEffect(() => {
     if (debouncedValue.length < 2) return;
@@ -66,8 +58,8 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           onChange={onChangeHandler}
           className='mt-5 w-[100%] rounded-xl border px-5 py-3 text-black focus:outline-none md:w-[70%]'
           placeholder='검색어를 입력해주세요.'
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onFocus={onFocusHandler}
+          onBlur={onBlurHandler}
           ref={inputRef}
         />
         {isFocus && !isValid && (
@@ -77,6 +69,7 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         )}
         <div>
           {filteredData &&
+            isValid &&
             filteredData.map(
               ({
                 title,
