@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, Dispatch } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 type value = string | number;
 const useSessionStorage = <T>(key: string, initialValue: T) => {
@@ -29,9 +29,6 @@ const useSessionStorage = <T>(key: string, initialValue: T) => {
     }
   };
 
-  useEffect(() => {
-    console.log(storedValue);
-  }, [storedValue]);
   return {
     storedValue,
     setValue,

@@ -16,12 +16,12 @@ const FeaturedCard: React.FC<MDXProps> = ({
         <Image
           src={thumbnailImg}
           alt={title}
-          className='mx-auto h-[50vh] w-full border-b border-gray-700 object-none md:h-[75vh] md:w-[80%]'
+          className='mx-auto h-[50vh] w-full border-b border-gray-700 object-scale-down md:h-[75vh] md:w-[80%]'
           width={1000}
           height={1000}
           loading='eager'
-          placeholder='blur'
-          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='
+          // placeholder='blur'
+          // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='
         />
 
         <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
