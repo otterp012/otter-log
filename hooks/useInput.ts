@@ -1,4 +1,8 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useReducer } from "react";
+
+const inputReducer = () => {
+  return;
+};
 
 const UseInput = (inputValidator: (value: number) => boolean) => {
   const [searchValue, setSearchValue] = useState("");
