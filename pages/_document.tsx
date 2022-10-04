@@ -11,9 +11,9 @@ export default class MyDocument extends Document {
       `;
 
     return (
-      <Html className='over-flow-x-hidden max-w-full' lang='ko'>
+      <Html className='over-flow-x-hidden max-w-full dark:bg-black' lang='ko'>
         <Head />
-        <body className='over-flow-x-hidden max-w-full dark:bg-black dark:text-white'>
+        <body className='over-flow-x-hidden h-full max-w-full dark:bg-black dark:text-white'>
           <script dangerouslySetInnerHTML={{ __html: setThemeMode }} />
           <Main />
           <NextScript />
