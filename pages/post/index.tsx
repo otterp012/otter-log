@@ -5,11 +5,11 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Post as PostType } from "contentlayer/generated";
 
 import { allPosts } from "contentlayer/generated";
-import useSavedInfiniteScroll from "hooks/useSavedInfiniteScroll";
+import useSavedInfiniteScroll from "../../hooks/useSavedInfiniteScroll";
 
 import Card from "components/card/card";
 
-const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
   const observedTarget = useRef<HTMLParagraphElement>(null);
   const { len: postLength } = useSavedInfiniteScroll(
     3,
@@ -55,7 +55,7 @@ const Blogs = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   );
 };
 
-export default Blogs;
+export default Posts;
 
 export const getStaticProps: GetStaticProps = async () => {
   const allBlogsByDate = allPosts.sort(
