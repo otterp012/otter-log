@@ -9,17 +9,14 @@ type props = {
 };
 
 const NavList: React.FC<props> = ({ query, title, onClickHandler }) => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <li>
       <Link href={query}>
         <a
           className={`
-            ${
-              router.pathname.includes(query) &&
-              "text-blue-900 dark:text-yellow-200"
-            } 
+            ${pathname.includes(query) && "text-blue-900 dark:text-yellow-200"} 
           font-semibold hover:text-blue-500 dark:hover:text-yellow-300 md:text-xl`}
           onClick={onClickHandler}
         >
