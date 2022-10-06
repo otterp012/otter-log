@@ -1,9 +1,9 @@
 // 모든페이지에 렌더링되는 layout 컴포넌트 테스트
 import { render, screen } from "@testing-library/react";
-import Layout from "../../components/layout/index";
-import React from "react";
-import { createMockRouter } from "../../__mock__/next";
+import { createMockRouter } from "../../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+
+import Layout from "../../../components/layout/index";
 
 describe("layout component", () => {
   it("Layout 컴포넌트가 렌더링 된다.", async () => {
@@ -47,6 +47,3 @@ describe("layout component", () => {
     );
   });
 });
-
-// 로컬스토리지에 초기에 저장한 값 : 기본 다크 모드를 테스트 할 ㅅ ㅜ있을까?
-// https://ui.toast.com/weekly-pick/ko_20210630

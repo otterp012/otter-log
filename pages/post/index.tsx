@@ -47,9 +47,18 @@ const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
         )}
       </div>
       <div className='mt-20 text-center' ref={observedTarget}>
-        <Link href='#top' replace={true}>
-          <a className='px-3 py-5 italic'>맨 위로가기 ⬆️⬆️</a>
-        </Link>
+        <a
+          className='cursor-pointer px-3 py-5 italic hover:text-yellow-300 '
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          맨 위로가기 ⬆️⬆️
+        </a>
       </div>
     </Fragment>
   );

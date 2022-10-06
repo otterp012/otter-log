@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React from "react";
-import DarkModeBtn from "../../components/layout/header/darkModeBtn";
+
+import DarkModeBtn from "../../../components/layout/header/darkModeBtn";
 
 describe("dark mode", () => {
   it("darkMode 버튼이 렌더링 된다.", () => {
@@ -15,8 +15,10 @@ describe("dark mode", () => {
     render(<DarkModeBtn />);
     const Button = screen.getByRole("button", { name: /DARK/i });
     await userEvent.click(Button);
+
     expect(Button).toHaveAccessibleName("LIGHT");
     await userEvent.click(Button);
+
     expect(Button).toHaveAccessibleName("DARK");
   });
 });
