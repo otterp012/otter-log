@@ -1,14 +1,16 @@
 import { Fragment } from "react";
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from "next";
 import FeaturedCard from "components/card/featuredCard";
-import { allPosts, Post as PostType } from "contentlayer/generated";
+import { allPosts, Post, Post as PostType } from "contentlayer/generated";
 
 import Card from "components/card/card";
 
-const Home: NextPage = ({
-  featuredPost,
-  recentPosts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+type Props = {
+  featuredPost: Post;
+  recentPosts: Post[];
+};
+
+const Home: NextPage<Props> = ({ featuredPost, recentPosts }) => {
   return (
     <Fragment>
       <div className='mt-5 w-full px-3 md:px-0'>
@@ -43,7 +45,7 @@ const Home: NextPage = ({
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const featuredPost = allPosts.filter((post) => post.isFeatured)[0];
+  const featuredPost = allPosts.find((post) => post.isFeatured);
   const recentPosts = allPosts
     .filter((post) => !post.isFeatured)
     .sort(
