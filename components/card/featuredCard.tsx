@@ -11,34 +11,35 @@ const FeaturedCard: React.FC<MDXProps> = ({
   slug,
 }) => {
   return (
-    <Link href={slug} passHref>
-      <a>
-        <section className='hover:cursor-pointer'>
+    <section>
+      <Link href={slug} passHref>
+        <a>
           <Image
             src={thumbnailImg}
             alt={title}
-            className='mx-auto h-[50vh] w-full border-b border-gray-700 object-scale-down md:h-[75vh] md:w-[80%]'
+            className='mx-auto h-[50vh] w-full border-b border-gray-700 object-scale-down hover:cursor-pointer md:h-[75vh] md:w-[80%]'
             width={1000}
             height={1000}
             loading='eager'
-            // placeholder='blur'
-            // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg=='
           />
-
-          <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
-            <div className='mb-2 text-right md:text-center'>
-              <time className='text-sm font-bold text-gray-400'>
-                {publishedAt}
-              </time>
-              <h2 className='break-words text-4xl font-semibold'>{title}</h2>
-            </div>
-            <p className='w-[60%] break-all text-right text-sm text-gray-400 line-clamp-2 md:text-center'>
-              {description}
-            </p>
-          </div>
-        </section>
-      </a>
-    </Link>
+        </a>
+      </Link>
+      <div className='mt-3 flex flex-col items-end px-5 md:items-center'>
+        <div className='mb-2 text-right md:text-center'>
+          <time className='text-sm font-bold text-gray-400'>{publishedAt}</time>
+          <Link href={slug} passHref>
+            <a>
+              <h2 className='break-words text-4xl font-semibold hover:text-yellow-300'>
+                {title}
+              </h2>
+            </a>
+          </Link>
+        </div>
+        <p className='w-[60%] break-all text-right text-sm text-gray-400 line-clamp-2 md:text-center'>
+          {description}
+        </p>
+      </div>
+    </section>
   );
 };
 export default FeaturedCard;
