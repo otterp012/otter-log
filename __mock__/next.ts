@@ -1,9 +1,5 @@
 import type { NextRouter } from "next/router";
 
-const useRouter = jest.spyOn(require("next/router"), "useRouter");
-
-const mockUseNextRouter = useRouter;
-
 export function createMockRouter(overrides: Partial<NextRouter>) {
   return {
     basePath: "",
@@ -32,4 +28,3 @@ export function createMockRouter(overrides: Partial<NextRouter>) {
 }
 
 // https://github.com/vercel/next.js/discussions/23034
-// mock  router 관련 내용
