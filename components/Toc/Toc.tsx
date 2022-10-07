@@ -1,8 +1,8 @@
 // component
 
 // hook
-// import useToc from "hooks/useToc";
-// import { linkHandler, scrollTopHandler } from "lib/lib";
+import useToc from "hooks/useToc";
+import { linkHandler, scrollTopHandler } from "lib/lib";
 
 type HeadingType = {
   slug: string;
@@ -11,11 +11,11 @@ type HeadingType = {
 };
 
 type props = {
-  headings?: HeadingType[];
+  headings: HeadingType[];
   title: string;
 };
 const Toc: React.FC<props> = ({ headings, title }) => {
-  // const { visibleList } = useToc();
+  const { visibleList } = useToc();
 
   return (
     <aside className='relative hidden xl:block'>
@@ -24,28 +24,28 @@ const Toc: React.FC<props> = ({ headings, title }) => {
           <h4 className='keep-all hover:text-yellow-300 mb-3 inline-block cursor-pointer text-xl font-bold'>
             <a>{title}</a>
           </h4>
-          {/* <ol className='ml-2'>
-              {headings.map(({ slug, heading, text }) => {
-                const visibleStyle =
-                  slug === visibleList
-                    ? "font-bold text-deepBlue dark:text-deepPink"
-                    : "";
-                const headingStyle = {
-                  heading2: "",
-                  heading3: "ml-3 text-sm",
-                  heading4: "ml-5 text-xs",
-                };
-                const commonStyle = `keep-all mb-1 h-full w-[250px] pointer hover-change-color`;
-                return (
-                  <li
-                    key={slug}
-                    className={commonStyle + headingStyle[heading] + visibleStyle}
-                  >
-                    <a>{text}</a>
-                  </li>
-                );
-              })}
-            </ol> */}
+          <ol className='ml-2'>
+            {headings.map(({ slug, heading, text }) => {
+              const visibleStyle =
+                slug === visibleList
+                  ? "font-bold text-deepBlue dark:text-deepPink"
+                  : "";
+              const headingStyle = {
+                heading2: "",
+                heading3: "ml-3 text-sm",
+                heading4: "ml-5 text-xs",
+              };
+              const commonStyle = `keep-all mb-1 h-full w-[250px] pointer hover-change-color`;
+              return (
+                <li
+                  key={slug}
+                  className={commonStyle + headingStyle[heading] + visibleStyle}
+                >
+                  <a>{text}</a>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </aside>

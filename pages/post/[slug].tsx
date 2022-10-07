@@ -20,7 +20,7 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       />
       <MdxLayout>
         <MdxSection postData={data} />
-        <Toc title={title} />
+        <Toc title={title} headings={headings} />
       </MdxLayout>
     </Fragment>
   );
