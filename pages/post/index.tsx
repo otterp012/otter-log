@@ -7,7 +7,7 @@ import { allPosts, Post as PostType } from "contentlayer/generated";
 import useSavedInfiniteScroll from "hooks/useSavedInfiniteScroll";
 
 // components
-import { PageLayout, ToTopButton } from "components";
+import { PageLayout, Card, ToTopButton } from "components";
 
 const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
   const observedTarget = useRef<HTMLDivElement>(null);
@@ -26,6 +26,27 @@ const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
       title='POST...'
       description='궁금한 것을 공부합니다. 그리고 기록합니다. 👨‍💻'
     >
+      {displayedPosts.map(
+        ({
+          title,
+          description,
+          publishedAtFormatted,
+          thumbnailImg,
+          path,
+          tags,
+        }: PostType) => (
+          <Card
+            title={title}
+            description={description}
+            publishedAt={publishedAtFormatted}
+            thumbnailImg={thumbnailImg}
+            key={title}
+            slug={path}
+            tags={tags}
+            cardType='verticalCard'
+          />
+        ),
+      )}
       <ToTopButton />
       <div data-testid='test' ref={observedTarget} />
     </PageLayout>
