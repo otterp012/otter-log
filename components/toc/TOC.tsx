@@ -2,7 +2,7 @@
 
 // hook
 // import useToc from "hooks/useToc";
-import { linkHandler, scrollTopHandler } from "lib/lib";
+// import { linkHandler, scrollTopHandler } from "lib/lib";
 
 export type HeadingType = {
   slug: string;
@@ -22,7 +22,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
       <div className='border-gray-200 sticky top-[200px] right-5 ml-10 w-[280px] border-l-2'>
         <div className='py-2 pl-5'>
           <h4 className='keep-all hover:text-yellow-300 mb-3 inline-block cursor-pointer text-xl font-bold'>
-            <a onClick={scrollTopHandler}>{title}</a>
+            <a>{title}</a>
           </h4>
           <ol className='ml-2'>
             {headings.map(({ slug, heading, text }) => {
@@ -41,7 +41,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
 
               return (
                 <li key={slug} className={commonStyle + headingStyle[heading]}>
-                  <a onClick={(e) => linkHandler(e, slug)}>{text}</a>
+                  <a>{text}</a>
                 </li>
               );
             })}

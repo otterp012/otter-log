@@ -1,3 +1,5 @@
+import { DefaultMeta } from "./DefaultMeta";
+
 // Card
 export { Card } from "./Card";
 export { ProjectCard } from "./ProjectCard";
@@ -23,6 +25,7 @@ export { TOC } from "./TOC";
 
 // Meta
 // export { CustomMeta, DefaultMeta } from "./Meta";
+export { DefaultMeta } from "./DefaultMeta";
 
 // Filter
 export { NoteFilter } from "./NoteFilter";
