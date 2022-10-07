@@ -21,7 +21,7 @@ export { DarkModeButton } from "./DarkModeButton";
 export { ToTopButton } from "./ToTopButton";
 
 // TOC
-export { TOC } from "./TOC";
+export { Toc } from "./Toc";
 
 // Meta
 // export { CustomMeta, DefaultMeta } from "./Meta";
