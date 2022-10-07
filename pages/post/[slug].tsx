@@ -4,7 +4,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types/types";
 
 import { MdxSection, MdxLayout } from "components";
-import { TOC } from "components/TOC";
+import { TOC } from "components";
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

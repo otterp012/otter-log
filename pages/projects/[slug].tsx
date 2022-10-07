@@ -3,7 +3,7 @@ import type { Params } from "types/types";
 
 import { allProjects } from "contentlayer/generated";
 import { MdxSection, MdxLayout } from "components";
-import { TOC } from "components/TOC";
+import { TOC } from "components";
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings } = data;
 
