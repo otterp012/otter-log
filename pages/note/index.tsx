@@ -1,5 +1,4 @@
-import NoteSection from "components/noteSection";
-import NoteFilter from "components/filter";
+import { PageLayout, NoteFilter, Notes } from "components";
 
 type Props = {
   created_time: string;
@@ -11,14 +10,13 @@ type Props = {
 
 const Note: React.FC<{ data: Props[] }> = ({ data }) => {
   return (
-    <div className='px-3'>
-      <h2 className='pt-5 text-3xl font-bold italic'>NOTES...</h2>
-      <p className='text-sm font-semibold text-red-400'>
-        아래 페이지는, 노션으로 연결됩니다. 🥸
-      </p>
+    <PageLayout
+      title='NOTES...'
+      description='공부한 기록들, 도움이 될 수도 있습니다. 🤗'
+    >
       <NoteFilter />
-      <NoteSection data={data} />
-    </div>
+      <Notes data={data} />
+    </PageLayout>
   );
 };
 

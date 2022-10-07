@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Card from "../../../components/card/card";
+import Card from "../../../components/Card/Card";
 import { createMockRouter } from "../../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { allPosts, Post } from "contentlayer/generated";

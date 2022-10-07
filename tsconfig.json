@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "contentlayer/generated": [
         "./.contentlayer/generated",
@@ -27,9 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
-    "contentlayer/generated",
-    "__tests__/pages/layout.test.js",
-    "__mock__/next.ts"
+    "contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import DarkModeBtn from "../../../components/layout/header/darkModeBtn";
+import DarkModeBtn from "../../../components/Layout/header/darkModeBtn";
 
 describe("dark mode", () => {
   it("darkMode 버튼이 렌더링 된다.", () => {

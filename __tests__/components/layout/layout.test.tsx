@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { createMockRouter } from "../../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import Layout from "../../../components/layout/index";
+import Layout from "../../../components/Layout/AppLayout";
 
 describe("layout component", () => {
   it("Layout 컴포넌트가 렌더링 된다.", async () => {

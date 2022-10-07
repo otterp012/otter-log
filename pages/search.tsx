@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Post as PostType } from "contentlayer/generated";
 
-import Card from "components/card/card";
+import { Card } from "components";
 
 import { allPosts } from "contentlayer/generated";
 
 import useDebounce from "hooks/useDebounce";
 import UseInput from "hooks/useInput";
+import { InputWithRef, PageLayout } from "components";
 const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const inputValidator = (value: number) => {
     return value > 2;
@@ -24,7 +25,6 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   } = UseInput(inputValidator);
 
   const debouncedValue = useDebounce(searchValue, 500);
-  const [isFilterOn, SetIsFilterOn] = useState(false);
   const [filteredData, setFilteredData] = useState<PostType[]>([]);
 
   useEffect(() => {
@@ -44,59 +44,53 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   }, [debouncedValue, data]);
 
   return (
-    <div className='w-full px-3'>
-      <div className='flex items-end justify-between'>
-        <label htmlFor='search' className='pt-5 text-3xl font-bold italic'>
-          SEARCH...
-        </label>
-        <span
-          className='font-bold text-blue-700 dark:text-yellow-200'
-          onClick={() => SetIsFilterOn(!isFilterOn)}
-        >
-          + FILTER
-        </span>
-      </div>
-      <input
-        type='search'
-        id='search'
-        value={searchValue}
-        onChange={onChangeHandler}
-        className='mt-5 w-[100%] rounded-xl border px-5 py-3 text-black focus:outline-none md:w-[70%]'
-        placeholder='검색어를 입력해주세요.'
-        onFocus={onFocusHandler}
-        onBlur={onBlurHandler}
+    <PageLayout
+      title='SEARCH...'
+      description='검색 알고리즘이 따로 없어, 한단어만 부탁합니다. 😅'
+    >
+      <InputWithRef
+        style='mt-5 w-[100%] rounded-xl border px-5 py-3 text-black focus:outline-none md:w-[70%]'
+        label='search'
+        inputInfo={{
+          type: "search",
+          value: searchValue,
+          onChange: onChangeHandler,
+          onFocus: onFocusHandler,
+          onBlur: onBlurHandler,
+          placeholder: "검색어를 입력해주세요.",
+        }}
         ref={inputRef}
       />
+
       {isFocus && !isValid && (
-        <p className='mt-3 px-2 text-blue-600 dark:text-red-400'>
+        <p className='mt-3 px-2 text-black dark:text-white'>
           두글자 이상 입력해주세요.
         </p>
       )}
-      <div>
-        {filteredData &&
-          isValid &&
-          filteredData.map(
-            ({
-              title,
-              description,
-              publishedAtFormatted,
-              thumbnailImg,
-              path,
-              tags,
-            }: PostType) => (
-              <Card
-                title={title}
-                description={description}
-                publishedAt={publishedAtFormatted}
-                thumbnailImg={thumbnailImg}
-                key={title}
-                slug={path}
-                tags={tags}
-              />
-            ),
-          )}
-      </div>
-    </div>
+      {filteredData &&
+        isValid &&
+        filteredData.map(
+          ({
+            title,
+            description,
+            publishedAtFormatted,
+            thumbnailImg,
+            path,
+            tags,
+          }: PostType) => (
+            <Card
+              title={title}
+              description={description}
+              publishedAt={publishedAtFormatted}
+              thumbnailImg={thumbnailImg}
+              key={title}
+              slug={path}
+              tags={tags}
+              cardType='verticalCard'
+            />
+          ),
+        )}
+    </PageLayout>
   );
 };
 

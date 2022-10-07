@@ -9,3 +9,27 @@
     @apply overflow-x-hidden;
   }
 }
+
+@layer utilities {
+  .hover-change-color {
+    @apply dark:hover:text-pink;
+    @apply hover:text-blue;
+  }
+
+  .grayed-text {
+    @apply text-deepGray;
+    @apply dark:text-lightGray;
+  }
+
+  .grayed-border {
+    @apply border-lightGray;
+    @apply dark:border-deepGray;
+  }
+
+  .pointer {
+    @apply hover:cursor-pointer;
+  }
+}
+.keep-all {
+  word-break: keep-all;
+}
