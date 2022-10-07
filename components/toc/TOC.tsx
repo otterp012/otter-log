@@ -4,16 +4,16 @@
 import useToc from "hooks/useToc";
 import { linkHandler, scrollTopHandler } from "lib/lib";
 
-type HeadingType = {
-  slug: string;
-  heading: "heading2" | "heading3" | "heading4";
-  text: string;
-};
+// type HeadingType = {
+//   slug: string;
+//   heading: "heading2" | "heading3" | "heading4";
+//   text: string;
+// };
 
-type props = {
-  headings: HeadingType[];
-  title: string;
-};
+// type props = {
+//   headings: HeadingType[];
+//   title: string;
+// };
 const TOC: React.FC<props> = ({ headings, title }) => {
   const { visibleList } = useToc();
 
@@ -24,7 +24,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
           <h4 className='keep-all hover:text-yellow-300 mb-3 inline-block cursor-pointer text-xl font-bold'>
             <a onClick={scrollTopHandler}>{title}</a>
           </h4>
-          <ol className='ml-2'>
+          {/* <ol className='ml-2'>
             {headings.map(({ slug, heading, text }) => {
               const visibleStyle =
                 slug === visibleList
@@ -48,7 +48,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
                 </li>
               );
             })}
-          </ol>
+          </ol> */}
         </div>
       </div>
     </aside>
