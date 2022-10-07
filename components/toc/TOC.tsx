@@ -4,17 +4,17 @@
 // import useToc from "hooks/useToc";
 // import { linkHandler, scrollTopHandler } from "lib/lib";
 
-type HeadingType = {
-  slug: string;
-  heading: "heading2" | "heading3" | "heading4";
-  text: string;
-};
+// type HeadingType = {
+//   slug: string;
+//   heading: "heading2" | "heading3" | "heading4";
+//   text: string;
+// };
 
-type props = {
-  headings?: HeadingType[];
-  title: string;
-};
-const Toc: React.FC<props> = ({ headings, title }) => {
+// type props = {
+//   headings?: HeadingType[];
+//   title: string;
+// };
+const Toc = () => {
   // const { visibleList } = useToc();
 
   return (
@@ -22,7 +22,7 @@ const Toc: React.FC<props> = ({ headings, title }) => {
       <div className='border-gray-200 sticky top-[200px] right-5 ml-10 w-[280px] border-l-2'>
         <div className='py-2 pl-5'>
           <h4 className='keep-all hover:text-yellow-300 mb-3 inline-block cursor-pointer text-xl font-bold'>
-            <a>{title}</a>
+            {/* <a>{title}</a> */}
           </h4>
           {/* <ol className='ml-2'>
             {headings.map(({ slug, heading, text }) => {

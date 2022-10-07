@@ -4,7 +4,7 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types/types";
 
 import { MdxSection, MdxLayout } from "components";
-import { TOC } from "components";
+import { Toc } from "components";
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -21,7 +21,7 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       /> */}
       <MdxLayout>
         <MdxSection postData={data} />
-        <TOC headings={headings} title={title} />
+        <Toc />
       </MdxLayout>
     </Fragment>
   );
