@@ -1,7 +1,7 @@
 // component
 
 // hook
-import useToc from "hooks/useToc";
+// import useToc from "hooks/useToc";
 import { linkHandler, scrollTopHandler } from "lib/lib";
 
 export type HeadingType = {
@@ -15,7 +15,7 @@ type props = {
   title: string;
 };
 const TOC: React.FC<props> = ({ headings, title }) => {
-  const { visibleList } = useToc();
+  // const { visibleList } = useToc();
 
   return (
     <aside className='relative hidden xl:block'>
@@ -26,10 +26,10 @@ const TOC: React.FC<props> = ({ headings, title }) => {
           </h4>
           <ol className='ml-2'>
             {headings.map(({ slug, heading, text }) => {
-              const visibleStyle =
-                slug === visibleList
-                  ? "font-bold text-deepBlue dark:text-deepPink"
-                  : "";
+              // const visibleStyle =
+              //   slug === visibleList
+              //     ? "font-bold text-deepBlue dark:text-deepPink"
+              //     : "";
 
               const headingStyle = {
                 heading2: "",
@@ -40,10 +40,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
               const commonStyle = `keep-all mb-1 h-full w-[250px] pointer hover-change-color`;
 
               return (
-                <li
-                  key={slug}
-                  className={commonStyle + headingStyle[heading] + visibleStyle}
-                >
+                <li key={slug} className={commonStyle + headingStyle[heading]}>
                   <a onClick={(e) => linkHandler(e, slug)}>{text}</a>
                 </li>
               );
