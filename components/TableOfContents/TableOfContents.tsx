@@ -3,7 +3,6 @@
 // hook
 import useToc from "hooks/useToc";
 import { linkHandler, scrollTopHandler } from "lib/lib";
-import React from "react";
 
 type HeadingType = {
   slug: string;
@@ -15,7 +14,7 @@ type props = {
   headings: HeadingType[];
   title: string;
 };
-const Toc: React.FC<props> = ({ headings, title }) => {
+const TableOfContents: React.FC<props> = ({ headings, title }) => {
   const { visibleList } = useToc();
 
   return (
@@ -53,4 +52,4 @@ const Toc: React.FC<props> = ({ headings, title }) => {
   );
 };
 
-export default Toc;
+export default TableOfContents;

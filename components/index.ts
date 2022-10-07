@@ -21,7 +21,7 @@ export { DarkModeButton } from "./DarkModeButton";
 export { ToTopButton } from "./ToTopButton";
 
 // TOC
-export { Toc } from "./Toc";
+export { TableOfContents } from "./TableOfContents";
 
 // Meta
 
