@@ -8,3 +8,11 @@ export const linkHandler = (
       behavior: "smooth",
     });
 };
+
+export const scrollTopHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.preventDefault();
+  window.scroll({
+    top: 0,
+    behavior: "smooth",
+  });
+};
