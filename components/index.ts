@@ -1,5 +1,5 @@
 // Card
-
+export { Card } from "./Card";
 export { ProjectCard } from "./ProjectCard";
 
 // Link

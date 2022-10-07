@@ -1,39 +1,49 @@
-// components
-import { PageLayout, ProjectCard } from "components";
+import { Fragment } from "react";
+import type { NextPage } from "next";
 
-// mdx
-import { allProjects, Project as ProjectType } from "contentlayer/generated";
+// Mdx
+import { allPosts, Post as PostType } from "contentlayer/generated";
+
+// components
+import { Card } from "components";
 
 type Props = {
-  allProjects: ProjectType[];
+  featuredPost: PostType;
+  recentPosts: PostType[];
 };
 
-const Projects: React.FC<Props> = ({ allProjects }) => {
+const Home: NextPage<Props> = ({ featuredPost, recentPosts }) => {
   return (
-    <PageLayout
-      title='PROJECTS...'
-      description='프로젝트를 진행하면서 이런 생각을 했습니다. 🤡'
-    >
-      <div className='flex flex-col md:flex-row md:items-center md:justify-center md:space-x-5'>
-        {allProjects.map(({ title, thumbnailImg, slug }: ProjectType) => (
-          <ProjectCard
-            key={title}
-            title={title}
-            thumbnailImg={thumbnailImg}
-            slug={slug}
-          />
-        ))}
-      </div>
-    </PageLayout>
+    <Fragment>
+      <Card
+        title={featuredPost.title}
+        description={featuredPost.description}
+        publishedAt={featuredPost.publishedAtFormatted}
+        thumbnailImg={featuredPost.thumbnailImg}
+        slug={featuredPost.path}
+        cardType='featuredCard'
+      />
+      {/* <RecentPosts recentPosts={recentPosts} /> */}
+    </Fragment>
   );
 };
 
-export default Projects;
+export default Home;
 
 export const getStaticProps = async () => {
+  const featuredPost = allPosts.find((post) => post.isFeatured);
+  const recentPosts = allPosts
+    .filter((post) => !post.isFeatured)
+    .sort(
+      (a, b) =>
+        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
+    )
+    .slice(0, 3);
+
   return {
     props: {
-      allProjects,
+      featuredPost,
+      recentPosts,
     },
   };
 };
