@@ -25,6 +25,7 @@ export { ToTopButton } from "./ToTopButton";
 // Meta
 // export { CustomMeta, DefaultMeta } from "./Meta";
 export { DefaultMeta } from "./DefaultMeta";
+export { CustomMeta } from "./CustomMeta";
 
 // Filter
 export { NoteFilter } from "./NoteFilter";
