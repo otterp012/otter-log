@@ -3,7 +3,6 @@
 // hook
 import useToc from "hooks/useToc";
 import { linkHandler, scrollTopHandler } from "lib/lib";
-import React from "react";
 
 type HeadingType = {
   slug: string;
