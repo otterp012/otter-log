@@ -24,7 +24,7 @@ export { ToTopButton } from "./ToTopButton";
 export { Toc } from "./Toc";
 
 // Meta
-// export { CustomMeta, DefaultMeta } from "./Meta";
+
 export { DefaultMeta } from "./DefaultMeta";
 export { CustomMeta } from "./CustomMeta";
 
@@ -40,4 +40,4 @@ export { AppLayout, PageLayout, MdxLayout } from "./Layout";
 // Input
 export { InputWithRef } from "./Input";
 
-// export { NoteSection } from "./NoteSection";
+export { NoteSection } from "./NoteSection";
