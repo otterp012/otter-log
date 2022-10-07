@@ -3,9 +3,8 @@ import type { NextPage } from "next";
 
 // Mdx
 import { allPosts, Post as PostType } from "contentlayer/generated";
-
 // components
-import { Card, RecentPosts } from "components";
+// import { Card, RecentPosts } from "components";
 
 type Props = {
   featuredPost: PostType;
@@ -13,19 +12,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ featuredPost, recentPosts }) => {
-  return (
-    <Fragment>
-      <Card
-        title={featuredPost.title}
-        description={featuredPost.description}
-        publishedAt={featuredPost.publishedAtFormatted}
-        thumbnailImg={featuredPost.thumbnailImg}
-        slug={featuredPost.path}
-        cardType='featuredCard'
-      />
-      <RecentPosts recentPosts={recentPosts} />
-    </Fragment>
-  );
+  return <Fragment>{/* <RecentPosts recentPosts={recentPosts} /> */}</Fragment>;
 };
 
 export default Home;

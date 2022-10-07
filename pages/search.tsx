@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Post as PostType } from "contentlayer/generated";
 
-import Card from "components/Card/Card";
-
 import { allPosts } from "contentlayer/generated";
 
 import useDebounce from "hooks/useDebounce";
@@ -67,29 +65,6 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           두글자 이상 입력해주세요.
         </p>
       )}
-      {filteredData &&
-        isValid &&
-        filteredData.map(
-          ({
-            title,
-            description,
-            publishedAtFormatted,
-            thumbnailImg,
-            path,
-            tags,
-          }: PostType) => (
-            <Card
-              title={title}
-              description={description}
-              publishedAt={publishedAtFormatted}
-              thumbnailImg={thumbnailImg}
-              key={title}
-              slug={path}
-              tags={tags}
-              cardType='verticalCard'
-            />
-          ),
-        )}
     </PageLayout>
   );
 };

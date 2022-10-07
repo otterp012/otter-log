@@ -1,7 +1,7 @@
 import Image from "next/future/image";
 
 // components
-import { CustomLink } from "components";
+import { CustomLink } from "components/CustomLink";
 
 type props = {
   title: string;

@@ -1,7 +1,8 @@
 import Image from "next/future/image";
 
 // component
-import { CustomLink, Tags } from "components";
+import { CustomLink } from "components/CustomLink";
+import { Tags } from "components/Tags";
 
 // style
 import { CardStyles } from "./styles";
@@ -49,7 +50,7 @@ const Card: React.FC<Props> = ({
       </CustomLink>
       <div className={style.textWrapper}>
         <div className={style.textUpperWrapper}>
-          <time className='text-xs font-bold text-gray-400'>{publishedAt}</time>
+          <time className='text-gray-400 text-xs font-bold'>{publishedAt}</time>
           <CustomLink href={slug}>
             {isVerticalCard ? (
               <h3 className={style.title}>{title}</h3>
