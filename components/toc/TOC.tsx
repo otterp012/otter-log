@@ -11,10 +11,10 @@ type HeadingType = {
 };
 
 type props = {
-  headings: HeadingType[];
+  headings?: HeadingType[];
   title: string;
 };
-const TOC: React.FC<props> = ({ headings, title }) => {
+const Toc: React.FC<props> = ({ headings, title }) => {
   // const { visibleList } = useToc();
 
   return (
@@ -55,4 +55,4 @@ const TOC: React.FC<props> = ({ headings, title }) => {
   );
 };
 
-export default TOC;
+export default Toc;
