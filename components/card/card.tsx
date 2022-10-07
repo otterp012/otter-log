@@ -5,7 +5,6 @@ import { CustomLink, Tags } from "components";
 
 // style
 import { CardStyles } from "./styles";
-import { wordBreak } from "styles/extraStyle";
 
 export type Props = {
   title: string;
@@ -53,20 +52,14 @@ const Card: React.FC<Props> = ({
           <time className='text-xs font-bold text-gray-400'>{publishedAt}</time>
           <CustomLink href={slug}>
             {isVerticalCard ? (
-              <h3 className={style.title} style={wordBreak}>
-                {title}
-              </h3>
+              <h3 className={style.title}>{title}</h3>
             ) : (
-              <h2 className={style.title} style={wordBreak}>
-                {title}
-              </h2>
+              <h2 className={style.title}>{title}</h2>
             )}
           </CustomLink>
           {isVerticalCard && tags && <Tags tags={tags} />}
         </div>
-        <p className={style.description} style={wordBreak}>
-          {description}
-        </p>
+        <p className={style.description}>{description}</p>
       </div>
     </section>
   );

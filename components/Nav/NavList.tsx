@@ -12,8 +12,8 @@ type props = {
 const NavList: React.FC<props> = ({ query, title, onClickHandler }) => {
   const { pathname } = useRouter();
   const style = `${
-    pathname.includes(query) && "text-blue-900 dark:text-yellow-200"
-  } font-semibold hover:text-blue-500 dark:hover:text-yellow-300 md:text-xl`;
+    pathname.includes(query) && "text-deepBlue dark:text-deepPink"
+  } font-semibold hover:text-blue-500 hover-change-color md:text-xl`;
 
   return (
     <li className={style}>

@@ -25,7 +25,6 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   } = UseInput(inputValidator);
 
   const debouncedValue = useDebounce(searchValue, 500);
-  const [isFilterOn, SetIsFilterOn] = useState(false);
   const [filteredData, setFilteredData] = useState<PostType[]>([]);
 
   useEffect(() => {
@@ -45,7 +44,10 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   }, [debouncedValue, data]);
 
   return (
-    <PageLayout title='SEARCH...'>
+    <PageLayout
+      title='SEARCH...'
+      description='검색 알고리즘이 따로 없어, 한단어만 부탁합니다. 😅'
+    >
       <InputWithRef
         style='mt-5 w-[100%] rounded-xl border px-5 py-3 text-black focus:outline-none md:w-[70%]'
         label='search'
@@ -59,15 +61,9 @@ const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         }}
         ref={inputRef}
       />
-      <span
-        className='text-right font-bold text-blue-700 dark:text-yellow-200'
-        onClick={() => SetIsFilterOn(!isFilterOn)}
-      >
-        + FILTER
-      </span>
 
       {isFocus && !isValid && (
-        <p className='mt-3 px-2 text-blue-600 dark:text-red-400'>
+        <p className='mt-3 px-2 text-black dark:text-white'>
           두글자 이상 입력해주세요.
         </p>
       )}

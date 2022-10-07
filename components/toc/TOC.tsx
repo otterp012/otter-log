@@ -1,14 +1,16 @@
 // type
-import type { HeadingsType } from "./types";
+import type { HeadingType } from "./types";
 
 // component
 import TocContainer from "./Container";
-import TocList from "./List";
+import TocLists from "./Lists";
 import TocTitle from "./Title";
 
+// hook
 import { useTocHighLight } from "hooks";
+
 type props = {
-  headings: HeadingsType;
+  headings: HeadingType[];
   title: string;
 };
 
@@ -18,7 +20,7 @@ const TOC: React.FC<props> = ({ headings, title }) => {
   return (
     <TocContainer>
       <TocTitle title={title} />
-      <TocList headings={headings} visibleList={visibleList} />
+      <TocLists headings={headings} visibleList={visibleList} />
     </TocContainer>
   );
 };

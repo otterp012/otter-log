@@ -3,9 +3,6 @@ import Image from "next/future/image";
 // component
 import { Tags } from "components";
 
-// style
-import { wordBreak } from "styles/extraStyle";
-
 type props = {
   title: string;
   publishedAtFormatted: string;
@@ -23,15 +20,14 @@ const MdxHeader: React.FC<props> = ({
     <header>
       <div className='space-y-2'>
         <h2
-          className='w-[80%] text-4xl font-semibold md:text-5xl'
+          className='keep-all w-[80%] text-4xl font-semibold md:text-5xl'
           id='top'
-          style={wordBreak}
         >
           {title}
         </h2>
         <div className='flex items-end justify-between'>
           <Tags tags={tags} />
-          <time className='mt-2 inline-block text-xs font-bold text-gray-700'>
+          <time className='grayed-text mt-2 inline-block text-xs font-bold'>
             {publishedAtFormatted}
           </time>
         </div>

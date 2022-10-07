@@ -2,7 +2,6 @@
 import type { Props } from "./types";
 
 // style
-import { wordBreak } from "styles/extraStyle";
 
 const NoteList: React.FC<Props> = ({
   url,
@@ -15,11 +14,9 @@ const NoteList: React.FC<Props> = ({
       <a
         target='_black'
         href={url}
-        className='flex w-full items-center justify-between border-b border-gray-600 hover:text-yellow-400'
+        className='grayed-border hover:text-yellow-400 flex w-full items-center justify-between border-b'
       >
-        <div className='min-w-[70%] md:min-w-[40%]' style={wordBreak}>
-          {title}
-        </div>
+        <div className='keep-all min-w-[70%] md:min-w-[40%]'>{title}</div>
         <p className='hidden md:block md:min-w-[40%]'>{description}</p>
         <time className='min-w-[30%] text-right text-xs md:min-w-[15%]'>
           {new Date(created_time).toLocaleDateString("ko-kr", {

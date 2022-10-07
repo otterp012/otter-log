@@ -9,7 +9,7 @@ const Tags: React.FC<Props> = ({ tags }) => {
         tags.map((tag) => (
           <span
             key={tag}
-            className='mr-3 text-sm font-semibold italic xl:mr-0 xl:rounded-xl xl:px-3 xl:py-2 xl:hover:cursor-pointer xl:hover:bg-slate-400'
+            className='dark:hover:bg-deePink mr-3 text-sm font-semibold italic hover:bg-deepBlue dark:hover:bg-deepPink xl:mr-0 xl:rounded-xl xl:px-3 xl:py-2 xl:hover:cursor-pointer'
           >
             #{tag}
           </span>

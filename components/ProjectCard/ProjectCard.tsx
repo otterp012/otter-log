@@ -11,9 +11,10 @@ type props = {
 
 const ProjectCard: React.FC<props> = ({ title, thumbnailImg, slug }) => {
   const path = `/projects/${slug}`;
+
   return (
     <CustomLink href={path}>
-      <section className='mt-10 flex min-h-[420px] flex-col rounded-lg bg-gray-300 shadow-2xl hover:scale-[1.03] hover:bg-gray-500 hover:ease-in dark:border-black'>
+      <section className='bg-gray-300 mt-10 flex min-h-[420px] flex-col rounded-lg bg-blue shadow-2xl hover:scale-[1.03] hover:bg-deepBlue hover:ease-in dark:bg-pink dark:hover:bg-deepPink'>
         <div className='w-full'>
           <Image
             src={thumbnailImg}

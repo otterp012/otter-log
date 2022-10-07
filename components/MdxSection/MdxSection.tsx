@@ -27,7 +27,7 @@ const MdxSection: React.FC<props> = ({ postData }) => {
         thumbnailImg={thumbnailImg}
         tags={tags}
       />
-      <div className='prose mx-auto mt-5 max-w-none select-text prose-a:no-underline dark:prose-invert dark:prose-pre:bg-gray-800'>
+      <div className='dark:prose-pre:bg-gray-800 prose mx-auto mt-5 max-w-none select-text prose-a:no-underline dark:prose-invert'>
         <MDXComponent />
       </div>
     </section>

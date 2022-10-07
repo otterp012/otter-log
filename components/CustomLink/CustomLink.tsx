@@ -6,6 +6,7 @@ type Props = {
   children: React.ReactNode;
   options?: Record<string, string>;
   onClickHandler?: () => void;
+  eventHandler?: (e: React.MouseEvent) => void;
 };
 
 const CustomLink: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const CustomLink: React.FC<Props> = ({
       </Link>
     );
   }
+
   return (
     <Link href={href} passHref>
       <a className={style}>{children}</a>

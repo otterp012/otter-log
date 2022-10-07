@@ -1,31 +1,21 @@
-import Link from "next/link";
-
-// style
-import { wordBreak } from "../../styles/extraStyle";
-
 type props = {
   title: string;
 };
 
 const TocTitle: React.FC<props> = ({ title }) => {
   return (
-    <h4
-      className='word-break mb-3 inline-block text-xl font-bold'
-      style={wordBreak}
-    >
-      <Link href='#top'>
-        <a
-          onClick={(e) => {
-            e.preventDefault();
-            document &&
-              document.getElementById("top")?.scrollIntoView({
-                behavior: "smooth",
-              });
-          }}
-        >
-          {title}
-        </a>
-      </Link>
+    <h4 className='keep-all mb-3 inline-block cursor-pointer text-xl font-bold hover:text-yellow-300'>
+      <a
+        onClick={(e) => {
+          e.preventDefault();
+          window.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        {title}
+      </a>
     </h4>
   );
 };

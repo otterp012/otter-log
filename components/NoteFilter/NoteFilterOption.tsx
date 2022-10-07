@@ -10,8 +10,9 @@ const NoteFilterOption: React.FC<Props> = ({ option, query }) => {
   const { filter } = router.query;
   return (
     <button
-      className={`border px-3 py-1 text-lg ${
-        filter === query && "border-0 bg-yellow-300 text-black"
+      className={`grayed-border border border-r-0 px-3 py-1 text-lg last:border-r ${
+        filter === query &&
+        "border-0 bg-blue text-white dark:bg-pink dark:text-black"
       }`}
       onClick={() => {
         router.push({

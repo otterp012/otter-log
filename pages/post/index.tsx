@@ -22,7 +22,10 @@ const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
   const displayedPosts = data.slice(0, postLength);
 
   return (
-    <PageLayout title='POST...'>
+    <PageLayout
+      title='POST...'
+      description='궁금한 것을 공부합니다. 그리고 기록합니다. 👨‍💻'
+    >
       {displayedPosts.map(
         ({
           title,
