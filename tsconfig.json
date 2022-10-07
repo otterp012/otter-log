@@ -31,5 +31,9 @@
     "__tests__/pages/layout.test.js",
     "__mock__/next.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "paths": {
+    "@components/*": ["components/*"],
+    "@styles/*": ["styles/*"]
+  }
 }

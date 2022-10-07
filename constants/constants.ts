@@ -11,3 +11,8 @@ export const NOTE_FILTER_OPTIONS = [
   { option: "NEXT", query: "NextJS" },
   { option: "CS", query: "CS" },
 ];
+
+export const BLUR_IMAGE_INLINE_BASE64 =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg==";
+
+

@@ -1,19 +1,16 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Params } from "types";
-
-import TOC from "components/toc";
-import PostSection from "components/section";
+import type { Params } from "types/types";
 
 import { allProjects } from "contentlayer/generated";
-
+import { MdxSection, MdxLayout, TOC } from "components";
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings } = data;
 
   return (
-    <div className='flex w-full px-3 md:px-5 xl:px-0'>
-      <PostSection postData={data} />
+    <MdxLayout>
+      <MdxSection postData={data} />
       <TOC headings={headings} title={title} />
-    </div>
+    </MdxLayout>
   );
 };
 

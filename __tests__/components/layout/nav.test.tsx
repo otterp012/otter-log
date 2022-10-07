@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { createMockRouter } from "../../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import Nav from "../../../components/layout/header/nav";
+import Nav from "../../../components/Layout/header/nav";
 
 it("Nav의 각 링크를 누르면 해당 페이지로 이동한다.", async () => {
   const router = createMockRouter({ pathname: "/" });

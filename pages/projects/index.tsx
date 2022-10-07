@@ -1,28 +1,33 @@
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { MDXProps } from "types";
+// components
+import { PageLayout, ProjectCard } from "components";
 
-import ProjectCard from "components/card/projectCard";
+// mdx
+import { allProjects, Project as ProjectType } from "contentlayer/generated";
 
-import { allProjects } from "contentlayer/generated";
+type Props = {
+  allProjects: ProjectType[];
+};
 
-const Projects = ({ allProjects }: InferGetStaticPropsType<GetStaticProps>) => {
+const Projects: React.FC<Props> = ({ allProjects }) => {
   return (
-    <div className='flex min-h-[720px] flex-col px-5 md:flex-row md:items-center md:justify-center md:space-x-3'>
-      {allProjects.map(({ title, thumbnailImg, slug }: MDXProps) => (
-        <ProjectCard
-          key={title}
-          title={title}
-          thumbnailImg={thumbnailImg}
-          slug={slug}
-        />
-      ))}
-    </div>
+    <PageLayout title='PROJECTS...'>
+      <div className='flex flex-col md:flex-row md:items-center md:justify-center md:space-x-5'>
+        {allProjects.map(({ title, thumbnailImg, slug }: ProjectType) => (
+          <ProjectCard
+            key={title}
+            title={title}
+            thumbnailImg={thumbnailImg}
+            slug={slug}
+          />
+        ))}
+      </div>
+    </PageLayout>
   );
 };
 
 export default Projects;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = async () => {
   return {
     props: {
       allProjects,

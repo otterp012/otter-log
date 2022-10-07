@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { createMockRouter } from "../../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import FeaturedCard from "components/card/featuredCard";
+import FeaturedCard from "backups/featuredCard";
 import { allPosts, Post } from "contentlayer/generated";
 
 describe("featuredPost", () => {

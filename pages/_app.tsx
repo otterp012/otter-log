@@ -2,8 +2,8 @@ import "../styles/globals.css";
 import { Fragment } from "react";
 
 import type { AppProps } from "next/app";
-import DefaultMeta from "components/meta/defaultMeta";
-import Layout from "components/layout";
+import DefaultMeta from "components/Meta/DefaultMeta";
+import { AppLayout } from "components";
 import useSavedScroll from "hooks/useSavedScroll";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -11,9 +11,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
       <DefaultMeta />
-      <Layout>
+      <AppLayout>
         <Component {...pageProps} />
-      </Layout>
+      </AppLayout>
     </Fragment>
   );
 }
