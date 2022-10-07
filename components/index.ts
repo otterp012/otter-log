@@ -40,4 +40,4 @@ export { AppLayout, PageLayout, MdxLayout } from "./Layout";
 // Input
 export { InputWithRef } from "./Input";
 
-export { NoteSection } from "./NoteSection";
+export { Notes } from "./Notes";

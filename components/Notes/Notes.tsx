@@ -9,7 +9,7 @@ type Props = {
   }[];
 };
 
-const NoteSection: React.FC<Props> = ({ data }) => {
+const Notes: React.FC<Props> = ({ data }) => {
   return (
     <section className='grayed-border mt-5 border px-5 py-5'>
       <ul className='w-full space-y-3'>
@@ -36,4 +36,4 @@ const NoteSection: React.FC<Props> = ({ data }) => {
     </section>
   );
 };
-export default NoteSection;
+export default Notes;
