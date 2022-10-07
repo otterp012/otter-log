@@ -25,7 +25,6 @@ export { ToTopButton } from "./ToTopButton";
 // export { CustomMeta, DefaultMeta } from "./Meta";
 
 // Filter
-export { Tags } from "./Tags";
 export { NoteFilter } from "./NoteFilter";
 
 // Icons
