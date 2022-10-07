@@ -1,4 +1,4 @@
-import { PageLayout, NoteSection, NoteFilter } from "components";
+import { PageLayout, NoteFilter, Notes } from "components";
 
 type Props = {
   created_time: string;
@@ -15,7 +15,7 @@ const Note: React.FC<{ data: Props[] }> = ({ data }) => {
       description='공부한 기록들, 도움이 될 수도 있습니다. 🤗'
     >
       <NoteFilter />
-      <NoteSection data={data} />
+      <Notes data={data} />
     </PageLayout>
   );
 };

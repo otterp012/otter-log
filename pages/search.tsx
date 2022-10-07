@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Post as PostType } from "contentlayer/generated";
 
-import Card from "components/Card/Card";
+import { Card } from "components";
 
 import { allPosts } from "contentlayer/generated";
 

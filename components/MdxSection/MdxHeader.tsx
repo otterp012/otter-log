@@ -1,7 +1,7 @@
 import Image from "next/future/image";
 
 // component
-import { Tags } from "components";
+import { Tags } from "components/Tags";
 
 type props = {
   title: string;
