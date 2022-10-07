@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const useTocHighlight = () => {
+const useTocHighLight = () => {
   const [visibleList, setVisibleList] = useState("");
   const observer = useRef<IntersectionObserver>();
 
@@ -25,4 +25,4 @@ const useTocHighlight = () => {
   return { visibleList };
 };
 
-export default useTocHighlight;
+export default useTocHighLight;

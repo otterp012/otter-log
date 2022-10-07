@@ -1,7 +1,10 @@
 import Image from "next/future/image";
+
+// component
 import { Tags } from "components";
 
-import { wordBreak } from "../../styles/extraStyle";
+// style
+import { wordBreak } from "styles/extraStyle";
 
 type props = {
   title: string;

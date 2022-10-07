@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-// components
+// component
 import { GithubIcon } from "components";
 
 const Footer = () => {

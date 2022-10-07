@@ -1,4 +1,7 @@
+// type
 import type { Props } from "./types";
+
+// style
 import { wordBreak } from "styles/extraStyle";
 
 const NoteList: React.FC<Props> = ({

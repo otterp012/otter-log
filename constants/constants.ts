@@ -15,4 +15,4 @@ export const NOTE_FILTER_OPTIONS = [
 export const BLUR_IMAGE_INLINE_BASE64 =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMDPT/DwAD3gHy5v4ozQAAAABJRU5ErkJggg==";
 
-
+export const GITHUB_URL = "https://github.com/otterp012";

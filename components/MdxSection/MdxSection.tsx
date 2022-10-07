@@ -1,7 +1,8 @@
+// component
 import MdxHeader from "./MdxHeader";
 
+// mdx
 import type { Post as PostType } from "contentlayer/generated";
-
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 type props = {

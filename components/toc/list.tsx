@@ -1,7 +1,9 @@
 import Link from "next/link";
 
+// type
 import type { HeadingsType } from "./types";
 
+// style
 import { wordBreak } from "../../styles/extraStyle";
 
 type props = {

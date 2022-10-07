@@ -1,4 +1,4 @@
-// components
+// component
 import { CustomLink } from "components";
 
 const Logo = () => {

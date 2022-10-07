@@ -1,5 +1,8 @@
-import NoteList from "./NoteList";
+// type
 import { Props } from "./types";
+
+// component
+import NoteList from "./NoteList";
 
 const NoteSection: React.FC<{ data: Props[] }> = ({ data }) => {
   return (

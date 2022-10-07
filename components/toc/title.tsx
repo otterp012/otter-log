@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// style
 import { wordBreak } from "../../styles/extraStyle";
 
 type props = {

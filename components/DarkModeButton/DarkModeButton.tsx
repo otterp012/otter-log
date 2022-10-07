@@ -1,27 +1,8 @@
-import { useEffect, useState, useCallback } from "react";
+// hook
+import { useDarkMode } from "hooks";
 
 const DarkModeButton = () => {
-  const [themeIsDark, setThemeIsDark] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.theme === "dark") {
-      setThemeIsDark(true);
-    } else {
-      setThemeIsDark(false);
-    }
-  }, []);
-
-  const themeModeHandler = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      localStorage.theme = localStorage.theme === "dark" ? "light" : "dark";
-      document.documentElement.classList.toggle("dark");
-      setThemeIsDark(!themeIsDark);
-    },
-    [themeIsDark],
-  );
-
-  // todo UseDarkMode
+  const { themeIsDark, themeModeHandler } = useDarkMode();
 
   return (
     <button

@@ -1,8 +1,8 @@
-// component
-import { Card } from "components";
-
 // type
 import type { Post as PostType } from "contentlayer/generated";
+
+// component
+import { Card } from "components";
 
 type Props = {
   recentPosts: PostType[];

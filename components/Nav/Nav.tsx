@@ -1,22 +1,16 @@
-import { useCallback, useState } from "react";
-
-// components
+// component
 import NavList from "./NavList";
 import { DarkModeButton, ToggleIcon } from "components";
 
-// constants
+// constant
 import { NAV_PATHS } from "../../constants/constants";
 
+// hook
+import { useToggle } from "hooks";
+
 const Nav = () => {
-  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
-
-  const onChangeHandler = useCallback(() => {
-    setDropDownIsOpen(!dropDownIsOpen);
-  }, [dropDownIsOpen]);
-
-  const onClickHandler = useCallback(() => {
-    setDropDownIsOpen(false);
-  }, []);
+  const { state: dropDownIsOpen, onToggleHandler: dropDownToggleHandler } =
+    useToggle(false);
 
   return (
     <nav className='flex space-x-2 md:space-x-3'>
@@ -26,7 +20,10 @@ const Nav = () => {
         ))}
       </ul>
       <DarkModeButton />
-      <ToggleIcon isOpen={dropDownIsOpen} onChangeHandler={onChangeHandler} />
+      <ToggleIcon
+        isOpen={dropDownIsOpen}
+        onChangeHandler={dropDownToggleHandler}
+      />
 
       {dropDownIsOpen && (
         <div className='fixed right-0 top-20 z-50 h-full w-full bg-white dark:bg-black md:hidden'>
@@ -36,7 +33,7 @@ const Nav = () => {
                 query={path}
                 title={title}
                 key={path}
-                onClickHandler={onClickHandler}
+                onClickHandler={dropDownToggleHandler}
               />
             ))}
           </ul>

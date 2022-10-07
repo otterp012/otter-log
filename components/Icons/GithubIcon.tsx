@@ -1,6 +1,9 @@
+// constant
+import { GITHUB_URL } from "constants/constants";
+
 const GithubIcon = () => {
   return (
-    <a href='https://github.com/otterp012' aria-label='github' target='_black'>
+    <a href={GITHUB_URL} aria-label='github' target='_black'>
       <svg
         fill='black'
         xmlns='http://www.w3.org/2000/svg'

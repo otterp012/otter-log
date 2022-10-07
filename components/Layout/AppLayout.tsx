@@ -1,4 +1,4 @@
-// components
+// component
 import { Header, Footer } from "components";
 
 type Props = {

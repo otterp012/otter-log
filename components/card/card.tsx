@@ -1,9 +1,9 @@
 import Image from "next/future/image";
 
-// components
+// component
 import { CustomLink, Tags } from "components";
 
-// styles
+// style
 import { CardStyles } from "./styles";
 import { wordBreak } from "styles/extraStyle";
 

@@ -1,11 +1,12 @@
+// type
 import type { HeadingsType } from "./types";
 
+// component
 import TocContainer from "./Container";
 import TocList from "./List";
 import TocTitle from "./Title";
 
-import useTocHighLight from "../../hooks/useTocHighlight";
-
+import { useTocHighLight } from "hooks";
 type props = {
   headings: HeadingsType;
   title: string;

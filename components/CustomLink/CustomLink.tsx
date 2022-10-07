@@ -4,16 +4,16 @@ type Props = {
   href: string;
   style?: string;
   children: React.ReactNode;
-  onClickHandler?: () => void;
   options?: Record<string, string>;
+  onClickHandler?: () => void;
 };
 
 const CustomLink: React.FC<Props> = ({
   href,
   style,
   children,
-  onClickHandler,
   options,
+  onClickHandler,
 }) => {
   if (onClickHandler) {
     return (

@@ -1,16 +1,14 @@
 import React from "react";
 
-type inputInfo = {
-  type: string;
-  value?: string | number;
-  placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-};
-
 type InputPropType = {
-  inputInfo: inputInfo;
+  inputInfo: {
+    type: string;
+    value?: string | number;
+    placeholder?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  };
   label: string;
   style: string;
 };
