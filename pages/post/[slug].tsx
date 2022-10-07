@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types/types";
 
-import { MdxSection, TOC, CustomMeta, MdxLayout } from "components";
+import { MdxSection, MdxLayout } from "components";
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -11,16 +11,16 @@ const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <Fragment>
-      <CustomMeta
+      {/* <CustomMeta
         title={title}
         description={description}
         url={slug}
         image={thumbnailImg}
         seo={seo && seo}
-      />
+      /> */}
       <MdxLayout>
         <MdxSection postData={data} />
-        <TOC headings={headings} title={title} />
+        {/* <TOC headings={headings} title={title} /> */}
       </MdxLayout>
     </Fragment>
   );

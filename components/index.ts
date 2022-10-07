@@ -1,7 +1,6 @@
 // Card
-export { Card } from "./Card";
+
 export { ProjectCard } from "./ProjectCard";
-export { RecentPosts } from "./RecentPosts";
 
 // Link
 export { CustomLink } from "./CustomLink";
@@ -14,17 +13,16 @@ export { Footer } from "./Footer";
 
 // Section
 export { MdxSection } from "./MdxSection";
-export { NoteSection } from "./NoteSection";
 
 // Button
 export { DarkModeButton } from "./DarkModeButton";
 export { ToTopButton } from "./ToTopButton";
 
 // TOC
-export { TOC } from "./TOC";
+// export { TOC } from "./TOC";
 
 // Meta
-export { CustomMeta, DefaultMeta } from "./Meta";
+// export { CustomMeta, DefaultMeta } from "./Meta";
 
 // Filter
 export { Tags } from "./Tags";
@@ -38,3 +36,5 @@ export { AppLayout, PageLayout, MdxLayout } from "./Layout";
 
 // Input
 export { InputWithRef } from "./Input";
+
+// export { NoteSection } from "./NoteSection";

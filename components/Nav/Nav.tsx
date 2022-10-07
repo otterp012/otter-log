@@ -1,6 +1,7 @@
 // component
 import NavList from "./NavList";
-import { DarkModeButton, ToggleIcon } from "components";
+import { DarkModeButton } from "components/DarkModeButton";
+import { ToggleIcon } from "components/Icons";
 
 // constant
 import { NAV_PATHS } from "../../constants/constants";
