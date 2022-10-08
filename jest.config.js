@@ -3,9 +3,12 @@ module.exports = {
   moduleNameMapper: {
     "^components/(.*)$": "<rootDir>/components/$1",
     "^pages/(.*)$": "<rootDir>/pages/$1",
-    // "^contentlayer/generated/(.*)$": "<rootDir>/.contentlayer/generated/$1",
     "contentlayer/generated": "<rootDir>/.contentlayer/generated",
+    "^hooks/(.*)$": "<rootDir>/hooks/$1",
+    "^constants/(.*)$": "<rootDir>/constants/$1",
   },
+  // Jest Cannot find module absolute path
+  // hooks 못찾아서 새로 추가한부분
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
   testEnvironment: "jsdom",

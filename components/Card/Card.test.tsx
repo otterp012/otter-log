@@ -3,12 +3,15 @@ import Card from "./Card";
 import { createMockRouter } from "../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { allPosts, Post } from "contentlayer/generated";
-import { CardStyles } from "./styles";
+
+// content-layer의 관련 테스트를 데브에서 진행하려면,
+// otter-log/.contentlayer/generated/index.mjs
+// 파일의 isType을 주석처리해줘야 아래 테스트가 성공합니다. (컨텐트레이어 관련한 오류)
 
 describe("Card", () => {
   const data = allPosts.find((post) => post.isFeatured) as Post;
-  const { title, description, thumbnailImg, slug, publishedAt, tags } = data;
-  const style = CardStyles.verticalCard;
+  const { title, description, thumbnailImg, slug, tags } = data;
+
   it("Card 컴포넌트의 이미지나 타이틀을 누르면 해당 링크로 이동한다.", async () => {
     const router = createMockRouter({ pathname: "/" });
     const path = `/${slug}`;

@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 // component
-import { GithubIcon } from "components";
+import { GithubIcon } from "components/Icons";
 
 const Footer = () => {
   return (

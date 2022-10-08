@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 // component
-import { CustomLink } from "components";
+import { CustomLink } from "components/CustomLink";
 
 type props = {
   query: string;

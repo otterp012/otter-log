@@ -39,5 +39,7 @@ export { AppLayout, PageLayout, MdxLayout } from "./Layout";
 
 // Input
 export { InputWithRef } from "./Input";
+export { SearchInput } from "./SearchInput";
 
+// Notes
 export { Notes } from "./Notes";
