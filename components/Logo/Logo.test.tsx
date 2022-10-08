@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { createMockRouter } from "../../../__mock__/next";
+import { createMockRouter } from "../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import Logo from "../../../components/Layout/header/logo";
+import Logo from "./Logo";
 
 it("Logo를 클릭하면, 메인페이지('/')로 이동한다.", async () => {
   const router = createMockRouter({ pathname: "/search" });

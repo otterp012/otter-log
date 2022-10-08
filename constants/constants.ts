@@ -2,7 +2,7 @@ export const NAV_PATHS = [
   { path: "/post", title: "POST" },
   { path: "/projects", title: "PROJECTS" },
   { path: "/search", title: "SEARCH" },
-  { path: "/note", title: "NOTES/React" },
+  { path: "/note?filter=React", title: "NOTES" },
 ];
 
 export const NOTE_FILTER_OPTIONS = [

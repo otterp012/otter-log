@@ -24,9 +24,9 @@ const ProjectCard: React.FC<props> = ({ title, thumbnailImg, slug }) => {
             height={1000}
           />
         </div>
-        <span className='flex flex-col px-5 py-5 text-center text-lg font-bold italic text-black'>
+        <h3 className='flex flex-col px-5 py-5 text-center text-lg font-bold italic text-black'>
           {title}
-        </span>
+        </h3>
       </section>
     </CustomLink>
   );

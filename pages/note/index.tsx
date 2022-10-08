@@ -12,7 +12,7 @@ const Note: React.FC<{ data: Props[] }> = ({ data }) => {
   return (
     <PageLayout
       title='NOTES...'
-      description='공부한 기록들, 도움이 될 수도 있습니다. 🤗'
+      description='공부한 기록들, 도움이 되었으면 좋겠습니다. 🤗'
     >
       <NoteFilter />
       <Notes data={data} />

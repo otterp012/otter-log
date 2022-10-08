@@ -1,5 +1,5 @@
 // component
-import { CustomLink } from "components";
+import { CustomLink } from "components/CustomLink";
 
 const Logo = () => {
   return (

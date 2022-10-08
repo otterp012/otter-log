@@ -7,7 +7,7 @@ import { ToggleIcon } from "components/Icons";
 import { NAV_PATHS } from "../../constants/constants";
 
 // hook
-import { useToggle } from "hooks";
+import useToggle from "hooks/useToggle";
 
 const Nav = () => {
   const { state: dropDownIsOpen, onToggleHandler: dropDownToggleHandler } =

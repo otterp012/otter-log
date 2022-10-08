@@ -1,7 +1,8 @@
 import { memo } from "react";
 
 // component
-import { Logo, Nav } from "components";
+import { Logo } from "components/Logo";
+import { Nav } from "components/Nav";
 
 const Header = () => {
   return (

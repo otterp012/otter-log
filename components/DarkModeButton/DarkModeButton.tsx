@@ -1,5 +1,5 @@
 // hook
-import { useDarkMode } from "hooks";
+import useDarkMode from "hooks/useDarkMode";
 
 const DarkModeButton = () => {
   const { themeIsDark, themeModeHandler } = useDarkMode();

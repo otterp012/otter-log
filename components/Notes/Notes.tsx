@@ -18,7 +18,7 @@ const Notes: React.FC<Props> = ({ data }) => {
             <a
               target='_black'
               href={url}
-              className='grayed-border hover:text-yellow-400 flex w-full items-center justify-between border-b'
+              className='grayed-border hover:text-yellow-400 hover-change-color flex w-full items-center justify-between border-b'
             >
               <div className='keep-all min-w-[70%] md:min-w-[40%]'>{title}</div>
               <p className='hidden md:block md:min-w-[40%]'>{description}</p>
