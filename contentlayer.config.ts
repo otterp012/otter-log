@@ -77,6 +77,7 @@ export const Project = defineDocumentType(() => ({
     description: { type: "string", required: true },
     seoDescription: { type: "string", required: false },
     thumbnailImg: { type: "string", required: true },
+    rank: { type: "number", required: true },
   },
   computedFields: {
     path: {

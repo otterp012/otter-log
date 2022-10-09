@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Post as PostType } from "contentlayer/generated";
 
+// component
 import { Card, PageLayout, SearchInput } from "components";
 
+// Mdx
 import { allPosts } from "contentlayer/generated";
 
 const Search = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

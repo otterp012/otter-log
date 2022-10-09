@@ -6,7 +6,7 @@ type Props = {
 
 const PageLayout: React.FC<Props> = ({ children, title, description }) => {
   return (
-    <div className='px-3'>
+    <div className='mx-auto w-full px-3 md:w-[780px]'>
       <h2 className='pt-5 text-3xl font-bold italic'>{title}</h2>
       <p className='mt-2 text-sm font-semibold text-deepBlue dark:text-deepPink'>
         {description}

@@ -3,7 +3,10 @@ import { Fragment } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types/types";
 
+// component
 import { MdxSection, MdxLayout, CustomMeta, TableOfContents } from "components";
+
+// mdx
 import { allPosts } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

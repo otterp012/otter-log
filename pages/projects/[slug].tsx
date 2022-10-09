@@ -1,8 +1,11 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Params } from "types/types";
 
-import { allProjects } from "contentlayer/generated";
+// component
 import { MdxSection, MdxLayout, TableOfContents } from "components";
+
+// Mdx
+import { allProjects } from "contentlayer/generated";
 
 const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, headings } = data;

@@ -1,11 +1,9 @@
 export const CardStyles = {
   verticalCard: {
     section:
-      "h-30 md:h-53 mt-5 flex w-full border-b grayed-border pb-5 last:border-none md:px-5",
-    image:
-      "mx-auto h-[150px] min-w-[150px] object-cover md:h-[240px] md:w-[240px]",
-    textWrapper:
-      "ml-5 flex min-h-full min-w-[55%] flex-col justify-around md:py-1",
+      "h-30 md:h-53 mt-5 flex w-full border-b grayed-border pb-5 last:border-none md:px-5 flex justify-center md:justify-start",
+    image: "mx-auto h-[150px] w-[150px] object-cover sm:h-[240px] sm:w-[240px]",
+    textWrapper: "ml-5 flex min-h-full w-[55%] flex-col justify-around md:py-1",
     textUpperWrapper: "mb-3 min-h-[60%] md:min-h-[30%]",
     description: "w-[90%] text-sm grayed-text line-clamp-2 md:mt-8 keep-all",
     title:

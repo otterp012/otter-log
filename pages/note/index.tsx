@@ -1,3 +1,5 @@
+// component
+
 import { PageLayout, NoteFilter, Notes } from "components";
 
 type Props = {
