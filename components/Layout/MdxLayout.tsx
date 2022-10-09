@@ -3,7 +3,14 @@ type Props = {
 };
 
 const MdxLayout: React.FC<Props> = ({ children }) => {
-  return <div className='flex w-full px-3 md:px-5 xl:px-0'>{children}</div>;
+  return (
+    <div
+      className='flex w-full px-3 md:px-5 xl:px-0'
+      style={{ scrollbarColor: "smooth" }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default MdxLayout;

@@ -1,8 +1,9 @@
 // 모든페이지에 렌더링되는 layout 컴포넌트 테스트
 import { fireEvent, render, screen } from "@testing-library/react";
-import { createMockRouter } from "../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { createMockRouter } from "__mock__/next";
 import { allProjects } from "contentlayer/generated";
+
 import ProjectCard from "./ProjectCard";
 
 describe("Project Card", () => {
