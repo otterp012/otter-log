@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import GithubIcon from "./GithubIcon";
 
 it("GithubIcon 깃허브 주소로 연결된다.", async () => {

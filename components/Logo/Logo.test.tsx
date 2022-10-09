@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { createMockRouter } from "../../__mock__/next";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { createMockRouter } from "__mock__/next";
 
 import Logo from "./Logo";
 

@@ -48,7 +48,7 @@ const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
         ),
       )}
       <ToTopButton />
-      <div data-testid='test' ref={observedTarget} />
+      <div id='lastItem' ref={observedTarget} />
     </PageLayout>
   );
 };
