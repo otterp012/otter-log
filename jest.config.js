@@ -15,7 +15,10 @@ module.exports = {
   // hooks 못찾아서 새로 추가한부분
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
-  transformIgnorePatterns: ["/node_modules/(?!next-contentlayer)(.*)"],
+  transformIgnorePatterns: [
+    "/node_modules/(?!next-contentlayer)(.*)",
+    "/node_modules/(?!next)(.*)",
+  ],
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.(js|jsx|ts|tsx|mjs)$": ["babel-jest", { presets: ["next/babel"] }],
