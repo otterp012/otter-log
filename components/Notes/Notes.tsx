@@ -1,15 +1,41 @@
-// type
-type Props = {
-  data: {
-    created_time: string;
-    description: string;
-    id?: string;
-    title: string;
-    url: string;
-  }[];
-};
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-const Notes: React.FC<Props> = ({ data }) => {
+// lib
+import { filterNotionData } from "lib/lib";
+
+const Notes: React.FC = () => {
+  const [data, setData] = useState([]);
+  const router = useRouter();
+  const filter = router.query.filter;
+  useEffect(() => {
+    const getData = async (filter: string) => {
+      let result = [];
+      if (process.env.NODE_ENV === "development") {
+        const response = await fetch(`api/notion?filter=${filter}`);
+        result = await response.json();
+      } else {
+        const response = await fetch("https://api.notion.com/v1/search/", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.NOTION_API}`,
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: filter?.toString(),
+          }),
+        });
+        result = await response.json();
+        result = filterNotionData(result);
+      }
+      const { filtered } = result;
+      setData(filtered);
+    };
+
+    getData(filter as string);
+  }, [filter]);
+
   return (
     <section className='grayed-border mt-5 border px-5 py-5'>
       <ul className='w-full space-y-3'>
