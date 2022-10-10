@@ -27,7 +27,7 @@ const Notes: React.FC = () => {
           }),
         });
         result = await response.json();
-        result = filterNotionData(result);
+        result = filterNotionData(result, filter);
       }
       const { filtered } = result;
       setData(filtered);

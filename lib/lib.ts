@@ -17,7 +17,7 @@ export const scrollTopHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
   });
 };
 
-export const filterNotionData = (arr: []) => {
+export const filterNotionData = (arr: [], filter: string) => {
   return arr
     .filter((result: { object: string }) => result.object === "page")
     .map(
