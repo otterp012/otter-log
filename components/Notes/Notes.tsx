@@ -12,23 +12,24 @@ const Notes: React.FC = () => {
     const getData = async (filter: string) => {
       let result = [];
       if (process.env.NODE_ENV === "development") {
-        const response = await fetch(`api/notion?filter=${filter}`);
-        result = await response.json();
-      } else {
-        const response = await fetch("https://api.notion.com/v1/search/", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.NOTION_API}`,
-            "Notion-Version": "2022-06-28",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: filter?.toString(),
-          }),
-        });
-        result = await response.json();
-        result = filterNotionData(result, filter);
       }
+      const response = await fetch(`api/notion?filter=${filter}`);
+      result = await response.json();
+      // else {
+      //   const response = await fetch("https://api.notion.com/v1/search/", {
+      //     method: "POST",
+      //     headers: {
+      //       Authorization: `Bearer ${process.env.NOTION_API}`,
+      //       "Notion-Version": "2022-06-28",
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       query: filter?.toString(),
+      //     }),
+      //   });
+      //   result = await response.json();
+      //   result = filterNotionData(result, filter);
+      // }
       const { filtered } = result;
       setData(filtered);
     };

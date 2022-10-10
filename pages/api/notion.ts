@@ -11,7 +11,7 @@ export default async function handler(
     const response = await fetch(`https://api.notion.com/v1/search/`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTION_API}`,
+        Authorization: `Bearer ${process.env.NOTION_API}`,
         "Notion-Version": "2022-06-28",
         "Content-Type": "application/json",
       },
