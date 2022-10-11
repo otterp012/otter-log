@@ -1,36 +1,60 @@
-name: "Deploy CI"
-on:
-  release:
-    types:
-      - published
-  push:
-    branches:
-      - feat/ci-cd
-  workflow_dispatch:
+# name: "Deploy CI"
+# on:
+#   release:
+#     types:
+#       - published
+#   push:
+#     branches:
+#       - feat/ci-cd
+#   workflow_dispatch:
 
+# jobs:
+#   vercel:
+#     runs-on: ubuntu-latest
+#     name: "Deploy application"
+
+#     steps:
+#       # - uses: actions/checkout@v2
+#       # - uses: actions/setup-node@v1
+#       # actions에 미리 등록을 해줘서, 등록 되어있는 actions 실행시키는 방법
+#       with:
+#          node-version: '14'
+#          registry-url: https://registry.npmjs.org/
+
+#      - name: "Deploy application"
+#        run: |
+#          prodRun=""
+#          if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
+#            prodRun="--prod"
+#          fi
+
+#          npx vercel --token ${VERCEL_TOKEN} $prodRun
+#         env:
+#           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+#           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+#           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+# # Now commit the changes and push your code to Github. Once the code is pushed, The Github actions will trigger an automatic deployment.
+
+name: deploy nexturl to vercel
+on: [push, pull_request]
 jobs:
   vercel:
     runs-on: ubuntu-latest
-    name: "Deploy application"
-
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      with:
-         node-version: '14'
-         registry-url: https://registry.npmjs.org/
- 
-     - name: "Deploy application"
-       run: |
-         prodRun=""
-         if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
-           prodRun="--prod"
-         fi
- 
-         npx vercel --token ${VERCEL_TOKEN} $prodRun
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-# Now commit the changes and push your code to Github. Once the code is pushed, The Github actions will trigger an automatic deployment.
-
+      #add env file to .env.local
+      - name: Set Env Vars on Vercel Project
+        uses: dkershner6/vercel-set-env-action@v1
+        with:
+          token: ${{ secrets.VERCEL_TOKEN }}
+          teamId: ${{ secrets.VERCEL_TEAM_ID }} # optional, without will use personal
+          projectName: otter-log # project name in Vercel
+      # deploy app to vercel
+      - name: deploy site to vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
+          vercel-args: "--prod" #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}} #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
