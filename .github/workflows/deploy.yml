@@ -1,0 +1,36 @@
+name: "Deploy CI"
+on:
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - feat/ci-cd
+  workflow_dispatch:
+
+jobs:
+  vercel:
+    runs-on: ubuntu-latest
+    name: "Deploy application"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      with:
+         node-version: '14'
+         registry-url: https://registry.npmjs.org/
+ 
+     - name: "Deploy application"
+       run: |
+         prodRun=""
+         if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
+           prodRun="--prod"
+         fi
+ 
+         npx vercel --token ${VERCEL_TOKEN} $prodRun
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+# Now commit the changes and push your code to Github. Once the code is pushed, The Github actions will trigger an automatic deployment.
+
