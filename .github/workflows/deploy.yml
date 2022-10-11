@@ -9,6 +9,7 @@ jobs:
       - name: Set Env Vars on Vercel Project
         uses: dkershner6/vercel-set-env-action@v1
         with:
+          projectName: otter-log # project name in Vercel
           token: ${{ secrets.VERCEL_TOKEN }}
       # deploy app to vercel
       - name: deploy site to vercel
