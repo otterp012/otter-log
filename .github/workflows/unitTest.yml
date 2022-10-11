@@ -1,7 +1,7 @@
-name: "Deploy CI"
+name: "UNIT TEST"
 on:
   push:
-    branches: [main]
+    branches: []
 jobs:
   build-test:
     name: Next Lint test

@@ -1,0 +1,9 @@
+- name: Get Vercel Preview URL
+  id: get-vercel-preview-url
+  uses: ViktorJT/Get-vercel-preview-url@1.2.2
+  with:
+    vercel_access_token: ${{ secrets.VERCEL_TOKEN }}
+    gh_token: ${{ secrets.DEPLOY_TOKEN }}
+
+- name: Echo preview
+  run: echo "Preview url is ready ${{ steps.get-vercel-preview-url.outputs.preview_url }}"
