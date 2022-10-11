@@ -36,4 +36,4 @@ jobs:
           vercel-args: "--prod" #Optional
           vercel-org-id: ${{ secrets.ORGID}} #Required
           vercel-project-id: ${{ secrets.PROJECTID}} #Required
-          working-directory: ./sub-directory
+          # working-directory: ./sub-directory
