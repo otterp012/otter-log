@@ -1,7 +1,5 @@
-name: "UNIT TEST"
-on:
-  push:
-    branches: []
+name: "lint test"
+on: push
 jobs:
   build-test:
     name: Next Lint test
@@ -15,4 +13,3 @@ jobs:
       - run: yarn
       - run: yarn lint
       - run: yarn test
-      - run: yarn build
