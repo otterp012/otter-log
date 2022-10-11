@@ -75,6 +75,6 @@ describe("Card", () => {
     const Paragraph = screen.getByText(description);
 
     fireEvent.click(Paragraph);
-    expect(router.push).not.toBeCalled();
+    expect(router.push).toBeCalled();
   });
 });
