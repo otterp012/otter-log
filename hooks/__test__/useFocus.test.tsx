@@ -15,7 +15,7 @@ describe("useFocus", () => {
     expect(onBlurHandler).toBeInstanceOf(Function);
   });
 
-  it("onFocusHandler가 실행되면, isFoucs는 true가 된다.", () => {
+  it("onFocusHandler가 실행되면, isFocus true가 된다.", () => {
     const { result } = renderHook(() => useFocus());
 
     act(() => {
@@ -25,7 +25,7 @@ describe("useFocus", () => {
     expect(result.current.isFocus).toBe(true);
   });
 
-  it("onBlurHandler가 실행되면, isFoucs는 false가 된다.", () => {
+  it("onBlurHandler가 실행되면, isFocus false가 된다.", () => {
     const { result } = renderHook(() => useFocus());
 
     act(() => {
