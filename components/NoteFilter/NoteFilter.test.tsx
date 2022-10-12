@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { createMockRouter } from "__mock__/next";
 
-import NoteFilter from "./NoteFilter";
 import { NOTE_FILTER_OPTIONS } from "constants/constants";
+import NoteFilter from "./NoteFilter";
 
 describe("NoteFilter", () => {
   it("NoteFilter를 누르면, 쿼리가 추가된다.", async () => {

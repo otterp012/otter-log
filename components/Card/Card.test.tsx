@@ -2,12 +2,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import { createMockRouter } from "__mock__/next";
+import { contentLayerMock } from "__mock__/contentLayer";
 
 import Card from "./Card";
-import { contentLayerMock } from "__mock__/contentLayer";
-// content-layer의 관련 테스트를 데브에서 진행하려면,
-// otter-log/.contentlayer/generated/index.mjs
-// 파일의 isType을 주석처리해줘야 아래 테스트가 성공합니다. (컨텐트레이어 관련한 오류)
 
 describe("Card", () => {
   const { title, description, thumbnailImg, slug, tags } =

@@ -1,5 +1,3 @@
-import { DefaultMeta } from "./DefaultMeta";
-
 // Card
 export { Card } from "./Card";
 export { ProjectCard } from "./ProjectCard";
@@ -24,7 +22,6 @@ export { ToTopButton } from "./ToTopButton";
 export { TableOfContents } from "./TableOfContents";
 
 // Meta
-
 export { DefaultMeta } from "./DefaultMeta";
 export { CustomMeta } from "./CustomMeta";
 

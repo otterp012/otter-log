@@ -8,3 +8,4 @@ export { default as useDarkMode } from "./useDarkMode";
 export { default as useToc } from "./useToc";
 export { default as useTextInput } from "./useTextInput";
 export { default as useFocus } from "./useFocus";
+export { default as useSavedInfiniteScroll } from "./useSavedInfiniteScroll";

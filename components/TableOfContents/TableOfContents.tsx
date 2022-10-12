@@ -1,5 +1,5 @@
 // hook
-import useToc from "hooks/useToc";
+import { useToc } from "hooks";
 import { linkHandler, scrollTopHandler } from "lib/lib";
 
 type HeadingType = {

@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 const ToTopButton = () => {
   return (
     <div className='mt-20 text-center'>
       <a
-        className='cursor-pointer px-3 py-5 italic hover:text-yellow-300 '
+        className='hover:text-yellow-300 cursor-pointer px-3 py-5 italic '
         onClick={(e) => {
           e.preventDefault();
           window.scrollTo({
@@ -17,4 +19,4 @@ const ToTopButton = () => {
   );
 };
 
-export default ToTopButton;
+export default memo(ToTopButton);

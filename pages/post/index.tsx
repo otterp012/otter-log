@@ -4,13 +4,12 @@ import { useRef } from "react";
 import { allPosts, Post as PostType } from "contentlayer/generated";
 
 // hooks
-import useSavedInfiniteScroll from "hooks/useSavedInfiniteScroll";
+import { useSavedInfiniteScroll } from "hooks";
 
 // components
 import { PageLayout, Card, ToTopButton } from "components";
 
 const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
-  console.log(data);
   const observedTarget = useRef<HTMLDivElement>(null);
   const { len: postLength } = useSavedInfiniteScroll(
     3,

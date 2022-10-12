@@ -6,7 +6,6 @@ type Props = {
   children: React.ReactNode;
   options?: Record<string, string>;
   onClickHandler?: () => void;
-  eventHandler?: (e: React.MouseEvent) => void;
 };
 
 const CustomLink: React.FC<Props> = ({
