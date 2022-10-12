@@ -7,6 +7,7 @@ module.exports = {
     "next-contentlayer/hooks": "next-contentlayer/hooks",
     "contentlayer/generated": "<rootDir>/.contentlayer/generated",
     "^hooks/(.*)$": "<rootDir>/hooks/$1",
+    hooks: "<rootDir>/hooks",
     "^constants/(.*)$": "<rootDir>/constants/$1",
     "^lib/(.*)$": "<rootDir>/lib/$1",
     "^__mock__/(.*)$": "<rootDir>/__mock__/$1",
