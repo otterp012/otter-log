@@ -1,28 +1,20 @@
-import useDebounce from "hooks/useDebounce";
-import UseInput from "hooks/useInput";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { InputWithRef } from "components/Input";
+import { useFocus, useTextInput, useDebounce } from "hooks";
 
 type Props = {
   onSaveSearchData: (searchData: string) => void;
 };
 
 const SearchInput: React.FC<Props> = ({ onSaveSearchData }) => {
-  const inputValidator = (value: number) => {
-    return value > 1;
+  const inputValidator = (value: string) => {
+    return value.length > 1;
   };
 
-  const {
-    searchValue,
-    isValid,
-    inputRef,
-    isFocus,
-    onChangeHandler,
-    onFocusHandler,
-    onBlurHandler,
-  } = UseInput(inputValidator);
-
+  const { searchValue, isValid, onChangeHandler } =
+    useTextInput(inputValidator);
+  const { isFocus, inputRef, onFocusHandler, onBlurHandler } = useFocus();
   const debouncedValue = useDebounce(searchValue, 500);
 
   useEffect(() => {
