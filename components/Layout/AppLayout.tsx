@@ -1,18 +1,13 @@
 // component
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
+import React from "react";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const AppLayout: React.FC<Props> = ({ children }) => {
+const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='flex min-h-screen w-full flex-col md:mx-auto md:max-w-[1080px]'>
+    <div className='mx-auto min-h-screen md:max-w-[768px] lg:max-w-[1024px]'>
       <Header />
-      <main className='mx-auto mt-2 min-h-screen w-full px-2 pt-16 md:mt-5'>
-        {children}
-      </main>
+      <main className='px-5 pt-20'>{children}</main>
       <Footer />
     </div>
   );
