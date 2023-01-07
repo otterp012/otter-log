@@ -1,14 +1,18 @@
 import { memo } from "react";
 
 // component
-import { Logo } from "components/Logo";
-import { Nav } from "components/Nav";
+import Logo from "./Logo";
+import Nav from "./Nav";
+import DarkModeButton from "./DarkModeButton";
 
 const Header = () => {
   return (
-    <header className='fixed z-50 flex h-20 w-[100vw] items-center justify-between bg-white px-5 dark:bg-black md:max-w-[1080px]'>
+    <header className='fixed top-0 z-10 flex h-20 w-[100vw] items-center justify-between bg-light-bg px-3 dark:bg-dark-bg md:max-w-[768px] lg:max-w-[1024px]'>
       <Logo />
-      <Nav />
+      <div className='flex items-center space-x-5'>
+        <Nav />
+        <DarkModeButton />
+      </div>
     </header>
   );
 };
