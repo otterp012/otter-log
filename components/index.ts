@@ -6,16 +6,11 @@ export { ProjectCard } from "./ProjectCard";
 export { CustomLink } from "./CustomLink";
 
 // Header / Footer
-export { Logo } from "./Logo";
-export { Nav } from "./Nav";
+
 export { Header } from "./Header";
 export { Footer } from "./Footer";
 
-// Section
-export { MdxSection } from "./MdxSection";
-
 // Button
-export { DarkModeButton } from "./DarkModeButton";
 export { ToTopButton } from "./ToTopButton";
 
 // TOC
@@ -32,11 +27,11 @@ export { NoteFilter } from "./NoteFilter";
 export { GithubIcon, ToggleIcon } from "./Icons";
 
 // Layouts
-export { AppLayout, PageLayout, MdxLayout } from "./Layout";
+export { AppLayout, PageLayout } from "./Layout";
 
 // Input
 export { InputWithRef } from "./Input";
 export { SearchInput } from "./SearchInput";
 
-// Notes
-export { Notes } from "./Notes";
+export { MarkDown } from "./MarkDown";
+export { PostHeader } from "./PostHeader";
