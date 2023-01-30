@@ -1,6 +1,7 @@
 // hook
 import { useToc } from "hooks";
 import { ToTopButton } from "components/ToTopButton";
+
 type HeadingType = {
   slug: string;
   heading: "heading2" | "heading3";

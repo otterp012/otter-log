@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { TableOfContents, MarkDown, PostHeader } from "components";
 import { getAllPublished, getPost } from "lib/notion";
-import { MetaData, Params, PostType } from "types/types";
+import { HeadingType, MetaData, Params, PostType } from "types/types";
 
 const Post = ({ post }: { post: PostType }) => {
   const { markdown, headings, metadata } = post;
@@ -23,10 +23,27 @@ export default Post;
 export const getStaticProps = async (context: { params: Params }) => {
   const { slug } = context.params;
   const post = await getPost(slug as string);
-
+  const regXHeader = /(^#{1,6})\s/g;
+  const headings = post.headings
+    .filter((item: { type: string; parent: string }) =>
+      item.type.includes("heading"),
+    )
+    .map((item: { type: string; parent: string }) => {
+      return {
+        heading: item.type.replace("_", ""),
+        slug: item.parent
+          .replace(regXHeader, "")
+          .replaceAll(" ", "-")
+          .toLowerCase(),
+        text: item.parent.replace(regXHeader, ""),
+      };
+    }) as HeadingType[];
   return {
     props: {
-      post,
+      post: {
+        ...post,
+        headings,
+      },
     },
     revalidate: 60,
   };
