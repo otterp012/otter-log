@@ -1,54 +1,29 @@
 import { Fragment } from "react";
-import type { NextPage } from "next";
-
-// Mdx
-import { allPosts, Post as PostType } from "contentlayer/generated";
 
 // components
 import { Card } from "components";
+import { getAllPublished } from "lib/notion";
+import { MetaData } from "types/types";
 
-type Props = {
-  featuredPost: PostType;
-  recentPosts: PostType[];
-};
-
-const Home: NextPage<Props> = ({ featuredPost, recentPosts }) => {
+const Home = ({ recent }: { recent: MetaData[] }) => {
   return (
     <Fragment>
-      <Card
-        title={featuredPost.title}
-        description={featuredPost.description}
-        publishedAt={featuredPost.publishedAtFormatted}
-        thumbnailImg={featuredPost.thumbnailImg}
-        slug={featuredPost.path}
-        cardType='featuredCard'
-      />
-      <div className='mx-auto mt-10 md:max-w-[70%]'>
-        <h2 className='mb-8 text-center text-3xl font-bold italic md:mb-10'>
-          RECENT POSTS
-        </h2>
-        {recentPosts.map(
-          ({
-            title,
-            description,
-            publishedAtFormatted,
-            thumbnailImg,
-            path,
-            tags,
-          }: PostType) => (
-            <Card
-              title={title}
-              description={description}
-              publishedAt={publishedAtFormatted}
-              thumbnailImg={thumbnailImg}
-              key={title}
-              slug={path}
-              tags={tags}
-              cardType='verticalCard'
-            />
-          ),
-        )}
-      </div>
+      <span className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
+        RECENT POSTS
+      </span>
+      <ul className='flex flex-wrap gap-2'>
+        {recent.map((post) => (
+          <Card
+            title={post.title}
+            slug={post.slug}
+            thumbnailImg={post.cover}
+            description={post.description}
+            publishedAt={post.date}
+            key={post.title}
+            tags={post.tags}
+          />
+        ))}
+      </ul>
     </Fragment>
   );
 };
@@ -56,19 +31,13 @@ const Home: NextPage<Props> = ({ featuredPost, recentPosts }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  const featuredPost = allPosts.find((post) => post.isFeatured);
-  const recentPosts = allPosts
-    .filter((post) => !post.isFeatured)
-    .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
-    )
-    .slice(0, 3);
-
+  const DATA_BASE_ID = process.env.DATABASE_ID as string;
+  const data = await getAllPublished(DATA_BASE_ID);
+  const recent = data.slice(0, 6);
   return {
     props: {
-      featuredPost,
-      recentPosts,
+      recent,
     },
+    revalidate: 60,
   };
 };

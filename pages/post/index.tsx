@@ -1,67 +1,42 @@
-import { useRef } from "react";
+import { Card } from "components";
+import { getAllPublished } from "lib/notion";
+import Head from "next/head";
+import type { GetStaticProps, InferGetStaticPropsType } from "next/types";
+import { MetaData } from "types/types";
 
-// Mdx
-import { allPosts, Post as PostType } from "contentlayer/generated";
-
-// hooks
-import { useSavedInfiniteScroll } from "hooks";
-
-// components
-import { PageLayout, Card, ToTopButton } from "components";
-
-const Posts: React.FC<{ data: PostType[] }> = ({ data }) => {
-  const observedTarget = useRef<HTMLDivElement>(null);
-  const { len: postLength } = useSavedInfiniteScroll(
-    3,
-    data.length,
-    3,
-    observedTarget,
-    "visibleCardsLength",
-  );
-
-  const displayedPosts = data.slice(0, postLength);
-
+export default function Post({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <PageLayout
-      title='POST...'
-      description='궁금한 것을 공부합니다. 그리고 기록합니다. 👨‍💻'
-    >
-      {displayedPosts.map(
-        ({
-          title,
-          description,
-          publishedAtFormatted,
-          thumbnailImg,
-          path,
-          tags,
-        }: PostType) => (
+    <>
+      <span className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
+        POSTS
+      </span>
+      <ul className='flex flex-wrap gap-2'>
+        {posts.map((post: MetaData) => (
           <Card
-            title={title}
-            description={description}
-            publishedAt={publishedAtFormatted}
-            thumbnailImg={thumbnailImg}
-            key={title}
-            slug={path}
-            tags={tags}
-            cardType='verticalCard'
+            title={post.title}
+            description={post.description}
+            publishedAt={post.date}
+            thumbnailImg={post.cover}
+            key={post.title}
+            slug={`post/${post.slug}`}
+            tags={post.tags}
           />
-        ),
-      )}
-      <ToTopButton />
-      <div id='lastItem' ref={observedTarget} />
-    </PageLayout>
+        ))}
+      </ul>
+    </>
   );
-};
-
-export default Posts;
+}
 
 export const getStaticProps = async () => {
-  const allBlogsByDate = allPosts.sort(
-    (a, b) => Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt)),
-  );
+  const DATA_BASE_ID = process.env.DATABASE_ID as string;
+  const data = await getAllPublished(DATA_BASE_ID);
+
   return {
     props: {
-      data: allBlogsByDate,
+      posts: data,
     },
+    revalidate: 60,
   };
 };
