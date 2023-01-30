@@ -7,6 +7,7 @@ import CustomLink from "./CustomLink";
 
 describe("CustomLink", () => {
   it("CustomLink를 누르면, href경로로 페이지가 이동된다..", async () => {
+    // arrange
     const router = createMockRouter({ pathname: "/" });
     const mockHref = "test";
     render(
@@ -18,9 +19,13 @@ describe("CustomLink", () => {
     const Link = screen.getByRole("link", {
       name: mockHref,
     });
+
     const path = `/${mockHref}`;
+
+    // act
     fireEvent.click(Link);
 
+    // assert
     expect(router.push).toHaveBeenCalledWith(path, path, {
       locale: undefined,
       scroll: undefined,

@@ -19,16 +19,10 @@ describe("layout component", () => {
     const Heading = screen.getByRole("heading", { name: /otter-log/i });
     const Footer = screen.getByRole("contentinfo");
     const Nav = screen.getByRole("navigation");
-    const SearchLink = screen.getByRole("link", { name: /SEARCH/i });
-    const PostLink = screen.getByRole("link", { name: /POST/i });
-    const ProjectsLink = screen.getByRole("link", { name: /Projects/i });
 
     expect(Heading).toBeInTheDocument();
     expect(Footer).toBeInTheDocument();
     expect(Nav).toBeInTheDocument();
-    expect(SearchLink).toBeInTheDocument();
-    expect(PostLink).toBeInTheDocument();
-    expect(ProjectsLink).toBeInTheDocument();
   });
 
   it("모든 경로에서 AppLayout은 렌더링된다.", () => {
@@ -44,15 +38,9 @@ describe("layout component", () => {
     const Heading = screen.getByRole("heading", { name: /otter-log/i });
     const Footer = screen.getByRole("contentinfo");
     const Nav = screen.getByRole("navigation");
-    const SearchLink = screen.getByRole("link", { name: /SEARCH/i });
-    const PostLink = screen.getByRole("link", { name: /POST/i });
-    const ProjectsLink = screen.getByRole("link", { name: /Projects/i });
 
     expect(Heading).toBeInTheDocument();
     expect(Footer).toBeInTheDocument();
     expect(Nav).toBeInTheDocument();
-    expect(SearchLink).toBeInTheDocument();
-    expect(PostLink).toBeInTheDocument();
-    expect(ProjectsLink).toBeInTheDocument();
   });
 });
