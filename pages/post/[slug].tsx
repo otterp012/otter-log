@@ -1,58 +1,46 @@
-import { Fragment } from "react";
+import * as React from "react";
 
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Params } from "types/types";
+import { TableOfContents, MarkDown, PostHeader } from "components";
+import { getAllPublished, getPost } from "lib/notion";
+import { MetaData, Params, PostType } from "types/types";
 
-// component
-import { MdxSection, MdxLayout, CustomMeta, TableOfContents } from "components";
-
-// mdx
-import { allPosts } from "contentlayer/generated";
-
-const Blog = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { title, headings, description, slug, thumbnailImg, seo } = data;
+const Post = ({ post }: { post: PostType }) => {
+  const { markdown, headings, metadata } = post;
 
   return (
-    <Fragment>
-      <CustomMeta
-        title={title}
-        description={description}
-        url={slug}
-        image={thumbnailImg}
-        seo={seo && seo}
-      />
-      <MdxLayout>
-        <MdxSection postData={data} />
-        <TableOfContents title={title} headings={headings} />
-      </MdxLayout>
-    </Fragment>
+    <section className='mt-10'>
+      <PostHeader {...metadata} />
+      <div className='mt-5 lg:flex lg:flex-row-reverse'>
+        <TableOfContents headings={headings} />
+        <MarkDown markdownString={markdown} />
+      </div>
+    </section>
   );
 };
 
-export default Blog;
+export default Post;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params as Params;
-  const data = allPosts.find((blog) => blog.slug === slug);
+export const getStaticProps = async (context: { params: Params }) => {
+  const { slug } = context.params;
+  const post = await getPost(slug as string);
 
   return {
     props: {
-      data,
+      post,
     },
+    revalidate: 60,
   };
 };
 
 export const getStaticPaths = async () => {
-  const allPaths = allPosts.map(({ slug }) => {
-    return {
-      params: {
-        slug,
-      },
-    };
-  });
+  const DATA_BASE_ID = process.env.DATABASE_ID as string;
+  const posts = await getAllPublished(DATA_BASE_ID);
+  const paths = posts.map(({ slug }: MetaData) => ({
+    params: { slug },
+  }));
 
   return {
-    paths: allPaths,
+    paths,
     fallback: false,
   };
 };
