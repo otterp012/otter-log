@@ -15,12 +15,17 @@ export type MetaData = {
   featured: boolean | undefined;
 };
 
+export type FetchedHeadingType = {
+  type: string;
+  parent: string;
+  children: string[];
+};
+
 export type HeadingType = {
   slug: string;
   heading: "heading2" | "heading3";
   text: string;
 };
-
 export type PostType = {
   metadata: MetaData;
   markdown: string;
