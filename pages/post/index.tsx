@@ -20,7 +20,7 @@ export default function Post({
             publishedAt={post.date}
             thumbnailImg={post.cover}
             key={post.title}
-            slug={`post/${post.slug}`}
+            slug={post.slug}
             tags={post.tags}
           />
         ))}
