@@ -5,7 +5,7 @@ import { GithubIcon } from "components/Icons";
 
 const Footer = () => {
   return (
-    <footer className='mt-10 flex w-full flex-col items-center justify-center'>
+    <footer className='mx-auto mt-10 flex flex-col items-center justify-center'>
       <GithubIcon />
       <span className='block'>Copyright ⓒ. All rights reserved</span>
     </footer>
