@@ -77,7 +77,7 @@ export const getPost = async (slug: string) => {
   const mdHeadings = await n2m.pageToMarkdown(page.id, 2);
   const regXHeader = /(^#{1,6})\s/g;
 
-  const headings = mdHeadings
+  const headings = await mdHeadings
     .filter((item: { type: string; parent: string }) =>
       item.type.includes("heading"),
     )
