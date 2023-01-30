@@ -7,7 +7,7 @@ describe("ToTopButton", () => {
 
     render(<ToTopButton />);
 
-    const toTopBtn = screen.getByText("맨 위로가기 ⬆️⬆️");
+    const toTopBtn = screen.getByRole("button");
     fireEvent.click(toTopBtn);
     expect(window.scrollTo).toHaveBeenCalledWith({
       top: 0,
