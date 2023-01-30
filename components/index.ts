@@ -20,9 +20,6 @@ export { TableOfContents } from "./TableOfContents";
 export { DefaultMeta } from "./DefaultMeta";
 export { CustomMeta } from "./CustomMeta";
 
-// Filter
-export { NoteFilter } from "./NoteFilter";
-
 // Icons
 export { GithubIcon, ToggleIcon } from "./Icons";
 
