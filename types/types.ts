@@ -29,5 +29,5 @@ export type HeadingType = {
 export type PostType = {
   metadata: MetaData;
   markdown: string;
-  headings: HeadingType[];
+  headings: FetchedHeadingType[];
 };

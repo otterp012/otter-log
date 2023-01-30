@@ -7,24 +7,8 @@ import { HeadingType, MetaData, Params, PostType } from "types/types";
 const Post = ({ post }: { post: PostType }) => {
   const { markdown, headings, metadata } = post;
 
-  return (
-    <section className='mt-10'>
-      <PostHeader {...metadata} />
-      <div className='mt-5 lg:flex lg:flex-row-reverse'>
-        <TableOfContents headings={headings} />
-        <MarkDown markdownString={markdown} />
-      </div>
-    </section>
-  );
-};
-
-export default Post;
-
-export const getStaticProps = async (context: { params: Params }) => {
-  const { slug } = context.params;
-  const post = await getPost(slug as string);
   const regXHeader = /(^#{1,6})\s/g;
-  const headings = post.headings
+  const parsedHeading = headings
     .filter((item: { type: string; parent: string }) =>
       item.type.includes("heading"),
     )
@@ -38,12 +22,27 @@ export const getStaticProps = async (context: { params: Params }) => {
         text: item.parent.replace(regXHeader, ""),
       };
     }) as HeadingType[];
+
+  return (
+    <section className='mt-10'>
+      <PostHeader {...metadata} />
+      <div className='mt-5 lg:flex lg:flex-row-reverse'>
+        <TableOfContents headings={parsedHeading} />
+        <MarkDown markdownString={markdown} />
+      </div>
+    </section>
+  );
+};
+
+export default Post;
+
+export const getStaticProps = async (context: { params: Params }) => {
+  const { slug } = context.params;
+  const post = await getPost(slug as string);
+
   return {
     props: {
-      post: {
-        ...post,
-        headings,
-      },
+      post,
     },
     revalidate: 60,
   };
