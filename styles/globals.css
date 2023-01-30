@@ -29,6 +29,14 @@
   .pointer {
     @apply hover:cursor-pointer;
   }
+
+  .light-base {
+    @apply bg-lightGray text-light-text;
+  }
+
+  .dark-base {
+    @apply bg-dark-bg text-dark-text;
+  }
 }
 .keep-all {
   word-break: keep-all;
