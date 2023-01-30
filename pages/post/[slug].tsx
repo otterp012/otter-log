@@ -17,7 +17,7 @@ const Post = ({ post }: { post: PostType }) => {
         heading: item.type.replace("_", ""),
         slug: item.parent
           .replace(regXHeader, "")
-          .replaceAll(" ", "-")
+          .replace(/ /g, "-")
           .toLowerCase(),
         text: item.parent.replace(regXHeader, ""),
       };
