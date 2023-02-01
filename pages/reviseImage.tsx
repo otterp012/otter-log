@@ -12,17 +12,25 @@ const ReviseImage = () => {
     e.preventDefault();
     const { password, slug } = input;
     setFetchState("fetched.pending");
-    await fetch("/api/reviseImage", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-images-passcode": password,
-      },
-      body: JSON.stringify({
-        slug,
-      }),
-    });
+
+    try {
+      const response = await fetch("/api/reviseImage", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-images-passcode": password,
+        },
+        body: JSON.stringify({
+          slug,
+        }),
+      });
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+
     setFetchState("fetched.fulfilled");
     setInput({
       password: "",
