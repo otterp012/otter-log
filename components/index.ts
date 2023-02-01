@@ -27,7 +27,7 @@ export { GithubIcon, ToggleIcon } from "./Icons";
 export { AppLayout, PageLayout } from "./Layout";
 
 // Input
-export { InputWithRef } from "./Input";
+export { InputWithRef, InputWithLabel } from "./Input";
 export { SearchInput } from "./SearchInput";
 
 // markdown
