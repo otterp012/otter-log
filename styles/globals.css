@@ -38,6 +38,3 @@
     @apply bg-dark-bg text-dark-text;
   }
 }
-.keep-all {
-  word-break: keep-all;
-}
