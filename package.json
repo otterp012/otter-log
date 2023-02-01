@@ -14,7 +14,6 @@
     "@notionhq/client": "^2.2.3",
     "@over-ui/select": "^1.1.0",
     "cloudinary": "^1.33.0",
-    "contentlayer": "^0.2.7",
     "daisyui": "^2.49.0",
     "gif-frames": "^1.0.1",
     "next": "^12.3.0",
