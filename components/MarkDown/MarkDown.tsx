@@ -14,7 +14,7 @@ const CodeBlock = ({ language, code }: { language: string; code: string }) => {
 const MarkDown = ({ markdownString }: { markdownString: string }) => {
   return (
     <ReactMarkdown
-      className='prose-code:none prose max-w-full select-text dark:prose-invert lg:mt-5 lg:max-w-[75%]'
+      className='prose max-w-full select-text prose-li:marker:text-black dark:prose-invert dark:prose-li:marker:text-gray lg:mt-5 lg:max-w-[75%]'
       components={{
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
