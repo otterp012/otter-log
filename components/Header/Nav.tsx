@@ -20,7 +20,13 @@ const Nav = () => {
               pathname.includes(path) && "text-pink"
             }`}
           >
-            <CustomLink href={`${path}`}>{title}</CustomLink>
+            <CustomLink
+              href={{
+                pathname: path,
+              }}
+            >
+              {title}
+            </CustomLink>
           </li>
         ))}
       </ul>
