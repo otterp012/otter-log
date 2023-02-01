@@ -1,4 +1,3 @@
-const { withContentlayer } = require("next-contentlayer");
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -6,4 +5,5 @@ const nextConfig = {
     disableStaticImages: true,
   },
 };
-module.exports = withContentlayer(nextConfig);
+
+module.exports = nextConfig;
