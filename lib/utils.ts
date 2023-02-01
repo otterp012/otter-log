@@ -50,3 +50,11 @@ export const scrollTopHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
     behavior: "smooth",
   });
 };
+
+export const parseHeading = (heading: string) => {
+  const regexp = /[^ㄱ-ㅎ가-힣A-Za-z\s]/g;
+  // 공백과, 문자를 제외한 나머지 제거
+
+  // trim을 통해 맨 앞 공백 제거
+  return heading.replace(regexp, "").trim();
+};
