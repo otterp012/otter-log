@@ -1073,6 +1073,42 @@
   resolved "https://registry.npmjs.org/@opentelemetry/semantic-conventions/-/semantic-conventions-1.5.0.tgz"
   integrity sha512-wlYG/U6ddW1ilXslnDLLQYJ8nd97W8JJTTfwkGhubx6dzW6SUkd+N4/MzTjjyZlrHQunxHtkHFvVpUKiROvFDw==
 
+"@over-ui/core@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/core/-/core-1.1.0.tgz#92e7db2c76226eb3becf9310083963c6e798459a"
+  integrity sha512-yaDlPdxfqk+wHOBaz+LQ4M7zwJv4xTNjOkxm0KCbaJKntNxlvNYj09TsnuI2qYZHTvwJMp1eQGitwKSV85voig==
+
+"@over-ui/merge-refs@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/merge-refs/-/merge-refs-1.1.0.tgz#ef6454d60c52e07276b6b997015e6e0a213d4496"
+  integrity sha512-XrlizlqnFpJ3bJM0qxbp+ahawiunbmUyHgsmZKBvsLzt9QgVl7pGbzAWFZhCJ20gCT9xYFH7PxLUP9+01gu1mw==
+
+"@over-ui/select@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/select/-/select-1.1.0.tgz#56588ab78a7ec1e9010ee7907f2409ddd8122c07"
+  integrity sha512-/qaDDT8prgmU05MeFvhStYh/M9+VMgU6cqyL7RXBgLZpPRL2riIeSC7H3RtbUOYBQJuhnC8cQjXKI/iNrpbcpQ==
+  dependencies:
+    "@over-ui/core" "1.1.0"
+    "@over-ui/merge-refs" "1.1.0"
+    "@over-ui/use-controlled" "1.1.0"
+    "@over-ui/use-id" "1.1.0"
+    "@over-ui/use-outside-click" "1.1.0"
+
+"@over-ui/use-controlled@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/use-controlled/-/use-controlled-1.1.0.tgz#ba8531b9fe839803ae6cfe0b9dbce19f40b993e0"
+  integrity sha512-1NGYOpskQFPW6OQ7Nw6QcAitdzdmrfvELjP/WHc1b21AC6SWe5roqshs7ZKMd+THAaO9t0JC5OErVpxHP1ZxWQ==
+
+"@over-ui/use-id@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/use-id/-/use-id-1.1.0.tgz#8878fa7cdaf4082d30ee624b024494007719cb45"
+  integrity sha512-SKEZo9V81dHnBbuFCopGHMgSE1JisJWC4iRd3MEdSy6+V1hwjInQvEFLUWBFSdA20/mdfIJXsO3wNvO4qy63/w==
+
+"@over-ui/use-outside-click@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@over-ui/use-outside-click/-/use-outside-click-1.1.0.tgz#f0cd20ed0f14c565c190b829c5ef2c6e04a4458d"
+  integrity sha512-dDAg/I67z3WqiX2mxPDsuu3LqIiv4AOi/bcibcFm+GFuLbUN8esW+k9sI4vLN55fb7xeUVmy+7iphPSrmSVsRA==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@protobufjs/aspromise/-/aspromise-1.1.2.tgz"
