@@ -34,7 +34,7 @@ const TableOfContents = ({ headings }: props) => {
                       behavior: "smooth",
                     });
                 }}
-                className={`${headingStyle[heading]} pointer block rounded-md ${visibleStyle} hover:bg-deepGray`}
+                className={`${headingStyle[heading]} pointer block rounded-md ${visibleStyle} break-keep hover:bg-deepGray`}
               >
                 {text}
               </a>

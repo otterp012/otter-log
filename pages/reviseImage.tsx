@@ -49,7 +49,7 @@ const ReviseImage = () => {
         REVISE IMAGE URL PAGE
       </h2>
 
-      <p className='keep-all px-5 text-center text-sm md:w-[70%] md:text-xl'>
+      <p className='break-keep px-5 text-center text-sm md:w-[70%] md:text-xl'>
         노션 이미지 사용과정에서 발생한 문제를 해결하기 위해 생성한
         페이지입니다.
         <br />
