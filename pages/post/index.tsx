@@ -1,30 +1,35 @@
-import { Card } from "components";
+import type { InferGetStaticPropsType } from "next/types";
+import { useRouter } from "next/router";
+
+import { Cards, FilterOptions } from "components";
 import { getAllPublished } from "lib/notion";
-import Head from "next/head";
-import type { GetStaticProps, InferGetStaticPropsType } from "next/types";
-import { MetaData } from "types/types";
+
+import { ABLE_FILTER_OPTIONS } from "constants/constants";
+import type { MetaData } from "types/types";
 
 export default function Post({
   posts,
+  filterOptions,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  const { filterBy } = router.query;
+  const isFiltered = filterBy !== undefined;
+  const UNABLE_FILTER_OPTIONS = filterOptions.filter(
+    (item) => !ABLE_FILTER_OPTIONS.includes(item),
+  );
+  const isABELfilter = ABLE_FILTER_OPTIONS.includes(filterBy as string);
+  const filteredPost = isFiltered
+    ? isABELfilter
+      ? posts.filter((post: MetaData) => post.tags.includes(filterBy as string))
+      : posts.filter((post: MetaData) =>
+          post.tags.some((tag) => UNABLE_FILTER_OPTIONS.includes(tag)),
+        )
+    : posts;
+
   return (
     <>
-      <span className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
-        POSTS
-      </span>
-      <ul className='flex flex-wrap gap-2'>
-        {posts.map((post: MetaData) => (
-          <Card
-            title={post.title}
-            description={post.description}
-            publishedAt={post.date}
-            thumbnailImg={post.cover}
-            key={post.title}
-            slug={post.slug}
-            tags={post.tags}
-          />
-        ))}
-      </ul>
+      <FilterOptions />
+      <Cards posts={filteredPost} />
     </>
   );
 }
@@ -32,10 +37,17 @@ export default function Post({
 export const getStaticProps = async () => {
   const DATA_BASE_ID = process.env.DATABASE_ID as string;
   const data = await getAllPublished(DATA_BASE_ID);
+  const filterOptionSet = new Set();
+  data.forEach((item: { tags: string[] }) => {
+    item.tags.forEach((tag) => filterOptionSet.add(tag));
+  });
+
+  const filterOptions = Array.from(filterOptionSet) as string[];
 
   return {
     props: {
       posts: data,
+      filterOptions,
     },
     revalidate: 60,
   };
