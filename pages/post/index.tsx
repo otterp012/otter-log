@@ -50,5 +50,6 @@ export const getStaticProps = async () => {
       filterOptions,
     },
     revalidate: 60,
+    fallback: "blocking",
   };
 };
