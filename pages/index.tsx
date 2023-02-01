@@ -1,30 +1,16 @@
-import { Fragment } from "react";
-
 // components
-import { Card } from "components";
+import { Cards } from "components";
 import { getAllPublished } from "lib/notion";
 import { MetaData } from "types/types";
 
 const Home = ({ recent }: { recent: MetaData[] }) => {
   return (
-    <Fragment>
-      <span className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
+    <>
+      <h2 className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
         RECENT POSTS
-      </span>
-      <ul className='flex flex-wrap gap-2'>
-        {recent.map((post) => (
-          <Card
-            title={post.title}
-            slug={post.slug}
-            thumbnailImg={post.cover}
-            description={post.description}
-            publishedAt={post.date}
-            key={post.title}
-            tags={post.tags}
-          />
-        ))}
-      </ul>
-    </Fragment>
+      </h2>
+      <Cards posts={recent} />
+    </>
   );
 };
 
