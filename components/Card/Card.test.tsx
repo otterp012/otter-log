@@ -3,7 +3,7 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import { createMockRouter } from "__mock__/next";
 
-import Card from "./Card";
+import { Card } from "./Card";
 
 describe("Card Component", () => {
   let rendered: RenderResult;
