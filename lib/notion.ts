@@ -35,7 +35,7 @@ const getTags = (tags: { name: string }[]) => {
 const getMetaData = (post: any) => {
   return {
     id: post.id,
-    cover: post.cover?.file?.url ?? null,
+    cover: post.cover?.external?.url ?? null,
     title: post.properties.이름.title[0].plain_text,
     tags: getTags(post.properties.태그.multi_select),
     description: post.properties.Description.rich_text[0].plain_text,
@@ -58,6 +58,20 @@ function dateToKorean(dateString: string) {
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export const getPost = async (slug: string) => {
+  const page = await getPage(slug);
+  const metadata = getMetaData(page);
+  const mdBlocks = await n2m.pageToMarkdown(page.id);
+  const markdown = n2m.toMarkdownString(mdBlocks);
+  const headings = await n2m.pageToMarkdown(page.id, 2);
+
+  return {
+    metadata,
+    markdown,
+    headings,
+  };
+};
+
+export const getPage = async (slug: string) => {
   const response = await notion.databases.query({
     database_id: process.env.DATABASE_ID,
     filter: {
@@ -70,15 +84,44 @@ export const getPost = async (slug: string) => {
     },
   });
 
-  const page = response.results[0];
-  const metadata = getMetaData(page);
-  const mdBlocks = await n2m.pageToMarkdown(page.id);
-  const markdown = n2m.toMarkdownString(mdBlocks);
-  const headings = await n2m.pageToMarkdown(page.id, 2);
+  return response.results[0];
+};
 
-  return {
-    metadata,
-    markdown,
-    headings,
-  };
+export const getAllBlocksBySlug = async (slug: string) => {
+  try {
+    const response = await getPage(slug);
+    const id = response.id;
+
+    const blocks = await notion.blocks.children.list({
+      block_id: id,
+    });
+
+    return blocks.results;
+  } catch {
+    return null;
+  }
+};
+
+export const updateBlockImage = async (id: string, url?: string) => {
+  if (!url) return;
+  return await notion.blocks.update({
+    block_id: id,
+    image: {
+      external: {
+        url,
+      },
+    },
+  });
+};
+
+export const updateCoverImage = async (id: string, url?: string) => {
+  if (!url) return;
+  return await notion.pages.update({
+    page_id: id,
+    cover: {
+      external: {
+        url,
+      },
+    },
+  });
 };
