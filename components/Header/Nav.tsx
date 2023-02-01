@@ -16,8 +16,8 @@ const Nav = () => {
         {NAV_PATHS.map(({ path, title }) => (
           <li
             key='path'
-            className={`text-xl font-bold ${
-              pathname.includes(path) && "text-pink"
+            className={`text-xl font-bold hover:text-deepBlue ${
+              pathname.includes(path) && "text-deepBlue"
             }`}
           >
             <CustomLink
