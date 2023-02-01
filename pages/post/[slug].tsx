@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { TableOfContents, MarkDown, PostHeader } from "components";
 import { getAllPublished, getPost } from "lib/notion";
-import { HeadingType, MetaData, Params, PostType } from "types/types";
+import type { HeadingType, MetaData, Params, PostType } from "types/types";
 
 const Post = ({ post }: { post: PostType }) => {
   const { markdown, headings, metadata } = post;
