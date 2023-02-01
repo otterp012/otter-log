@@ -1,23 +1,16 @@
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
-type Props = {
-  href: string;
+interface Props extends LinkProps {
   style?: string;
   children: React.ReactNode;
-  options?: Record<string, string>;
   onClickHandler?: () => void;
-};
+}
 
-const CustomLink: React.FC<Props> = ({
-  href,
-  style,
-  children,
-  options,
-  onClickHandler,
-}) => {
+const CustomLink: React.FC<Props> = (props) => {
+  const { style, children, onClickHandler, ...restProps } = props;
   if (onClickHandler) {
     return (
-      <Link href={href} passHref {...options}>
+      <Link {...restProps}>
         <a className={style} onClick={onClickHandler}>
           {children}
         </a>
@@ -26,7 +19,7 @@ const CustomLink: React.FC<Props> = ({
   }
 
   return (
-    <Link href={href} passHref>
+    <Link {...restProps}>
       <a className={style}>{children}</a>
     </Link>
   );
