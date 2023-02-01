@@ -31,7 +31,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const inputPassword = req.headers["x-reviseImages-passcode"];
+  const inputPassword = req.headers["x-images-passcode"];
   const { slug } = req.body;
   if (!inputPassword || inputPassword !== IMAGE_PASSWORD) {
     return res.status(400).json({
@@ -40,9 +40,11 @@ export default async function handler(
   }
 
   const page = await getPage(slug);
+
   if (!page) return res.status(400).json({ error: "유효한 경로가 아닙니다." });
 
   // ----- cover 이미지 수정
+
   const cover =
     page?.cover.type === "file"
       ? {
@@ -104,7 +106,7 @@ export default async function handler(
   }
 
   return res.status(200).json({
-    message: `${req.body}의 이미지를 수정했습니다.`,
+    message: `${slug}의 이미지를 수정했습니다.`,
   });
 }
 
