@@ -17,7 +17,7 @@ const ReviseImage = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "x-reviseImages-passcode": password,
+        "x-images-passcode": password,
       },
       body: JSON.stringify({
         slug,
