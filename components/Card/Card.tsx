@@ -3,7 +3,7 @@ import Image from "next/future/image";
 // component
 import { CustomLink } from "components/CustomLink";
 import { Tags } from "components/Tags";
-
+import { MetaData } from "types/types";
 export type Props = {
   title: string;
   description: string;
@@ -12,6 +12,25 @@ export type Props = {
   slug: string;
   tags: string[];
 };
+
+const Cards = ({ posts }: { posts: MetaData[] }) => {
+  return (
+    <ul className='flex flex-wrap gap-2'>
+      {posts.map((post: MetaData) => (
+        <Card
+          title={post.title}
+          description={post.description}
+          publishedAt={post.date}
+          thumbnailImg={post.cover}
+          key={post.title}
+          slug={post.slug}
+          tags={post.tags}
+        />
+      ))}
+    </ul>
+  );
+};
+
 const Card: React.FC<Props> = ({
   title,
   publishedAt,
@@ -51,4 +70,5 @@ const Card: React.FC<Props> = ({
   );
 };
 
-export default Card;
+export default Cards;
+export { Card };
