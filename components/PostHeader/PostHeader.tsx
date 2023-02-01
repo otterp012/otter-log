@@ -5,7 +5,7 @@ import Image from "next/future/image";
 const PostHeader: React.FC<MetaData> = (props) => {
   const { title, cover, tags, last_edit, date } = props;
   return (
-    <header className='space-y-3 border-b border-b-lightGray pb-8 dark:border-b-deepGray'>
+    <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
       <h2
         className='break-keep mb-5 text-center text-4xl font-bold md:text-5xl'
         id='top'
