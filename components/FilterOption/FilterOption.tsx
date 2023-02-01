@@ -28,7 +28,7 @@ const FilterOption = (props: any) => {
   };
   return (
     <span
-      className={`border border-l-0 px-3 py-2 text-sm font-bold italic first:border-l md:text-lg ${
+      className={`cursor-pointer border border-l-0 px-3 py-2 text-sm font-bold italic first:border-l hover:bg-deepGray md:text-lg ${
         filterBy && filterBy === value && "bg-deepGray"
       }`}
       onClick={handleClick}
