@@ -13,6 +13,7 @@ export type MetaData = {
   last_edit: string;
   tags: string[];
   featured: boolean | undefined;
+  last_mod: Date;
 };
 
 export type FetchedHeadingType = {
