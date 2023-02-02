@@ -17,6 +17,7 @@
     "daisyui": "^2.49.0",
     "gif-frames": "^1.0.1",
     "next": "^12.3.0",
+    "next-sitemap": "^3.1.49",
     "notion-to-md": "^2.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
