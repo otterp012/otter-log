@@ -16,10 +16,6 @@ export { ToTopButton } from "./ToTopButton";
 // TOC
 export { TableOfContents } from "./TableOfContents";
 
-// Meta
-export { DefaultMeta } from "./DefaultMeta";
-export { CustomMeta } from "./CustomMeta";
-
 // Icons
 export { GithubIcon, ToggleIcon } from "./Icons";
 
@@ -36,3 +32,6 @@ export { PostHeader } from "./PostHeader";
 
 // filter
 export { FilterOptions } from "./FilterOption";
+
+// SEO
+export { SEO } from "./SEO";
