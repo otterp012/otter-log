@@ -42,6 +42,7 @@ const getMetaData = (post: any) => {
     date: dateToKorean(post.properties.Date.date.start),
     last_edit: dateToKorean(post.properties.Last_Date.date.start),
     slug: post.properties.slug.rich_text[0].plain_text,
+    last_mod: post.properties.Last_Date.date.start,
   };
 };
 
