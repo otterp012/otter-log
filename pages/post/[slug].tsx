@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { TableOfContents, MarkDown, PostHeader } from "components";
+import { TableOfContents, MarkDown, PostHeader, SEO } from "components";
 import { getAllPublished, getPost } from "lib/notion";
 import { parseHeading } from "lib/utils";
 import type { HeadingType, MetaData, Params, PostType } from "types/types";
@@ -8,14 +8,23 @@ import type { HeadingType, MetaData, Params, PostType } from "types/types";
 const Post = ({ post }: { post: PostType }) => {
   const { markdown, headings, metadata } = post;
 
+  const { title, description, cover, slug } = metadata;
   return (
-    <section className='mt-10'>
-      <PostHeader {...metadata} />
-      <div className='mt-5 lg:flex lg:flex-row-reverse'>
-        <TableOfContents headings={headings} />
-        <MarkDown markdownString={markdown} />
-      </div>
-    </section>
+    <>
+      <SEO
+        title={title}
+        description={description}
+        url={`/${slug}`}
+        imageUrl={cover as string}
+      />
+      <section className='mt-10'>
+        <PostHeader {...metadata} />
+        <div className='mt-5 lg:flex lg:flex-row-reverse'>
+          <TableOfContents headings={headings} />
+          <MarkDown markdownString={markdown} />
+        </div>
+      </section>
+    </>
   );
 };
 
