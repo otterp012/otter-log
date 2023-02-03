@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import {
-  getAllBlocksBySlug,
+  getAllBlocksById,
   getPage,
   updateBlockImage,
   updateCoverImage,
@@ -54,7 +54,7 @@ export default async function handler(
         }
       : null;
 
-  const blocks = (await getAllBlocksBySlug(slug)) as Block[];
+  const blocks = (await getAllBlocksById(page.id)) as Block[];
 
   if (cover) {
     const { id, coverUrl, imgId } = cover;
@@ -73,6 +73,7 @@ export default async function handler(
   }
 
   // ----- blocks 이미지들 수정
+
   const candidates = blocks
     .filter((block) => "type" in block && block.type === "image")
     .filter((block) => "image" in block && block.image.type === "file")
