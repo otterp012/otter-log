@@ -14,7 +14,7 @@ const Post = ({ post }: { post: PostType }) => {
       <SEO
         title={title}
         description={description}
-        url={`post/${slug}`}
+        url={`/post/${slug}`}
         imageUrl={cover as string}
       />
       <section className='mt-10'>
