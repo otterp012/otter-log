@@ -2,6 +2,7 @@ import { getServerSideSitemap } from "next-sitemap";
 import { GetServerSideProps } from "next";
 import { getAllPublished } from "lib/notion";
 import { MetaData } from "types/types";
+import { PAGE_URL } from "constants/constants";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const DATA_BASE_ID = process.env.DATABASE_ID as string;
@@ -9,7 +10,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const dynamicFields = data.map((item: MetaData) => {
     return {
-      loc: `https://otter-log/post/${item.slug}`,
+      loc: `${PAGE_URL}/post/${item.slug}`,
       lastmod: new Date(item.last_mod).toISOString(),
     };
   });
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const LAST_MODIFIED = dynamicFields[0].lastmod;
 
   const absoluteFields = {
-    loc: "https://otter-log.world",
+    loc: PAGE_URL,
     lastmod: LAST_MODIFIED,
   };
 
