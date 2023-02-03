@@ -1,3 +1,6 @@
+import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
+import { BlockList } from "net";
+
 const { Client } = require("@notionhq/client");
 const { NotionToMarkdown } = require("notion-to-md");
 
@@ -88,16 +91,30 @@ export const getPage = async (slug: string) => {
   return response.results[0];
 };
 
-export const getAllBlocksBySlug = async (slug: string) => {
-  try {
-    const response = await getPage(slug);
-    const id = response.id;
+const getAllBlocks = async (blockId: string, start?: string) => {
+  let results: any[] = [];
 
+  const recur = async (blockId: string, start?: string) => {
     const blocks = await notion.blocks.children.list({
-      block_id: id,
+      block_id: blockId,
+      start_cursor: start,
     });
 
-    return blocks.results;
+    results = [...results, ...blocks.results];
+
+    if (!blocks.has_more) return;
+    await recur(blockId, blocks.next_cursor);
+  };
+
+  await recur(blockId, start);
+
+  return results;
+};
+
+export const getAllBlocksById = async (id: string) => {
+  try {
+    const blocks = getAllBlocks(id, undefined);
+    return blocks;
   } catch {
     return null;
   }
