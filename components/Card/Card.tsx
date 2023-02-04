@@ -11,6 +11,7 @@ export type Props = {
   thumbnailImg: string | undefined;
   slug: string;
   tags: string[];
+  lastMod: Date;
 };
 
 const Cards = ({ posts }: { posts: MetaData[] }) => {
@@ -25,6 +26,7 @@ const Cards = ({ posts }: { posts: MetaData[] }) => {
           key={post.title}
           slug={post.slug}
           tags={post.tags}
+          lastMod={post.last_mod}
         />
       ))}
     </ul>
@@ -38,6 +40,7 @@ const Card: React.FC<Props> = ({
   thumbnailImg,
   slug,
   tags,
+  lastMod,
 }) => {
   return (
     <li className='mx-auto mb-5 h-96 w-[95%] list-none rounded-lg bg-light-card shadow-lg dark:bg-dark-card sm:w-[48%] lg:w-[32%]'>
@@ -52,19 +55,20 @@ const Card: React.FC<Props> = ({
         }
       />
       <div className='mt-4 flex flex-col items-center'>
-        <time className='font-semi-bold text-xs'>{publishedAt}</time>
+        <time className='font-semi-bold text-xs' dateTime={lastMod.toString()}>
+          {publishedAt}
+        </time>
         <h2 className='mb-2 text-center text-xl font-bold'>{title}</h2>
         <p className='text-sm'>{description}</p>
         <div className='mt-2'>
           <Tags tags={tags} />
         </div>
-        <span
+        <CustomLink
+          href={`post/${slug}`}
           className='mt-5 rounded-md bg-light-bg px-5 py-2 font-semibold shadow-2xl hover:bg-deepGray dark:bg-dark-bg hover:dark:bg-deepGray'
-          role='link'
-          aria-label={title}
         >
-          <CustomLink href={`post/${slug}`}>READ MORE</CustomLink>
-        </span>
+          <span>READ MORE</span>
+        </CustomLink>
       </div>
     </li>
   );
