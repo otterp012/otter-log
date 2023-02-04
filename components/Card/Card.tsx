@@ -67,7 +67,7 @@ const Card: React.FC<Props> = ({
           href={`post/${slug}`}
           className='mt-5 rounded-md bg-light-bg px-5 py-2 font-semibold shadow-2xl hover:bg-deepGray dark:bg-dark-bg hover:dark:bg-deepGray'
         >
-          <span>READ MORE</span>
+          READ MORE
         </CustomLink>
       </div>
     </li>
