@@ -3,7 +3,7 @@ import { MetaData } from "types/types";
 import Image from "next/future/image";
 
 const PostHeader: React.FC<MetaData> = (props) => {
-  const { title, cover, tags, last_edit, date } = props;
+  const { title, cover, tags, last_edit, date, last_mod } = props;
   return (
     <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
       <h2
@@ -25,7 +25,9 @@ const PostHeader: React.FC<MetaData> = (props) => {
         <div>
           <Tags tags={tags} />
         </div>
-        <time className='mr-2 inline text-xs'>{date}</time>
+        <time dateTime={last_mod.toString()} className='mr-2 inline text-xs'>
+          {date}
+        </time>
         <span className='text-xs'>by otter</span>
         <em className='block text-xs'>
           {last_edit}에 최종수정되었습니다. <br />
