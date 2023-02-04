@@ -17,13 +17,13 @@ const Post = ({ post }: { post: PostType }) => {
         url={`/post/${slug}`}
         imageUrl={cover as string}
       />
-      <section className='mt-10'>
+      <article className='mt-10'>
         <PostHeader {...metadata} />
         <div className='mt-5 lg:flex lg:flex-row-reverse'>
           <TableOfContents headings={headings} />
           <MarkDown markdownString={markdown} />
         </div>
-      </section>
+      </article>
     </>
   );
 };
