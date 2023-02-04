@@ -60,6 +60,7 @@ const mockData = {
   date: "2023년 1월 3일",
   last_edit: "2023년 1월 3일",
   slug: "js-eventloop",
+  last_mod: new Date("2022-01-03"),
 };
 
 const MockCard = () => {
@@ -70,6 +71,7 @@ const MockCard = () => {
       thumbnailImg={mockData.cover}
       slug={mockData.slug}
       tags={mockData.tags}
+      lastMod={mockData.last_mod}
     />
   );
 };
