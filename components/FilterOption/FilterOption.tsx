@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FILTER_OPTIONS } from "constants/constants";
+import { CustomLink } from "components/CustomLink";
 
 const FilterOptions = () => {
   return (
@@ -12,9 +13,9 @@ const FilterOptions = () => {
 };
 
 const FilterOption = (props: any) => {
-  const { value } = props;
   const router = useRouter();
   const { filterBy } = router.query;
+  const { value } = props;
 
   const nextQuery = {
     pathname: "/post",
@@ -23,18 +24,15 @@ const FilterOption = (props: any) => {
     },
   };
 
-  const handleClick = () => {
-    router.push(nextQuery, undefined, { shallow: true });
-  };
   return (
-    <span
-      className={`cursor-pointer border border-l-0 px-3 py-2 text-sm font-bold italic first:border-l hover:bg-deepGray md:text-lg ${
-        filterBy && filterBy === value && "bg-deepGray"
-      }`}
-      onClick={handleClick}
+    <CustomLink
+      href={nextQuery}
+      shallow={true}
+      className='`cursor-pointer ${ filterBy && filterBy === value && "bg-deepGray" border border-l-0 px-3
+      py-2 text-sm font-bold italic first:border-l hover:bg-deepGray md:text-lg'
     >
       {value.toUpperCase()}
-    </span>
+    </CustomLink>
   );
 };
 
