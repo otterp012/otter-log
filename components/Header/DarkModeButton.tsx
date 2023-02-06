@@ -2,7 +2,7 @@
 import useDarkMode from "hooks/useDarkMode";
 import { memo } from "react";
 
-const DarkModeButton = () => {
+export const DarkModeButton = memo(() => {
   const { themeIsDark, themeModeHandler } = useDarkMode();
 
   return (
@@ -13,6 +13,6 @@ const DarkModeButton = () => {
       {themeIsDark ? "LIGHT" : "DARK"}
     </button>
   );
-};
+});
 
-export default memo(DarkModeButton);
+DarkModeButton.displayName = "DarkModeButton";

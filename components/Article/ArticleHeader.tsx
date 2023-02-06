@@ -1,27 +1,24 @@
-import { Tags } from "components/Tags";
-import { MetaData } from "types/types";
 import Image from "next/future/image";
 
-const ArticleHeader: React.FC<MetaData> = (props) => {
+import { Tags } from "components/Tags";
+
+import type { MetaData } from "types/types";
+
+export const ArticleHeader = (props: MetaData) => {
   const { title, cover, tags, last_edit, date, last_mod } = props;
   return (
     <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
-      <h2
-        className='break-keep mb-5 text-center text-4xl font-bold md:text-5xl'
-        id='top'
-      >
+      <h2 className='break-keep mb-5 text-center text-4xl font-bold md:text-5xl'>
         {title}
       </h2>
-      {cover && (
-        <Image
-          src={cover}
-          alt={title}
-          className='mx-auto h-auto w-[90%] rounded-xl object-cover md:w-[640px]'
-          width={1000}
-          height={1000}
-          priority={true}
-        />
-      )}
+      <Image
+        src={cover}
+        alt={title}
+        className='mx-auto h-auto w-[90%] rounded-xl object-cover md:w-[640px]'
+        width={1000}
+        height={1000}
+        priority={true}
+      />
       <div className='space-y-2 py-3 pb-5 text-center text-deepGray'>
         <div>
           <Tags tags={tags} />
@@ -38,5 +35,3 @@ const ArticleHeader: React.FC<MetaData> = (props) => {
     </header>
   );
 };
-
-export { ArticleHeader };

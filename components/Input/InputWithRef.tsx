@@ -13,7 +13,7 @@ type InputPropType = {
   style: string;
 };
 
-const Input = React.forwardRef<HTMLInputElement, InputPropType>(
+export const InputWithRef = React.forwardRef<HTMLInputElement, InputPropType>(
   (props, ref) => {
     return (
       <>
@@ -29,6 +29,4 @@ const Input = React.forwardRef<HTMLInputElement, InputPropType>(
   },
 );
 
-export default Input;
-
-Input.displayName = "Input";
+InputWithRef.displayName = "InputWithRef";

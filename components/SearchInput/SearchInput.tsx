@@ -7,7 +7,7 @@ type Props = {
   onSaveSearchData: (searchData: string) => void;
 };
 
-const SearchInput: React.FC<Props> = ({ onSaveSearchData }) => {
+export const SearchInput = ({ onSaveSearchData }: Props) => {
   const inputValidator = (value: string) => {
     return value.length > 1;
   };
@@ -48,5 +48,3 @@ const SearchInput: React.FC<Props> = ({ onSaveSearchData }) => {
     </>
   );
 };
-
-export default SearchInput;

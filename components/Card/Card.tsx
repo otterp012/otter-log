@@ -75,5 +75,3 @@ export const Card: React.FC<Props> = ({
     </li>
   );
 };
-
-export default Cards;

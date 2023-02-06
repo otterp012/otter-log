@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const ToTopButton = () => {
+export const ToTopButton = memo(() => {
   return (
     <button
       className='text-md hidden w-full rounded-md pl-5 text-left hover:bg-deepGray lg:block'
@@ -15,5 +15,6 @@ const ToTopButton = () => {
       맨 위로 가기
     </button>
   );
-};
-export default memo(ToTopButton);
+});
+
+ToTopButton.displayName = "ToTopButton";

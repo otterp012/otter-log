@@ -12,7 +12,7 @@ type props = {
   headings: HeadingType[];
 };
 
-const TableOfContents = ({ headings }: props) => {
+export const TableOfContents = ({ headings }: props) => {
   const { visibleList } = useToc();
   return (
     <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[25%] lg:self-start lg:pl-3'>
@@ -46,5 +46,3 @@ const TableOfContents = ({ headings }: props) => {
     </div>
   );
 };
-
-export default TableOfContents;

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { FILTER_OPTIONS } from "constants/constants";
 import { CustomLink } from "components/CustomLink";
 
-const FilterOptions = () => {
+export const FilterOptions = () => {
   return (
     <div className='mt-2 mb-5 flex flex-wrap'>
       {FILTER_OPTIONS.map((option) => (
@@ -28,12 +28,12 @@ const FilterOption = (props: any) => {
     <CustomLink
       href={nextQuery}
       shallow={true}
-      className='`cursor-pointer ${ filterBy && filterBy === value && "bg-deepGray" border border-l-0 px-3
-      py-2 text-sm font-bold italic first:border-l hover:bg-deepGray md:text-lg'
+      className={`cursor-pointer ${
+        filterBy && filterBy === value && "bg-deepGray"
+      } border border-l-0 px-3
+      py-2 text-sm font-bold italic first:border-l hover:bg-deepGray md:text-lg`}
     >
       {value.toUpperCase()}
     </CustomLink>
   );
 };
-
-export default FilterOptions;

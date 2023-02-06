@@ -1,10 +1,12 @@
 import ReactMarkdown from "react-markdown";
-import slug from "remark-slug";
 import Image from "next/future/image";
-import { getRevisedImageUrl } from "lib/utils";
+import slug from "remark-slug";
+
 import { CodeBlock } from "./CodeBlock";
 
-const MarkDown = ({ markdownString }: { markdownString: string }) => {
+import { getRevisedImageUrl } from "lib/utils";
+
+export const MarkDown = ({ markdownString }: { markdownString: string }) => {
   return (
     <ReactMarkdown
       className='markdown'
@@ -46,5 +48,3 @@ const MarkDown = ({ markdownString }: { markdownString: string }) => {
     </ReactMarkdown>
   );
 };
-
-export { MarkDown };

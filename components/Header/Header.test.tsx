@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { createMockRouter } from "__mock__/next";
 
-import Header from "./Header";
+import { Header } from "./Header";
 
 describe("Header", () => {
   it("Header 컴포넌트가 렌더링 된다.", async () => {

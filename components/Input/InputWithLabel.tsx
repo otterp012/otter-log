@@ -4,7 +4,7 @@ type InputWithLabel = {
   labelName?: string;
 };
 
-const InputWithLabel = (props: InputWithLabel) => {
+export const InputWithLabel = (props: InputWithLabel) => {
   const { labelProps, inputProps, labelName } = props;
   return (
     <>
@@ -13,5 +13,3 @@ const InputWithLabel = (props: InputWithLabel) => {
     </>
   );
 };
-
-export default InputWithLabel;

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ToTopButton from "./ToTopButton";
+import { ToTopButton } from "./ToTopButton";
 
 describe("ToTopButton", () => {
   it("ToTopButton버튼을 누르면, 페이지가 맨 위로 이동된다.", () => {
