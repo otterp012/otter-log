@@ -5,15 +5,15 @@ export type Params = {
 };
 
 export type MetaData = {
+  id: string;
   title: string;
   description: string;
-  date: string;
-  cover: string;
+  thumbnailImg: string;
   slug: string;
-  last_edit: string;
   tags: string[];
-  featured: boolean | undefined;
-  last_mod: Date;
+  formattedDate: string;
+  lastEditDate: Date;
+  lastEditFormattedDate: string;
 };
 
 export type FetchedHeadingType = {
@@ -24,9 +24,10 @@ export type FetchedHeadingType = {
 
 export type HeadingType = {
   slug: string;
-  heading: "heading2" | "heading3";
+  heading: "h3" | "h4";
   text: string;
 };
+
 export type PostType = {
   metaData: MetaData;
   markDownString: string;

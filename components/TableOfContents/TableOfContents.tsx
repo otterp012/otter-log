@@ -1,18 +1,12 @@
 // hook
 import { useToc } from "hooks";
 import { ToTopButton } from "components/ToTopButton";
+import { HeadingType } from "types/types";
 
-type HeadingType = {
-  slug: string;
-  heading: "heading2" | "heading3";
-  text: string;
-};
-
-type props = {
+type TOCProps = {
   headings: HeadingType[];
 };
-
-export const TableOfContents = ({ headings }: props) => {
+export const TableOfContents = ({ headings }: TOCProps) => {
   const { visibleList } = useToc();
   return (
     <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[25%] lg:self-start lg:pl-3'>
@@ -21,8 +15,8 @@ export const TableOfContents = ({ headings }: props) => {
         {headings.map(({ slug, heading, text }) => {
           const visibleStyle = slug === visibleList ? "bg-deepGray" : "";
           const headingStyle = {
-            heading2: "text-md pl-5",
-            heading3: "pl-8 text-sm",
+            h3: "text-md pl-5",
+            h4: "pl-8 text-sm",
           };
 
           return (

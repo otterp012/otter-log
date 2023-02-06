@@ -1,3 +1,5 @@
+import { parseHeading } from "./utils";
+
 const { Client } = require("@notionhq/client");
 const { NotionToMarkdown } = require("notion-to-md");
 
@@ -23,9 +25,7 @@ export const getAllPublished = async (database: string) => {
   });
 
   const allPosts = posts.results;
-  return allPosts.map((post: any) => {
-    return getMetaData(post);
-  });
+  return allPosts.map(getMetaData);
 };
 
 const getTags = (tags: { name: string }[]) => {
@@ -35,14 +35,14 @@ const getTags = (tags: { name: string }[]) => {
 const getMetaData = (post: any) => {
   return {
     id: post.id,
-    cover: post.cover?.external?.url ?? null,
     title: post.properties.이름.title[0].plain_text,
-    tags: getTags(post.properties.태그.multi_select),
     description: post.properties.Description.rich_text[0].plain_text,
-    date: dateToKorean(post.properties.Date.date.start),
-    last_edit: dateToKorean(post.properties.Last_Date.date.start),
+    thumbnailImg: post.cover?.external?.url ?? post.cover.file.url,
     slug: post.properties.slug.rich_text[0].plain_text,
-    last_mod: post.properties.Last_Date.date.start,
+    tags: getTags(post.properties.태그.multi_select),
+    formattedDate: dateToKorean(post.properties.Date.date.start),
+    lastEditDate: post.properties.Last_Date.date.start,
+    lastEditFormattedDate: dateToKorean(post.properties.Last_Date.date.start),
   };
 };
 
@@ -65,10 +65,26 @@ export const getPost = async (slug: string) => {
   const markDownString = n2m.toMarkdownString(mdBlocks);
   const headings = await n2m.pageToMarkdown(page.id, 2);
 
+  const parsedHeadings = headings
+    .filter((item: { type: string; parent: string }) =>
+      item.type.includes("heading"),
+    )
+    .map((item: { type: string; parent: string }) => {
+      const parsedText = parseHeading(item.parent);
+      return {
+        heading: item.type
+          .replace(/_/, "")
+          .replace("heading2", "h3")
+          .replace("heading3", "h4"),
+        slug: parsedText.replace(/ /g, "-").toLowerCase(),
+        text: parsedText,
+      };
+    });
+
   return {
     metaData,
     markDownString,
-    headings,
+    headings: parsedHeadings,
   };
 };
 
