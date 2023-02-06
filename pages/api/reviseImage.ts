@@ -7,7 +7,7 @@ import {
   updateCoverImage,
 } from "lib/notion";
 import { uploadImage } from "lib/cloudinary";
-import { downloadImageToBase64, downloadGifToBase64 } from "lib/utils";
+import { downloadImageToBase64 } from "lib/utils";
 
 type Block = {
   type: string;
@@ -22,10 +22,6 @@ type Block = {
 
 const IMAGE_PASSWORD = process.env.IMAGE_PASSWORD;
 const UPLOAD_IMAGE_PREFIX = `data:image/jpeg;base64,`;
-const getIsGif = (url: string) => {
-  const beforeQuery = url.indexOf("?");
-  return url.slice(beforeQuery - 4, beforeQuery).includes("gif");
-};
 
 export default async function handler(
   req: NextApiRequest,
@@ -58,11 +54,8 @@ export default async function handler(
 
   if (cover) {
     const { id, coverUrl, imgId } = cover;
-    const isGif = getIsGif(coverUrl);
 
-    const base64 = isGif
-      ? await downloadGifToBase64(coverUrl)
-      : await downloadImageToBase64(coverUrl);
+    const base64 = downloadImageToBase64(coverUrl);
 
     const url = await uploadImage(UPLOAD_IMAGE_PREFIX + base64, {
       public_id: imgId,
@@ -92,11 +85,8 @@ export default async function handler(
 
   for (const candidate of candidates) {
     const { id, url: candidateUrl, imgId } = candidate;
-    const isGif = getIsGif(candidateUrl);
 
-    const base64 = isGif
-      ? await downloadGifToBase64(candidateUrl)
-      : await downloadImageToBase64(candidateUrl);
+    const base64 = downloadImageToBase64(candidateUrl);
 
     const url = await uploadImage(UPLOAD_IMAGE_PREFIX + base64, {
       public_id: imgId,
