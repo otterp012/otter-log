@@ -70,6 +70,7 @@ export default async function handler(
     });
 
   // --------------------------------
+  // Cloudinary 연결
   connectCloudinary();
 
   if (cover) {
