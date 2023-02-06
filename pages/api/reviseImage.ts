@@ -6,7 +6,8 @@ import {
   updateBlockImage,
   updateCoverImage,
 } from "lib/notion";
-import { uploadImage } from "lib/cloudinary";
+
+import { uploadImage, connectCloudinary } from "lib/cloudinary";
 import { downloadImageToBase64 } from "lib/utils";
 
 type Block = {
@@ -29,6 +30,7 @@ export default async function handler(
 ) {
   const inputPassword = req.headers["x-images-passcode"];
   const { slug } = req.body;
+
   if (!inputPassword || inputPassword !== IMAGE_PASSWORD) {
     return res.status(400).json({
       message: "유효한 비밀번호가 아닙니다.",
@@ -39,8 +41,7 @@ export default async function handler(
 
   if (!page) return res.status(400).json({ error: "유효한 경로가 아닙니다." });
 
-  // ----- cover 이미지 수정
-
+  // -- cover 이미지와 블록들 안에 있는 이미지들 모으기.
   const cover =
     page?.cover.type === "file"
       ? {
@@ -51,6 +52,25 @@ export default async function handler(
       : null;
 
   const blocks = (await getAllBlocksById(page.id)) as Block[];
+
+  const candidates = blocks
+    .filter((block) => "type" in block && block.type === "image")
+    .filter((block) => "image" in block && block.image.type === "file")
+    .map((block) => {
+      return {
+        id: block.id,
+        url: block.image.file.url,
+        imgId: block.id.replace(/-/g, ""),
+      };
+    });
+
+  if (!candidates.length && cover)
+    return res.status(200).json({
+      message: "수정할 이미지가 없습니다.",
+    });
+
+  // --------------------------------
+  connectCloudinary();
 
   if (cover) {
     const { id, coverUrl, imgId } = cover;
@@ -64,24 +84,6 @@ export default async function handler(
 
     await updateCoverImage(id, url);
   }
-
-  // ----- blocks 이미지들 수정
-
-  const candidates = blocks
-    .filter((block) => "type" in block && block.type === "image")
-    .filter((block) => "image" in block && block.image.type === "file")
-    .map((block) => {
-      return {
-        id: block.id,
-        url: block.image.file.url,
-        imgId: block.id.replace(/-/g, ""),
-      };
-    });
-
-  if (!candidates.length)
-    return res.status(200).json({
-      message: "수정할 이미지가 없습니다.",
-    });
 
   for (const candidate of candidates) {
     const { id, url: candidateUrl, imgId } = candidate;

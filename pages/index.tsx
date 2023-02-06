@@ -7,9 +7,9 @@ const Home = ({ recent }: { recent: MetaData[] }) => {
   return (
     <>
       <SEO {...DEFAULT_SEO} />
-      <h2 className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
+      <span className='mb-10 inline-block w-full text-center text-3xl font-bold italic'>
         RECENT POSTS
-      </h2>
+      </span>
       <Cards posts={recent} />
     </>
   );
