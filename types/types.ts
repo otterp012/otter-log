@@ -8,7 +8,7 @@ export type MetaData = {
   title: string;
   description: string;
   date: string;
-  cover: string | undefined;
+  cover: string;
   slug: string;
   last_edit: string;
   tags: string[];
@@ -28,7 +28,7 @@ export type HeadingType = {
   text: string;
 };
 export type PostType = {
-  metadata: MetaData;
-  markdown: string;
+  metaData: MetaData;
+  markDownString: string;
   headings: HeadingType[];
 };
