@@ -17,7 +17,7 @@ export const ArticleHeader = (props: ArticleHeaderProps) => {
   } = props;
   return (
     <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
-      <h2 className='break-keep mb-5 text-center text-4xl font-bold md:text-5xl'>
+      <h2 className='mb-5 text-center text-4xl font-bold md:text-5xl'>
         {title}
       </h2>
       <Image
@@ -28,7 +28,7 @@ export const ArticleHeader = (props: ArticleHeaderProps) => {
         height={1000}
         priority={true}
       />
-      <div className='space-y-2 py-3 pb-5 text-center text-deepGray'>
+      <div className='space-y-2 py-3 pb-5 text-center'>
         <div>
           <Tags tags={tags} />
         </div>

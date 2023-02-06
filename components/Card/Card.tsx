@@ -3,6 +3,7 @@ import { Tags } from "components/Tags";
 import { MetaData } from "types/types";
 import { ImageWithFallback } from "components/ImageWithFallback";
 import { getRevisedImageUrl } from "lib/utils";
+import { VisuallyHidden } from "components/VisuallyHidden";
 
 export const Cards = ({ posts }: { posts: MetaData[] }) => {
   return (
@@ -46,7 +47,7 @@ export const Card = (props: CardProps) => {
           {formattedDate}
         </time>
         <h2 className='mb-2 text-center text-xl font-bold'>{title}</h2>
-        <p className='break-keep h-10 w-[80%] text-center text-sm line-clamp-2'>
+        <p className='h-10 w-[80%] text-center text-sm line-clamp-2'>
           {description}
         </p>
         <div className='mt-2'>
@@ -58,6 +59,7 @@ export const Card = (props: CardProps) => {
           title={title}
         >
           READ MORE
+          <VisuallyHidden>{title}</VisuallyHidden>
         </CustomLink>
       </div>
     </li>

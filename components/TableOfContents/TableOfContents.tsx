@@ -2,10 +2,12 @@
 import { useToc } from "hooks";
 import { ToTopButton } from "components/ToTopButton";
 import { HeadingType } from "types/types";
+import { linkHandler } from "lib/utils";
 
 type TOCProps = {
   headings: HeadingType[];
 };
+
 export const TableOfContents = ({ headings }: TOCProps) => {
   const { visibleList } = useToc();
   return (
@@ -22,12 +24,8 @@ export const TableOfContents = ({ headings }: TOCProps) => {
           return (
             <li key={slug}>
               <a
-                onClick={(e) => {
-                  document &&
-                    document.getElementById(`${slug}`)?.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                }}
+                onClick={(e) => linkHandler(e, slug)}
+                aria-labelledby={`#${slug}`}
                 className={`${headingStyle[heading]} pointer block rounded-md ${visibleStyle} break-keep hover:bg-deepGray`}
               >
                 {text}
