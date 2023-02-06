@@ -1,7 +1,7 @@
 import { CustomLink } from "components/CustomLink";
 import { Tags } from "components/Tags";
 import { MetaData } from "types/types";
-import { ImageWithFallback } from "components";
+import { ImageWithFallback } from "components/ImageWithFallback";
 import { getRevisedImageUrl } from "lib/utils";
 
 export type Props = {
@@ -14,7 +14,7 @@ export type Props = {
   lastMod: Date;
 };
 
-const Cards = ({ posts }: { posts: MetaData[] }) => {
+export const Cards = ({ posts }: { posts: MetaData[] }) => {
   return (
     <ul className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
       {posts.map((post: MetaData, index) => (
@@ -33,7 +33,7 @@ const Cards = ({ posts }: { posts: MetaData[] }) => {
   );
 };
 
-const Card: React.FC<Props> = ({
+export const Card: React.FC<Props> = ({
   title,
   publishedAt,
   description,
@@ -77,4 +77,3 @@ const Card: React.FC<Props> = ({
 };
 
 export default Cards;
-export { Card };
