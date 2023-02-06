@@ -26,12 +26,17 @@ export { AppLayout, PageLayout } from "./Layout";
 export { InputWithRef, InputWithLabel } from "./Input";
 export { SearchInput } from "./SearchInput";
 
-// markdown
-export { MarkDown } from "./MarkDown";
-export { PostHeader } from "./PostHeader";
+// article
+export * from "./Article";
 
 // filter
 export { FilterOptions } from "./FilterOption";
 
 // SEO
 export { SEO } from "./SEO";
+
+// Image
+export * from "./ImageWithFallback";
+
+// VisuallyHidden
+export * from "./VisuallyHidden";
