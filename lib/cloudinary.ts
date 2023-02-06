@@ -1,16 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
 
-const NAME = process.env.CLOUDINARY_NAME;
-const KEY = process.env.CLOUDINARY_KEY;
-const SECRET = process.env.CLOUDINARY_SECRET;
-const FOLDER_NAME = process.env.CLOUDINARY_UPLOAD_FOLDER;
-
-cloudinary.config({
-  cloud_name: NAME,
-  api_key: KEY,
-  api_secret: SECRET,
-});
-
 export const uploadImage = async (encoded: string, options: any) => {
   let url;
   try {
@@ -22,4 +11,16 @@ export const uploadImage = async (encoded: string, options: any) => {
   } finally {
     return url;
   }
+};
+
+export const connectCloudinary = () => {
+  const NAME = process.env.CLOUDINARY_NAME;
+  const KEY = process.env.CLOUDINARY_KEY;
+  const SECRET = process.env.CLOUDINARY_SECRET;
+
+  cloudinary.config({
+    cloud_name: NAME,
+    api_key: KEY,
+    api_secret: SECRET,
+  });
 };
