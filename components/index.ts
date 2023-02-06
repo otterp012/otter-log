@@ -37,6 +37,3 @@ export { SEO } from "./SEO";
 
 // Image
 export * from "./ImageWithFallback";
-
-// VisuallyHidden
-export * from "./VisuallyHidden";
