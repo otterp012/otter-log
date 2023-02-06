@@ -3,13 +3,13 @@ import { ToTopButton } from "./ToTopButton";
 
 describe("ToTopButton", () => {
   it("ToTopButton버튼을 누르면, 페이지가 맨 위로 이동된다.", () => {
-    window.scrollTo = jest.fn();
+    window.scroll = jest.fn();
 
     render(<ToTopButton />);
 
-    const toTopBtn = screen.getByRole("button");
+    const toTopBtn = screen.getByText(/맨 위로 가기/);
     fireEvent.click(toTopBtn);
-    expect(window.scrollTo).toHaveBeenCalledWith({
+    expect(window.scroll).toHaveBeenCalledWith({
       top: 0,
       behavior: "smooth",
     });
