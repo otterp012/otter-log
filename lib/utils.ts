@@ -39,7 +39,7 @@ export const scrollTopHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
 };
 
 export const parseHeading = (heading: string) => {
-  const regexp = /[^ㄱ-ㅎ가-힣A-Za-z\s]/g;
+  const regexp = /[^ㄱ-ㅎ가-힣A-Za-z0-9\s]/g;
   // 공백과, 문자를 제외한 나머지 제거
 
   // trim을 통해 맨 앞 공백 제거
@@ -59,6 +59,7 @@ export const getRevisedImageUrl = ({
   height?: number | "auto";
   format?: "webp" | "jpg" | "auto";
 }) => {
+  if (src.includes("s3.us-west-2.amazonaws")) return src;
   const prefixIndex = src.lastIndexOf("upload");
   const prefix = src.slice(0, prefixIndex);
   const restUrl = src.replace(prefix, "").replace("upload/", "");
