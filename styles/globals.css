@@ -37,4 +37,19 @@
   .dark-base {
     @apply bg-dark-bg text-dark-text;
   }
+
+  .visuallyHidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .markdown {
+    @apply prose max-w-full select-text prose-li:marker:text-black dark:prose-invert dark:prose-li:marker:text-gray lg:mt-5 lg:max-w-[75%];
+  }
 }
