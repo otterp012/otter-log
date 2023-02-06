@@ -5,7 +5,7 @@ const useToc = () => {
   const observer = useRef<IntersectionObserver>();
 
   useEffect(() => {
-    const headingTags = document.querySelectorAll("h2, h3");
+    const headingTags = document.querySelectorAll("h3, h4");
     observer.current = new IntersectionObserver(callback, {
       rootMargin: "0px 0px -25% 0px",
     });
