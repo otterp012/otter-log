@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://example.com",
+  siteUrl: "https://otter-log.world",
   generateRobotsTxt: true,
   exclude: ["/server-sitemap.xml"],
   robotsTxtOptions: {
