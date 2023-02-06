@@ -71,7 +71,8 @@ const MockCard = () => {
       thumbnailImg={mockData.cover}
       slug={mockData.slug}
       tags={mockData.tags}
-      lastMod={mockData.last_mod}
+      formattedDate={mockData.date}
+      lastEditDate={mockData.last_mod}
     />
   );
 };

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import SearchInput from "./SearchInput";
+import { SearchInput } from "./SearchInput";
 
 describe("SearchInput", () => {
   it("SearchInput이 렌더링되면, focus된다.", async () => {

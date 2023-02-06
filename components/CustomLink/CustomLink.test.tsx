@@ -3,7 +3,7 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import { createMockRouter } from "__mock__/next";
 
-import CustomLink from "./CustomLink";
+import { CustomLink } from "./CustomLink";
 
 describe("CustomLink", () => {
   it("CustomLink를 누르면, href경로로 페이지가 이동된다..", async () => {

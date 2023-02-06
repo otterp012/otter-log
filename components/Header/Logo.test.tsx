@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { createMockRouter } from "__mock__/next";
 
-import Logo from "./Logo";
+import { Logo } from "./Logo";
 
 it("Logo를 클릭하면, 메인페이지('/')로 이동한다.", async () => {
   // arrange
