@@ -1,6 +1,3 @@
-import { makeConsoleLogger } from "@notionhq/client/build/src/logging";
-import { BlockList } from "net";
-
 const { Client } = require("@notionhq/client");
 const { NotionToMarkdown } = require("notion-to-md");
 
@@ -63,14 +60,14 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export const getPost = async (slug: string) => {
   const page = await getPage(slug);
-  const metadata = getMetaData(page);
+  const metaData = getMetaData(page);
   const mdBlocks = await n2m.pageToMarkdown(page.id);
-  const markdown = n2m.toMarkdownString(mdBlocks);
+  const markDownString = n2m.toMarkdownString(mdBlocks);
   const headings = await n2m.pageToMarkdown(page.id, 2);
 
   return {
-    metadata,
-    markdown,
+    metaData,
+    markDownString,
     headings,
   };
 };
