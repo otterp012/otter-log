@@ -1,7 +1,7 @@
 import { render, RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import DarkModeButton from "./DarkModeButton";
+import { DarkModeButton } from "./DarkModeButton";
 
 describe("dark mode", () => {
   let rendered: RenderResult;

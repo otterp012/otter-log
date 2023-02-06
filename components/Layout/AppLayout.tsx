@@ -1,9 +1,8 @@
 // component
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
-import React from "react";
 
-const AppLayout = ({ children }: { children: React.ReactNode }) => {
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='mx-auto min-h-screen md:max-w-[768px] lg:max-w-[1024px]'>
       <Header />
@@ -12,5 +11,3 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     </div>
   );
 };
-
-export default AppLayout;

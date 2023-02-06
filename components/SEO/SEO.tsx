@@ -7,7 +7,7 @@ type SEOProps = {
   imageUrl: string;
 };
 
-const SEO = (props: SEOProps) => {
+export const SEO = (props: SEOProps) => {
   const { title, description, url, imageUrl } = props;
   const computedTitle = title === "오터 로그" ? title : `${title} | 오터 로그`;
 
@@ -36,5 +36,3 @@ const SEO = (props: SEOProps) => {
     </Head>
   );
 };
-
-export default SEO;

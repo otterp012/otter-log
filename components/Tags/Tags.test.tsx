@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Tags from "./Tags";
+import { Tags } from "./Tags";
 
 describe("Card", () => {
   it("tags는 props에 들어온 배열의 요소들이 렌더링된다.", async () => {

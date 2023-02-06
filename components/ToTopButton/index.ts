@@ -1,1 +1,1 @@
-export { default as ToTopButton } from "./ToTopButton";
+export * from "./ToTopButton";

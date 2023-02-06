@@ -7,7 +7,7 @@ import { NAV_PATHS } from "../../constants/constants";
 // component
 import { CustomLink } from "components/CustomLink";
 
-const Nav = () => {
+export const Nav = memo(() => {
   const { pathname } = useRouter();
 
   return (
@@ -32,6 +32,6 @@ const Nav = () => {
       </ul>
     </nav>
   );
-};
+});
 
-export default memo(Nav);
+Nav.displayName = "Nav";

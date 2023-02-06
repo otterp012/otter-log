@@ -6,7 +6,7 @@ interface CustomLinkProps extends LinkProps {
   title?: string;
 }
 
-const CustomLink = (props: CustomLinkProps) => {
+export const CustomLink = (props: CustomLinkProps) => {
   const { children, className, title, ...restProps } = props;
 
   return (
@@ -17,5 +17,3 @@ const CustomLink = (props: CustomLinkProps) => {
     </Link>
   );
 };
-
-export default CustomLink;

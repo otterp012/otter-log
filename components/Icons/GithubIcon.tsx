@@ -1,7 +1,8 @@
 // constant
 import { GITHUB_URL } from "constants/constants";
+import { memo } from "react";
 
-const GithubIcon = () => {
+export const GithubIcon = memo(() => {
   return (
     <a href={GITHUB_URL} aria-label='github' target='blank'>
       <svg
@@ -16,6 +17,6 @@ const GithubIcon = () => {
       </svg>
     </a>
   );
-};
+});
 
-export default GithubIcon;
+GithubIcon.displayName = "GithubIcon";

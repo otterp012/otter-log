@@ -5,7 +5,7 @@ type Props = {
   tags: string[];
 };
 
-const Tags: React.FC<Props> = ({ tags }) => {
+export const Tags = ({ tags }: Props) => {
   return (
     <>
       {tags &&
@@ -28,5 +28,3 @@ const Tags: React.FC<Props> = ({ tags }) => {
     </>
   );
 };
-
-export default Tags;
