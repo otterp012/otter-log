@@ -1,5 +1,4 @@
 import https from "https";
-const gifFrames = require("gif-frames");
 
 export const downloadImageToBase64 = (url: string) => {
   return new Promise((resolve, reject) => {
@@ -18,18 +17,6 @@ export const downloadImageToBase64 = (url: string) => {
     req.on("error", reject);
     req.end();
   });
-};
-
-export const downloadGifToBase64 = async (url: string) => {
-  const response = await gifFrames({
-    url: url,
-    frames: "0",
-  });
-
-  const image = await response[0].getImage();
-  const base64 = await image.read().toString("base64");
-
-  return base64;
 };
 
 export const linkHandler = (
@@ -57,4 +44,27 @@ export const parseHeading = (heading: string) => {
 
   // trim을 통해 맨 앞 공백 제거
   return heading.replace(regexp, "").trim();
+};
+
+export const getRevisedImageUrl = ({
+  src,
+  cropping = "thumb",
+  width = 600,
+  height = 400,
+  format = "webp",
+}: {
+  src: string;
+  cropping?: string;
+  width?: number | "auto";
+  height?: number | "auto";
+  format?: "webp" | "jpg" | "auto";
+}) => {
+  const prefixIndex = src.lastIndexOf("upload");
+  const prefix = src.slice(0, prefixIndex);
+  const restUrl = src.replace(prefix, "").replace("upload/", "");
+  const resizedUrl =
+    prefix +
+    `upload/c_${cropping},h_${height},w_${width}/f_${format}/` +
+    restUrl;
+  return resizedUrl;
 };
