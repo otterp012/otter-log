@@ -4,28 +4,23 @@
 
 @layer base {
   html {
-    @apply scroll-pt-20;
-    @apply select-none;
-    @apply overflow-x-hidden;
+    @apply select-none scroll-pt-20 overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  span,
+  p,
+  a {
+    word-break: keep-all;
   }
 }
 
 @layer utilities {
-  .hover-change-color {
-    @apply dark:hover:text-pink;
-    @apply hover:text-blue;
-  }
-
-  .grayed-text {
-    @apply text-deepGray;
-    @apply dark:text-lightGray;
-  }
-
-  .grayed-border {
-    @apply border-lightGray;
-    @apply dark:border-deepGray;
-  }
-
   .pointer {
     @apply hover:cursor-pointer;
   }
@@ -51,5 +46,9 @@
 
   .markdown {
     @apply prose max-w-full select-text prose-li:marker:text-black dark:prose-invert dark:prose-li:marker:text-gray lg:mt-5 lg:max-w-[75%];
+  }
+
+  .keep-all {
+    word-break: keep-all;
   }
 }
