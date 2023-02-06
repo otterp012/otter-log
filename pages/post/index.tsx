@@ -1,16 +1,17 @@
-import type { InferGetStaticPropsType } from "next/types";
 import { useRouter } from "next/router";
 
 import { Cards, FilterOptions } from "components";
-import { getAllPublished } from "lib/notion";
 
+import { getAllPublished } from "lib/notion";
 import { ABLE_FILTER_OPTIONS } from "constants/constants";
 import type { MetaData } from "types/types";
 
-export default function Post({
-  posts,
-  filterOptions,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+type PostPageProps = {
+  posts: MetaData[];
+  filterOptions: string[];
+};
+
+const PostPage = ({ posts, filterOptions }: PostPageProps) => {
   const router = useRouter();
   const { filterBy } = router.query;
   const isFiltered = filterBy !== undefined;
@@ -32,7 +33,9 @@ export default function Post({
       <Cards posts={filteredPost} />
     </>
   );
-}
+};
+
+export default PostPage;
 
 export const getStaticProps = async () => {
   const DATA_BASE_ID = process.env.DATABASE_ID as string;

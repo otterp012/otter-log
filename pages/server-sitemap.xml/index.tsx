@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const dynamicFields = data.map((item: MetaData) => {
     return {
       loc: `${PAGE_URL}/post/${item.slug}`,
-      lastmod: new Date(item.last_mod).toISOString(),
+      lastmod: new Date(item.lastEditDate).toISOString(),
     };
   });
 
