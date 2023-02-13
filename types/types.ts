@@ -1,19 +1,27 @@
 import { ParsedUrlQuery } from "querystring";
 
-export type Params = {
-  slug: string | string[] | ParsedUrlQuery | undefined;
-};
+type ParamsType = string | string[] | ParsedUrlQuery;
+export type Params = Record<string, ParamsType>;
 
-export type MetaData = {
+export interface MetaData {
   id: string;
   title: string;
   description: string;
-  thumbnailImg: string;
   slug: string;
-  tags: string[];
   formattedDate: string;
   lastEditDate: Date;
   lastEditFormattedDate: string;
+  tags: string[];
+  thumbnailImg: string;
+  reference: string;
+  name: string;
+  chap: number;
+}
+
+export type ArticleType = {
+  metaData: MetaData;
+  markDownString: string;
+  headings: HeadingType[];
 };
 
 export type FetchedHeadingType = {
@@ -28,8 +36,19 @@ export type HeadingType = {
   text: string;
 };
 
-export type PostType = {
-  metaData: MetaData;
+export type PostMetaData = Omit<MetaData, "reference" | "chap">;
+export type BookMetaData = Omit<MetaData, "tags" | "thumbnailImg">;
+
+interface Blog {
   markDownString: string;
   headings: HeadingType[];
-};
+}
+
+export interface PostType extends Blog {
+  metaData: PostMetaData;
+}
+
+export interface BookType extends Blog {
+  metaData: BookMetaData;
+  name: string;
+}
