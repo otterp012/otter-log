@@ -2,14 +2,14 @@ import dynamic from "next/dynamic";
 
 import { SEO } from "components";
 
-import { getAllPublished, getPost } from "lib/notion";
-import type { MetaData, Params, PostType } from "types/types";
+import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
+import type { ArticleType, MetaData, Params } from "types/types";
 
-const DynamicArticle = dynamic<PostType>(() =>
+const DynamicArticle = dynamic<ArticleType>(() =>
   import("components").then((mod) => mod.Article),
 );
 
-const Post = ({ post }: { post: PostType }) => {
+const Post = ({ post }: { post: ArticleType }) => {
   const { metaData } = post;
   const { title, description, thumbnailImg, slug } = metaData;
 
@@ -30,19 +30,27 @@ export default Post;
 
 export const getStaticProps = async (context: { params: Params }) => {
   const { slug } = context.params;
-  const post = await getPost(slug as string);
+  const metaData = await getPageBySlug({
+    database: "post",
+    slug: slug as string,
+  });
+
+  const { markDownString, headings } = await getMarkDownById(metaData?.id);
 
   return {
     props: {
-      post,
+      post: {
+        metaData,
+        markDownString,
+        headings,
+      },
     },
     revalidate: 60,
   };
 };
 
 export const getStaticPaths = async () => {
-  const DATA_BASE_ID = process.env.DATABASE_ID as string;
-  const posts = await getAllPublished(DATA_BASE_ID);
+  const posts = await getAllPublished("post");
   const paths = posts.map(({ slug }: MetaData) => ({
     params: { slug },
   }));
