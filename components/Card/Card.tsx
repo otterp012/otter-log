@@ -1,21 +1,21 @@
 import { CustomLink } from "components/CustomLink";
 import { Tags } from "components/Tags";
-import { MetaData } from "types/types";
+import { PostMetaData } from "types/types";
 import { ImageWithFallback } from "components/ImageWithFallback";
 import { getRevisedImageUrl } from "lib/utils";
 import { VisuallyHidden } from "components/VisuallyHidden";
 
-export const Cards = ({ posts }: { posts: MetaData[] }) => {
+export const Cards = ({ posts }: { posts: PostMetaData[] }) => {
   return (
     <ul className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-      {posts.map((post: MetaData) => (
+      {posts.map((post: PostMetaData) => (
         <Card {...post} key={post.id} />
       ))}
     </ul>
   );
 };
 
-type CardProps = Omit<MetaData, "id" | "lastEditFormattedDate">;
+type CardProps = Omit<PostMetaData, "lastEditFormattedDate">;
 
 export const Card = (props: CardProps) => {
   const {
