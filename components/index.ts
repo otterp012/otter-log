@@ -13,3 +13,5 @@ export * from "./FilterOption";
 export * from "./SEO";
 export * from "./ImageWithFallback";
 export * from "./Tags";
+export * from "./BookSelect";
+export * from "./BookLists";
