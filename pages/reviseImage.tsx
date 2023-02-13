@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import { InputWithLabel } from "components";
+import * as Select from "@over-ui/select";
 
 const ReviseImage = () => {
   const [fetchState, setFetchState] = useState("fetched.idle");
-  const [input, setInput] = useState({
-    password: "",
-    slug: "",
-  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { password, slug } = input;
     setFetchState("fetched.pending");
-
+    const target = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(target));
+    const { password, slug, databaseName } = data;
     try {
       const response = await fetch("/api/reviseImage", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "x-images-passcode": password,
+          "x-images-passcode": password as string,
         },
         body: JSON.stringify({
           slug,
+          databaseName,
         }),
       });
+
       const json = await response.json();
       console.log(json);
     } catch (error) {
@@ -32,10 +32,6 @@ const ReviseImage = () => {
     }
 
     setFetchState("fetched.fulfilled");
-    setInput({
-      password: "",
-      slug: "",
-    });
   };
 
   const style = {
@@ -64,12 +60,23 @@ const ReviseImage = () => {
         onSubmit={handleSubmit}
         className='flex flex-col items-center justify-center gap-2 md:flex-row'
       >
+        <Select.Root name='databaseName'>
+          <Select.Trigger>
+            {({ selectedValue }) =>
+              selectedValue ? selectedValue : "databaseName"
+            }
+          </Select.Trigger>
+          <Select.Options className='absolute'>
+            <Select.Option value='post'>post</Select.Option>
+            <Select.Option value='book'>book</Select.Option>
+          </Select.Options>
+        </Select.Root>
+
         <InputWithLabel
           inputProps={{
+            name: "password",
             type: "password",
             id: "password",
-            value: input.password,
-            onChange: (e) => setInput({ ...input, password: e.target.value }),
             className: style.input,
           }}
           labelProps={{
@@ -80,8 +87,7 @@ const ReviseImage = () => {
         />
         <InputWithLabel
           inputProps={{
-            value: input.slug,
-            onChange: (e) => setInput({ ...input, slug: e.target.value }),
+            name: "slug",
             id: "slug",
             className: style.input,
           }}

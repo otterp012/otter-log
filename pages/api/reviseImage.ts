@@ -42,7 +42,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const inputPassword = req.headers["x-images-passcode"];
-  const { slug } = req.body;
+  const { slug, databaseName } = req.body;
 
   if (!inputPassword || inputPassword !== IMAGE_PASSWORD) {
     return res.status(400).json({
@@ -50,7 +50,7 @@ export default async function handler(
     });
   }
 
-  const page = await getPage(slug);
+  const page = await getPage(databaseName, slug);
 
   if (!page) return res.status(400).json({ error: "유효한 경로가 아닙니다." });
 
