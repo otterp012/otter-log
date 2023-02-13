@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 
-import { Cards, FilterOptions } from "components";
+import { Cards, FilterOptions, SEO } from "components";
 
 import { getAllPublished } from "lib/notion";
 import { ABLE_FILTER_OPTIONS } from "constants/constants";
-import type { MetaData } from "types/types";
+import type { PostMetaData } from "types/types";
 
 type PostPageProps = {
-  posts: MetaData[];
+  posts: PostMetaData[];
   filterOptions: string[];
 };
 
@@ -21,14 +21,22 @@ const PostPage = ({ posts, filterOptions }: PostPageProps) => {
   const isABELfilter = ABLE_FILTER_OPTIONS.includes(filterBy as string);
   const filteredPost = isFiltered
     ? isABELfilter
-      ? posts.filter((post: MetaData) => post.tags.includes(filterBy as string))
-      : posts.filter((post: MetaData) =>
+      ? posts.filter((post: PostMetaData) =>
+          post.tags.includes(filterBy as string),
+        )
+      : posts.filter((post: PostMetaData) =>
           post.tags.some((tag) => UNABLE_FILTER_OPTIONS.includes(tag)),
         )
     : posts;
+  // todo 이부분 정리하기
 
   return (
     <>
+      <SEO
+        title='Recent Posts'
+        description={posts.map((post) => post.title).join(" ")}
+        url='/post'
+      />
       <FilterOptions />
       <Cards posts={filteredPost} />
     </>
@@ -38,8 +46,7 @@ const PostPage = ({ posts, filterOptions }: PostPageProps) => {
 export default PostPage;
 
 export const getStaticProps = async () => {
-  const DATA_BASE_ID = process.env.DATABASE_ID as string;
-  const data = await getAllPublished(DATA_BASE_ID);
+  const data = await getAllPublished("post");
   const filterOptionSet = new Set();
   data.forEach((item: { tags: string[] }) => {
     item.tags.forEach((tag) => filterOptionSet.add(tag));
