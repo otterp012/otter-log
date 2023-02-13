@@ -4,7 +4,8 @@ import { Tags } from "components/Tags";
 
 import type { MetaData } from "types/types";
 
-type ArticleHeaderProps = Omit<MetaData, "id" | "description" | "slug">;
+type OmitProps = "id" | "description" | "slug";
+type ArticleHeaderProps = Omit<MetaData, OmitProps>;
 
 export const ArticleHeader = (props: ArticleHeaderProps) => {
   const {
@@ -14,24 +15,33 @@ export const ArticleHeader = (props: ArticleHeaderProps) => {
     formattedDate,
     lastEditDate,
     lastEditFormattedDate,
+    reference,
   } = props;
   return (
     <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
       <h2 className='mb-5 text-center text-4xl font-bold md:text-5xl'>
         {title}
       </h2>
-      <Image
-        src={thumbnailImg}
-        alt={title}
-        className='mx-auto h-auto w-[90%] rounded-xl object-cover md:w-[640px]'
-        width={1000}
-        height={1000}
-        priority={true}
-      />
+      {thumbnailImg && (
+        <Image
+          src={thumbnailImg}
+          alt={title}
+          className='mx-auto h-auto w-[90%] rounded-xl object-cover md:w-[640px]'
+          width={1000}
+          height={1000}
+          priority={true}
+        />
+      )}
+
       <div className='space-y-2 py-3 pb-5 text-center'>
-        <div>
-          <Tags tags={tags} />
-        </div>
+        {tags && (
+          <div>
+            <Tags tags={tags} />
+          </div>
+        )}
+        {reference && (
+          <span className='block font-semibold italic'>{reference}</span>
+        )}
         <time
           dateTime={lastEditDate.toString()}
           className='mr-2 inline text-xs'

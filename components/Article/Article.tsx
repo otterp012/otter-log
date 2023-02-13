@@ -2,9 +2,9 @@ import { TableOfContents } from "components/TableOfContents";
 import { ArticleHeader } from "./ArticleHeader";
 import { MarkDown } from "./MarkDown";
 
-import type { PostType } from "types/types";
+import type { ArticleType } from "types/types";
 
-export const Article = (props: PostType) => {
+export const Article = (props: ArticleType) => {
   const { metaData, headings, markDownString } = props;
   return (
     <article className='mt-10'>
