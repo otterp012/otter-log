@@ -15,8 +15,8 @@ export const Nav = memo(() => {
       <ul className='flex space-x-2'>
         {NAV_PATHS.map(({ path, title }) => (
           <li
-            key='path'
-            className={`text-xl font-bold hover:text-deepBlue ${
+            key={path}
+            className={`text-md font-bold hover:text-deepBlue md:text-xl ${
               pathname.includes(path) && "text-deepBlue"
             }`}
           >
