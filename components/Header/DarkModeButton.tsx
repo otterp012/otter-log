@@ -1,9 +1,8 @@
 // hook
-import useDarkMode from "hooks/useDarkMode";
 import { memo } from "react";
-
+import { useDarkModeContext } from "store";
 export const DarkModeButton = memo(() => {
-  const { themeIsDark, themeModeHandler } = useDarkMode();
+  const { themeIsDark, themeModeHandler } = useDarkModeContext();
 
   return (
     <button
