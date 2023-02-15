@@ -15,3 +15,4 @@ export * from "./ImageWithFallback";
 export * from "./Tags";
 export * from "./BookSelect";
 export * from "./BookLists";
+export * from "./Comment";
