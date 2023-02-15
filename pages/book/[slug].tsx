@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { SEO } from "components";
+import { SEO, Comment } from "components";
 import { BOOKS_INFO } from "constants/constants";
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, Params } from "types/types";
@@ -16,6 +16,7 @@ const BooK = ({ book }: { book: ArticleType }) => {
     <>
       <SEO title={title} description={description} url={`/book/${slug}`} />
       <DynamicArticle {...book} />
+      <Comment />
     </>
   );
 };
