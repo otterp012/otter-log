@@ -4,15 +4,18 @@ import { Fragment } from "react";
 import type { AppProps } from "next/app";
 
 import { AppLayout } from "components";
+import { DarkModeProvider } from "store";
 import useSavedScroll from "hooks/useSavedScroll";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useSavedScroll();
   return (
     <Fragment>
-      <AppLayout>
-        <Component {...pageProps} />
-      </AppLayout>
+      <DarkModeProvider>
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
+      </DarkModeProvider>
     </Fragment>
   );
 }
