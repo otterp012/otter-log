@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { SEO } from "components";
+import { SEO, Comment } from "components";
 
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, MetaData, Params } from "types/types";
@@ -21,7 +21,9 @@ const Post = ({ post }: { post: ArticleType }) => {
         url={`/post/${slug}`}
         imageUrl={thumbnailImg}
       />
+
       <DynamicArticle {...post} />
+      <Comment />
     </>
   );
 };
