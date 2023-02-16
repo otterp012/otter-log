@@ -24,21 +24,6 @@ export const MarkDown = ({ markdownString }: { markdownString: string }) => {
             </code>
           );
         },
-        img: ({ node, ...props }) => {
-          const revisedUrl = getRevisedImageUrl({
-            src: props.src as string,
-            height: 800,
-            width: "auto",
-          });
-          return <Image src={revisedUrl} width={1000} height={1000} alt='' />;
-        },
-        a: ({ node, ...props }) => {
-          return (
-            <a href={props.href} target='_blank' rel='noreferrer'>
-              {props.children}
-            </a>
-          );
-        },
         h2: "h3",
         h3: "h4",
       }}
