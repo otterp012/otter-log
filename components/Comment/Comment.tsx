@@ -4,7 +4,7 @@ import { useDarkModeContext } from "store";
 export const Comment = () => {
   const commentsRef = useRef<HTMLElement>(null);
   const { themeIsDark } = useDarkModeContext();
-  const THEME_MODE = themeIsDark ? "github-light" : "github-dark";
+  const THEME_MODE = themeIsDark ? "github-dark" : "github-light";
   const utterancesSelector = "iframe.utterances-frame";
 
   const createUtterancesEl = () => {
