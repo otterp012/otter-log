@@ -60,6 +60,8 @@ export const getRevisedImageUrl = ({
   format?: "webp" | "jpg" | "auto";
 }) => {
   if (src.includes("s3.us-west-2.amazonaws")) return src;
+  if (src.includes("gif")) return src;
+
   const prefixIndex = src.lastIndexOf("upload");
   const prefix = src.slice(0, prefixIndex);
   const restUrl = src.replace(prefix, "").replace("upload/", "");
