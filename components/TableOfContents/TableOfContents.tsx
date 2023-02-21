@@ -11,7 +11,7 @@ type TOCProps = {
 export const TableOfContents = ({ headings }: TOCProps) => {
   const { visibleList } = useToc();
   return (
-    <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[25%] lg:self-start lg:pl-3'>
+    <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[33%] lg:self-start lg:pl-3'>
       <span className='text-lg font-semibold'>📖 목차</span>
       <ol className='space-y-1.5'>
         {headings.map(({ slug, heading, text }) => {
