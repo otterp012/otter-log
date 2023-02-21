@@ -1,9 +1,11 @@
 import dynamic from "next/dynamic";
+import { getPlaiceholder } from "plaiceholder";
 
-import { SEO, Comment } from "components";
+import { SEO, Comment, Article } from "components";
 
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, MetaData, Params } from "types/types";
+import { ArticleHeader } from "components/Article/ArticleHeader";
 
 const DynamicArticle = dynamic<ArticleType>(() =>
   import("components").then((mod) => mod.Article),
@@ -21,8 +23,7 @@ const Post = ({ post }: { post: ArticleType }) => {
         url={`/post/${slug}`}
         imageUrl={thumbnailImg}
       />
-
-      <DynamicArticle {...post} />
+      <Article {...post} />
       <Comment />
     </>
   );
@@ -37,12 +38,16 @@ export const getStaticProps = async (context: { params: Params }) => {
     slug: slug as string,
   });
 
+  const { base64 } = await getPlaiceholder(metaData?.thumbnailImg);
   const { markDownString, headings } = await getMarkDownById(metaData?.id);
 
   return {
     props: {
       post: {
-        metaData,
+        metaData: {
+          ...metaData,
+          blurImg: base64,
+        },
         markDownString,
         headings,
       },
