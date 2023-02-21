@@ -16,21 +16,27 @@ export const ArticleHeader = (props: ArticleHeaderProps) => {
     lastEditDate,
     lastEditFormattedDate,
     reference,
+    blurImg,
   } = props;
+
   return (
-    <header className='space-y-3 border-b border-b-gray pb-8 dark:border-b-deepGray'>
+    <header className='space-y-3 border-b border-b-gray dark:border-b-deepGray'>
       <h2 className='mb-5 text-center text-4xl font-bold md:text-5xl'>
         {title}
       </h2>
+
       {thumbnailImg && (
-        <Image
-          src={thumbnailImg}
-          alt={title}
-          className='mx-auto h-auto w-[90%] rounded-xl object-cover md:w-[640px]'
-          width={1000}
-          height={1000}
-          priority={true}
-        />
+        <div className='relative mx-auto h-[300px] w-[400px] rounded-xl md:w-[700px]'>
+          <Image
+            src={thumbnailImg}
+            alt={title}
+            fill
+            priority={true}
+            blurDataURL={blurImg}
+            placeholder='blur'
+            style={{ objectFit: "contain" }}
+          />
+        </div>
       )}
 
       <div className='space-y-2 py-3 pb-5 text-center'>
