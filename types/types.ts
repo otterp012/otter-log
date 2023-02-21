@@ -16,6 +16,7 @@ export interface MetaData {
   reference: string;
   name: string;
   chap: number;
+  blurImg: string;
 }
 
 export type ArticleType = {
