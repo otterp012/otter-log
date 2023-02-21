@@ -7,6 +7,7 @@ const nextConfig = {
   images: {
     domains: ["s3.us-west-2.amazonaws.com", "res.cloudinary.com"],
     disableStaticImages: true,
+    deviceSizes: [450, 768, 1080, 1200],
   },
 };
 module.exports = withBundleAnalyzer(nextConfig);
