@@ -4,9 +4,7 @@ import slug from "remark-slug";
 
 import { CodeBlock } from "./CodeBlock";
 
-import { getRevisedImageUrl } from "lib/utils";
-
-export const MarkDown = ({ markdownString }: { markdownString: string }) => {
+export const MarkDown = ({ markDownString }: { markDownString: string }) => {
   return (
     <ReactMarkdown
       className='markdown'
@@ -25,12 +23,16 @@ export const MarkDown = ({ markdownString }: { markdownString: string }) => {
           );
         },
         img: ({ node, ...props }) => {
-          const revisedUrl = getRevisedImageUrl({
-            src: props.src as string,
-            height: 800,
-            width: "auto",
-          });
-          return <Image src={revisedUrl} width={1000} height={1000} alt='' />;
+          return (
+            <Image
+              src={props.src as string}
+              alt=''
+              width={900}
+              height={300}
+              sizes='70vw'
+              priority={true}
+            />
+          );
         },
         a: ({ node, ...props }) => {
           return (
@@ -44,7 +46,7 @@ export const MarkDown = ({ markdownString }: { markdownString: string }) => {
       }}
       remarkPlugins={[slug]}
     >
-      {markdownString}
+      {markDownString}
     </ReactMarkdown>
   );
 };
