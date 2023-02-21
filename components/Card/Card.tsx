@@ -1,9 +1,8 @@
 import { CustomLink } from "components/CustomLink";
 import { Tags } from "components/Tags";
 import { PostMetaData } from "types/types";
-import { ImageWithFallback } from "components/ImageWithFallback";
-import { getRevisedImageUrl } from "lib/utils";
 import { VisuallyHidden } from "components/VisuallyHidden";
+import Image from "next/future/image";
 
 export const Cards = ({ posts }: { posts: PostMetaData[] }) => {
   return (
@@ -29,16 +28,19 @@ export const Card = (props: CardProps) => {
   } = props;
 
   return (
-    <li className='mx-auto h-[400px] w-[95%] list-none rounded-lg bg-light-card shadow-lg dark:bg-dark-card sm:w-auto'>
-      <ImageWithFallback
-        src={getRevisedImageUrl({ src: thumbnailImg })}
-        fallbackSrc={getRevisedImageUrl({ src: thumbnailImg, format: "webp" })}
-        alt={title}
-        width={600}
-        height={400}
-        className='h-[50%] rounded-t-lg object-cover'
-        priority={true}
-      />
+    <li className='mx-auto h-[400px] w-[300px] list-none rounded-lg bg-light-card shadow-lg dark:bg-dark-card'>
+      <div className='relative h-[50%]'>
+        <Image
+          src={thumbnailImg}
+          alt={title}
+          fill
+          sizes='(max-width: 450px) 100vw,
+          (max-width: 1080px) 50vw,
+            33vw'
+          className='rounded-t-lg object-cover'
+          priority={true}
+        />
+      </div>
       <div className='mt-4 flex flex-col items-center'>
         <time
           className='font-semi-bold text-xs'
@@ -46,7 +48,9 @@ export const Card = (props: CardProps) => {
         >
           {formattedDate}
         </time>
-        <h2 className='mb-2 text-center text-xl font-bold'>{title}</h2>
+        <h2 className='text-md mb-2 text-center font-bold sm:text-lg'>
+          {title}
+        </h2>
         <p className='h-10 w-[80%] text-center text-sm line-clamp-2'>
           {description}
         </p>
