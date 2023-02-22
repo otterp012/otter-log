@@ -26,7 +26,7 @@ export const ArticleHeader = (props: ArticleHeaderProps) => {
       </h2>
 
       {thumbnailImg && (
-        <div className='relative mx-auto h-[200px] rounded-xl bg-pink md:h-[300px] md:w-[700px]'>
+        <div className='relative mx-auto h-[200px] rounded-xl md:h-[300px] md:w-[700px]'>
           <Image
             src={thumbnailImg}
             alt={title}

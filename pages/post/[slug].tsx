@@ -1,15 +1,9 @@
-import dynamic from "next/dynamic";
 import { getPlaiceholder } from "plaiceholder";
 
 import { SEO, Comment, Article } from "components";
 
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, MetaData, Params } from "types/types";
-import { ArticleHeader } from "components/Article/ArticleHeader";
-
-const DynamicArticle = dynamic<ArticleType>(() =>
-  import("components").then((mod) => mod.Article),
-);
 
 const Post = ({ post }: { post: ArticleType }) => {
   const { metaData } = post;
