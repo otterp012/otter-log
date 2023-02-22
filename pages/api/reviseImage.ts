@@ -43,23 +43,23 @@ export default async function handler(
 ) {
   const inputPassword = req.headers["x-images-passcode"];
   const { slug, databaseName } = req.body;
-
+  console.log(slug, databaseName);
   if (!inputPassword || inputPassword !== IMAGE_PASSWORD) {
-    return res.status(400).json({
+    return res.status(401).json({
       message: "유효한 비밀번호가 아닙니다.",
     });
   }
 
   const page = await getPage(databaseName, slug);
 
-  if (!page) return res.status(400).json({ error: "유효한 경로가 아닙니다." });
+  if (!page) return res.status(404).json({ error: "유효한 경로가 아닙니다." });
 
   // -- cover 이미지와 블록들 안에 있는 이미지들 모으기.
   const cover =
-    page?.cover.type === "file"
+    "cover" in page
       ? {
           id: page.id,
-          coverUrl: page.cover.file.url,
+          coverUrl: page.cover?.file.url,
           imgId: page.id.replace(/-/g, ""),
         }
       : null;
@@ -94,7 +94,7 @@ export default async function handler(
     api_secret: SECRET,
   });
 
-  if (cover) {
+  if (cover?.coverUrl) {
     const { id, coverUrl, imgId } = cover;
 
     const base64 = await downloadImageToBase64(coverUrl);
@@ -109,18 +109,16 @@ export default async function handler(
 
   for (const candidate of candidates) {
     const { id, url: candidateUrl, imgId } = candidate;
-
     const base64 = await downloadImageToBase64(candidateUrl);
 
     const url = await uploadImage(UPLOAD_IMAGE_PREFIX + base64, {
       public_id: imgId,
       folder: `blog/${id}`,
     });
-
     await updateBlockImage(id, url);
   }
 
-  return res.status(200).json({
+  return res.status(201).json({
     message: `${slug}의 이미지를 수정했습니다.`,
   });
 }
