@@ -14,7 +14,7 @@ const Books = ({ books }: { books: BookMetaData[] }) => {
 
   const recentBooks = filteredBy
     ? filteredBooks.sort((a, b) => a.chap - b.chap)
-    : filteredBooks.slice(0, 10);
+    : filteredBooks.slice(0, 6);
 
   return (
     <>

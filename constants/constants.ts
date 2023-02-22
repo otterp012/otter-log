@@ -18,11 +18,6 @@ export const BOOKS_INFO = [
     reference: "단위 테스트, 블라디미르 코리코프 저/임준혁 역",
   },
   {
-    title: "모던 자바스크립트 Deep Dive",
-    id: "deepdive",
-    reference: "모던 자바스크립트 Deep Dive, 이웅모 저",
-  },
-  {
     title: "TIL",
     id: "til",
     reference: "otter의 TIL기록장",
