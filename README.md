@@ -20,11 +20,11 @@ yarn dev
 - tailwind CSS
 
 ## 구현 목록
-- [ ] 다크모드
-- [ ] Notion API 연동
-- [ ] Table of Contents
-- [ ] 댓글 기능
-- [ ] 필터 기능
+- [x] 다크모드
+- [x] Notion API 연동
+- [x] Table of Contents
+- [x] 댓글 기능
+- [x] 필터 기능
 
 
 ## 미구현 목록
