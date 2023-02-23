@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { SEO, Comment, ArticleHeader, ArticleMainProps } from "components";
+import { SEO, ArticleHeader, ArticleMainProps } from "components";
 import { BOOKS_INFO } from "constants/constants";
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, Params } from "types/types";
@@ -16,15 +16,15 @@ const BooK = ({ book }: { book: ArticleType }) => {
         <DynamicArticleMain {...rest} />
       </article>
       <DynamicComment />
-      <Comment />
     </>
   );
 };
 
 export default BooK;
 
-const DynamicComment = dynamic(() =>
-  import("components").then((mod) => mod.Comment),
+const DynamicComment = dynamic<{}>(
+  () => import("components").then((mod) => mod.Comment),
+  { ssr: false },
 );
 
 const DynamicArticleMain = dynamic<ArticleMainProps>(() =>

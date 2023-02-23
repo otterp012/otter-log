@@ -28,8 +28,9 @@ const Post = ({ post }: { post: ArticleType }) => {
 
 export default Post;
 
-const DynamicComment = dynamic(() =>
-  import("components").then((mod) => mod.Comment),
+const DynamicComment = dynamic<{}>(
+  () => import("components").then((mod) => mod.Comment),
+  { ssr: false },
 );
 
 const DynamicArticleMain = dynamic<ArticleMainProps>(() =>
