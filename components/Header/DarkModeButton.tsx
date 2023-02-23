@@ -9,7 +9,7 @@ export const DarkModeButton = memo(() => {
       className='rounded-xl bg-black px-2 py-1 text-xl font-semibold text-white dark:bg-white dark:text-black'
       onClick={themeModeHandler}
     >
-      {themeIsDark ? "LIGHT" : "DARK"}
+      {themeIsDark ? "DARK" : "LIGHT"}
     </button>
   );
 });
