@@ -12,7 +12,7 @@ export const FilterOptions = () => {
   );
 };
 
-const FilterOption = (props: any) => {
+const FilterOption = (props: { value: string }) => {
   const router = useRouter();
   const { filterBy } = router.query;
   const { value } = props;
