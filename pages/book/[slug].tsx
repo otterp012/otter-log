@@ -1,21 +1,35 @@
-import { SEO, Comment, Article } from "components";
+import dynamic from "next/dynamic";
+
+import { SEO, Comment, ArticleHeader } from "components";
 import { BOOKS_INFO } from "constants/constants";
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, Params } from "types/types";
 
 const BooK = ({ book }: { book: ArticleType }) => {
-  const { metaData } = book;
+  const { metaData, ...rest } = book;
   const { title, description, slug } = metaData;
   return (
     <>
       <SEO title={title} description={description} url={`/book/${slug}`} />
-      <Article {...book} />
+      <article className='mt-10'>
+        <ArticleHeader {...metaData} />
+        <DynamicArticleMain {...rest} />
+      </article>
+      <DynamicComment />
       <Comment />
     </>
   );
 };
 
 export default BooK;
+
+const DynamicComment = dynamic(() =>
+  import("components").then((mod) => mod.Comment),
+);
+
+const DynamicArticleMain = dynamic(() =>
+  import("components").then((mod) => mod.ArticleMain),
+);
 
 export const getStaticProps = async (context: { params: Params }) => {
   const { slug } = context.params;
