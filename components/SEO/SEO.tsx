@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { DEFAULT_SEO } from "constants/constants";
 
 type SEOProps = {
   title?: string;
@@ -9,10 +10,10 @@ type SEOProps = {
 
 export const SEO = (props: SEOProps) => {
   const {
-    title = "오터 로그",
-    description = "프론트엔드를 공부하는 오터의 기록입니다. Javascript, React, Next와 단위테스트를 위주로 공부하고 있습니다.",
-    url = "",
-    imageUrl = "https://res.cloudinary.com/ddzuhs646/image/upload/v1675164645/blog/daa778c3-734e-4d57-bca7-7e067dffbb9d/daa778c3734e4d57bca77e067dffbb9d.jpg",
+    title = DEFAULT_SEO.title,
+    description = DEFAULT_SEO.description,
+    url = DEFAULT_SEO.url,
+    imageUrl = DEFAULT_SEO.imageUrl,
   } = props;
   const computedTitle = title === "오터 로그" ? title : `${title} | 오터 로그`;
 
