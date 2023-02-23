@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { getPlaiceholder } from "plaiceholder";
 
-import { SEO, ArticleHeader } from "components";
+import { SEO, ArticleHeader, ArticleMainProps } from "components";
 import { getAllPublished, getMarkDownById, getPageBySlug } from "lib/notion";
 import type { ArticleType, MetaData, Params } from "types/types";
 
@@ -32,7 +32,7 @@ const DynamicComment = dynamic(() =>
   import("components").then((mod) => mod.Comment),
 );
 
-const DynamicArticleMain = dynamic(() =>
+const DynamicArticleMain = dynamic<ArticleMainProps>(() =>
   import("components").then((mod) => mod.ArticleMain),
 );
 
