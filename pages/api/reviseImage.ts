@@ -43,7 +43,6 @@ export default async function handler(
 ) {
   const inputPassword = req.headers["x-images-passcode"];
   const { slug, databaseName } = req.body;
-  console.log(slug, databaseName);
   if (!inputPassword || inputPassword !== IMAGE_PASSWORD) {
     return res.status(401).json({
       message: "유효한 비밀번호가 아닙니다.",
@@ -55,14 +54,13 @@ export default async function handler(
   if (!page) return res.status(404).json({ error: "유효한 경로가 아닙니다." });
 
   // -- cover 이미지와 블록들 안에 있는 이미지들 모으기.
-  const cover =
-    "cover" in page
-      ? {
-          id: page.id,
-          coverUrl: page.cover?.file.url,
-          imgId: page.id.replace(/-/g, ""),
-        }
-      : null;
+  const cover = page.cover.file
+    ? {
+        id: page.id,
+        coverUrl: page.cover.file.url,
+        imgId: page.id.replace(/-/g, ""),
+      }
+    : null;
 
   const blocks = (await getAllBlocksById(page.id)) as Block[];
 
