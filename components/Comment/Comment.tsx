@@ -1,27 +1,22 @@
 import { useEffect, useRef } from "react";
 import { useDarkModeContext } from "store";
 
+import { COMMENT_ATTRS } from "constants/constants";
+
 export const Comment = () => {
   const commentsRef = useRef<HTMLElement>(null);
   const { themeIsDark } = useDarkModeContext();
-  const THEME_MODE = themeIsDark ? "github-dark" : "github-light";
+  const themeMode = themeIsDark ? "github-dark" : "github-light";
   const utterancesSelector = "iframe.utterances-frame";
 
   const createUtterancesEl = () => {
     if (!commentsRef.current) return;
     const comment = document.createElement("script");
-    const attributes = {
-      src: `https://utteranc.es/client.js`,
-      repo: "otterp012/otter-log",
-      "issue-term": "pathname",
-      label: "comment",
-      theme: THEME_MODE,
-      crossOrigin: "anonymous",
-      async: "true",
-    };
-    Object.entries(attributes).forEach(([key, value]) => {
+
+    Object.entries(COMMENT_ATTRS).forEach(([key, value]) => {
       comment.setAttribute(key, value);
     });
+    comment.setAttribute("theme", themeMode);
     commentsRef.current.appendChild(comment);
   };
 
@@ -34,7 +29,7 @@ export const Comment = () => {
     const postThemeMessage = () => {
       const message = {
         type: "set-theme",
-        theme: THEME_MODE,
+        theme: themeMode,
       };
 
       utterancesEl.contentWindow!.postMessage(message, "https://utteranc.es");

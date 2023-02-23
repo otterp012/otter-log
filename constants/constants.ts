@@ -24,6 +24,15 @@ export const BOOKS_INFO = [
   },
 ];
 
+export const COMMENT_ATTRS = {
+  src: `https://utteranc.es/client.js`,
+  repo: "otterp012/otter-log",
+  "issue-term": "pathname",
+  label: "comment",
+  crossOrigin: "anonymous",
+  async: "true",
+};
+
 export const DEFAULT_SEO = {
   title: "오터 로그",
   description:
