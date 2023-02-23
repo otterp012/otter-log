@@ -10,7 +10,6 @@ const useSavedScroll = () => {
   useEffect(() => {
     router.beforePopState(() => {
       isBack.current = true;
-      console.log("beforePopState");
       // router.beforePopState의 콜백함수는
       // 뒤로가기가 실행되기 이전에 동작한다.
       return true;
