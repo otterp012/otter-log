@@ -21,11 +21,11 @@ const PostPage = ({ posts, filterOptions }: PostPageProps) => {
   const isABELfilter = ABLE_FILTER_OPTIONS.includes(filterBy as string);
   const filteredPost = isFiltered
     ? isABELfilter
-      ? posts.filter((post: PostMetaData) =>
-          post.tags.includes(filterBy as string),
+      ? posts.filter(({ tags }: PostMetaData) =>
+          tags.includes(filterBy as string),
         )
-      : posts.filter((post: PostMetaData) =>
-          post.tags.some((tag) => UNABLE_FILTER_OPTIONS.includes(tag)),
+      : posts.filter(({ tags }: PostMetaData) =>
+          tags.some((tag) => UNABLE_FILTER_OPTIONS.includes(tag)),
         )
     : posts;
   // todo 이부분 정리하기
@@ -34,7 +34,7 @@ const PostPage = ({ posts, filterOptions }: PostPageProps) => {
     <>
       <SEO
         title='Recent Posts'
-        description={posts.map((post) => post.title).join(" ")}
+        description={posts.map(({ title }) => title).join(" ")}
         url='/post'
       />
       <FilterOptions />
