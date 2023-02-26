@@ -1,25 +1,27 @@
 module.exports = {
-  collectCoverageFrom: ["**/*.{js,jsx}", "!**/*.d.ts", "!**/node_modules/**"],
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!<rootDir>/out/**",
+    "!<rootDir>/.next/**",
+    "!<rootDir>/*.config.js",
+    "!<rootDir>/coverage/**",
+  ],
   moduleNameMapper: {
     "^components/(.*)$": "<rootDir>/components/$1",
-    components: "<rootDir>/components",
     "^pages/(.*)$": "<rootDir>/pages/$1",
-    "next-contentlayer/hooks": "next-contentlayer/hooks",
-    "contentlayer/generated": "<rootDir>/.contentlayer/generated",
     "^hooks/(.*)$": "<rootDir>/hooks/$1",
     hooks: "<rootDir>/hooks",
+    __mock__: "<rootDir>/__mock__",
     "^constants/(.*)$": "<rootDir>/constants/$1",
     "^lib/(.*)$": "<rootDir>/lib/$1",
-    "^__mock__/(.*)$": "<rootDir>/__mock__/$1",
+    store: "<rootDir>/store",
   },
-  // Jest Cannot find module absolute path
-  // hooks 못찾아서 새로 추가한부분
+
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
-  transformIgnorePatterns: [
-    "/node_modules/(?!next-contentlayer)(.*)",
-    "/node_modules/(?!next)(.*)",
-  ],
+  transformIgnorePatterns: ["/node_modules/(?!next)(.*)"],
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.(js|jsx|ts|tsx|mjs)$": ["babel-jest", { presets: ["next/babel"] }],
