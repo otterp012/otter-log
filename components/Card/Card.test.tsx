@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
 import { createMockRouter, cardMock } from "__mock__";
@@ -9,28 +9,28 @@ import { Card, Cards } from "./Card";
 const setup = () => {
   const cardData = cardMock[0];
   const router = createMockRouter({ pathname: "/" });
-  const container = render(
+  const view = render(
     <RouterContext.Provider value={router}>
       <Card {...cardData} />
     </RouterContext.Provider>,
   );
 
   const user = userEvent.setup();
-  const heading = () => container.getByRole("heading");
+  const heading = () => screen.getByRole("heading");
   const description = () =>
-    container.getByText(/Image 컴포넌트로, 이미지를 최적화하기/);
+    screen.getByText(/Image 컴포넌트로, 이미지를 최적화하기/);
   const link = () =>
-    container.getByRole("link", {
+    screen.getByRole("link", {
       name: "Next/Image로 이미지 최적화 적용하기",
     });
   const tags = () =>
-    container.getAllByRole("link", {
+    screen.getAllByRole("link", {
       name: /^#/,
     });
-  const img = () => container.getByRole("img");
+  const img = () => screen.getByRole("img");
 
   return {
-    container,
+    view,
     heading,
     description,
     link,
@@ -67,8 +67,8 @@ describe("Card Component", () => {
 
 describe("Cards Component", () => {
   it("Cards 컴포넌트는 배열에 담겨진 수만큼 Card 컴포넌트를 렌더링한다.", async () => {
-    const container = render(<Cards posts={cardMock} />);
-    const cards = container.getAllByRole("listitem");
+    render(<Cards posts={cardMock} />);
+    const cards = screen.getAllByRole("listitem");
 
     expect(cards.length).toBe(cardMock.length);
   });
