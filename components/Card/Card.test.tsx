@@ -1,78 +1,81 @@
-import { fireEvent, render, RenderResult } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
+import { createMockRouter, cardMock } from "__mock__";
+
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { Card, Cards } from "./Card";
 
-import { createMockRouter } from "__mock__/next";
+const setup = () => {
+  const cardData = cardMock[0];
+  const router = createMockRouter({ pathname: "/" });
+  const container = render(
+    <RouterContext.Provider value={router}>
+      <Card {...cardData} />
+    </RouterContext.Provider>,
+  );
 
-import { Card } from "./Card";
+  const user = userEvent.setup();
+  const heading = () => container.getByRole("heading");
+  const description = () =>
+    container.getByText(/Image 컴포넌트로, 이미지를 최적화하기/);
+  const link = () =>
+    container.getByRole("link", {
+      name: "Next/Image로 이미지 최적화 적용하기",
+    });
+  const tags = () =>
+    container.getAllByRole("link", {
+      name: /^#/,
+    });
+  const img = () => container.getByRole("img");
+
+  return {
+    container,
+    heading,
+    description,
+    link,
+    tags,
+    img,
+    router,
+    user,
+    cardData,
+  };
+};
 
 describe("Card Component", () => {
-  let rendered: RenderResult;
-  let router;
+  it("문제없이 렌더링이 되어야 한다.", async () => {
+    const { heading, description, link, tags, img } = setup();
 
-  beforeEach(() => {
-    // arrange
-    router = createMockRouter({ pathname: "/" });
-    rendered = render(
-      <RouterContext.Provider value={router}>
-        <MockCard />
-      </RouterContext.Provider>,
-    );
+    expect(heading()).toBeInTheDocument();
+    expect(description()).toBeInTheDocument();
+    expect(link()).toBeInTheDocument();
+    tags().forEach((tag) => expect(tag).toBeInTheDocument());
+    expect(img()).toBeInTheDocument();
   });
 
-  it("Card 컴포넌트가 문제없이 렌더링 되어야 한다.", () => {
-    const Title = rendered.getByRole("heading");
-    const Des = rendered.getByText(mockData.description);
-    const Link = rendered.getByText(/Read More/i);
+  it("link를 누르면, post 페이지의 해당 페이지로 이동해야 한다.", async () => {
+    const { link, router, user, cardData } = setup();
 
-    expect(Title).toBeInTheDocument();
-    expect(Des).toBeInTheDocument();
-    expect(Link).toBeInTheDocument();
-  });
-
-  it("Card 컴포넌트의 `Read More` Link를 누르면, post페이지의 slug로 이동한다.", () => {
-    // arrange
-    const Link = rendered.getByText(/Read More/i);
-
-    // act
-    fireEvent.click(Link);
-
-    // assert
-    expect(router.push).toBeCalled();
+    await user.click(link());
     expect(router.push).toHaveBeenCalledWith(
-      "/post/" + mockData.slug,
-      "/post/" + mockData.slug,
-      {
-        locale: undefined,
-        scroll: undefined,
-        shallow: undefined,
-      },
+      `/post/${cardData.slug}`,
+      `/post/${cardData.slug}`,
+      { locale: undefined, scroll: undefined, shallow: undefined },
     );
   });
 });
 
-const mockData = {
-  id: "b5c38b09-08b8-4bb7-ad04-9bdb98dea672",
-  cover:
-    "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2a0d6d3a-bfb3-493e-b502-6b3aa81c7650/image_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230130%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230130T065231Z&X-Amz-Expires=3600&X-Amz-Signature=004a851cfcb2e4c590024baa098f82913b537ccf0e5b05d85ce33be1a9445c4f&X-Amz-SignedHeaders=host&x-id=GetObject",
-  title: "자바스크립트 이벤트 루프",
-  tags: ["javascript", "async"],
-  description: "자바스크립트 이벤트 루프에 관련하여",
-  date: "2023년 1월 3일",
-  last_edit: "2023년 1월 3일",
-  slug: "js-eventloop",
-  last_mod: new Date("2022-01-03"),
-};
+describe("Cards Component", () => {
+  it("Cards 컴포넌트는 배열에 담겨진 수만큼 Card 컴포넌트를 렌더링한다.", async () => {
+    const container = render(<Cards posts={cardMock} />);
+    const cards = container.getAllByRole("listitem");
 
-const MockCard = () => {
-  return (
-    <Card
-      title={mockData.title}
-      description={mockData.description}
-      thumbnailImg={mockData.cover}
-      slug={mockData.slug}
-      tags={mockData.tags}
-      formattedDate={mockData.date}
-      lastEditDate={mockData.last_mod}
-    />
-  );
-};
+    expect(cards.length).toBe(cardMock.length);
+  });
+
+  it("접근성 위반 사항이 없어야 한다.", async () => {
+    const { container } = render(<Cards posts={cardMock} />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
