@@ -4,17 +4,17 @@ import { PostMetaData } from "types/types";
 import { VisuallyHidden } from "components/VisuallyHidden";
 import Image from "next/future/image";
 
-export const Cards = ({ posts }: { posts: PostMetaData[] }) => {
+export const Cards = ({ posts }: { posts: CardProps[] }) => {
   return (
     <ul className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-      {posts.map((post: PostMetaData) => (
+      {posts.map((post: CardProps) => (
         <Card {...post} key={post.id} />
       ))}
     </ul>
   );
 };
 
-type CardProps = Omit<PostMetaData, "lastEditFormattedDate">;
+export type CardProps = Omit<PostMetaData, "lastEditFormattedDate" | "blurImg">;
 
 export const Card = (props: CardProps) => {
   const {
