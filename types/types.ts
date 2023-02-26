@@ -14,7 +14,6 @@ export interface MetaData {
   tags: string[];
   thumbnailImg: string;
   reference: string;
-  name: string;
   chap: number;
   blurImg: string;
 }
@@ -38,7 +37,9 @@ export type HeadingType = {
 };
 
 export type PostMetaData = Omit<MetaData, "reference" | "chap">;
-export type BookMetaData = Omit<MetaData, "tags" | "thumbnailImg">;
+export type BookMetaData = Omit<MetaData, "tags" | "thumbnailImg"> & {
+  name: string;
+};
 
 interface Blog {
   markDownString: string;
