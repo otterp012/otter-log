@@ -1,6 +1,5 @@
-import { act, render, waitFor, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe } from "jest-axe";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { createMockRouter } from "__mock__/next";
 import { Nav } from "./Nav";
