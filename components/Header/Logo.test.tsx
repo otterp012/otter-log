@@ -1,13 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react/pure";
+import userEvent from "@testing-library/user-event";
 import { RouterContext } from "next/dist/shared/lib/router-context";
-import { createMockRouter } from "__mock__/next";
+import { createMockRouter } from "__mock__";
 
 import { Logo } from "./Logo";
 
 it("Logo를 클릭하면, 메인페이지('/')로 이동한다.", async () => {
   // arrange
-  const router = createMockRouter({ pathname: "/search" });
-
+  const router = createMockRouter({ pathname: "/" });
+  const user = userEvent.setup();
   render(
     <RouterContext.Provider value={router}>
       <Logo />
@@ -17,7 +18,7 @@ it("Logo를 클릭하면, 메인페이지('/')로 이동한다.", async () => {
   const Title = screen.getByRole("link", { name: /otter-log/i });
 
   // act
-  fireEvent.click(Title);
+  await user.click(Title);
 
   // assert
   expect(router.push).toHaveBeenCalledWith("/", "/", {
