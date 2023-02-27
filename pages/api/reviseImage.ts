@@ -92,7 +92,7 @@ export default async function handler(
     api_secret: SECRET,
   });
 
-  if (cover?.coverUrl) {
+  if (cover) {
     const { id, coverUrl, imgId } = cover;
 
     const base64 = await downloadImageToBase64(coverUrl);
