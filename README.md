@@ -27,3 +27,14 @@ yarn dev
 - [x] 필터 기능
 - [ ] 필터 페이지를 추가해서, 필터기능 세분화하기
 - [ ] 관련 포스트를 제공해주는 컴포넌트 구현
+
+## 블로그를 만들면서 있었던일
+- [meta 태그와 sitemap을 활용한 블로그 SEO 최적화](https://otter-log.world/post/next-seo-optimazation)
+- [Notion API 사용기](https://otter-log.world/post/notion-next-blog)
+- [Notion API 이미지 문제 해결하기](https://otter-log.world/post/revise-notion-img)
+- [React에서 이미지 최적화 진행하기](https://otter-log.world/post/blog-optimization-image)
+- [Next/Image로 이미지 최적화 하기](https://otter-log.world/post/next-image-component)
+- [Read More 버튼과 검색 최적화, 클립패턴](https://otter-log.world/post/seo-clip-pattern)
+- [w3c validator로 마크업 개선하기](https://otter-log.world/post/w3c-validator-markup)
+- [Next에서 번들사이즈 개선하기](https://otter-log.world/post/next-optimization-bundle)
+- [다크모드 깜빡임 문제 해결하기](https://otter-log.world/post/next-dark-mode)
