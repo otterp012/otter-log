@@ -27,10 +27,9 @@ export const MarkDown = ({ markDownString }: { markDownString: string }) => {
             <Image
               src={props.src as string}
               alt=''
-              width={900}
+              width={700}
               height={300}
-              sizes='70vw'
-              priority={true}
+              sizes='80vw'
             />
           );
         },
