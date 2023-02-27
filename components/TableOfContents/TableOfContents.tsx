@@ -11,14 +11,14 @@ type TOCProps = {
 export const TableOfContents = ({ headings }: TOCProps) => {
   const { visibleList } = useToc();
   return (
-    <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[33%] lg:self-start lg:pl-3'>
+    <div className='mx-auto space-y-2 pb-7 lg:sticky lg:top-[200px] lg:mt-10 lg:w-[250px] lg:self-start lg:pl-3'>
       <span className='text-lg font-semibold'>📖 목차</span>
       <ol className='space-y-1.5'>
         {headings.map(({ slug, heading, text }) => {
           const visibleStyle = slug === visibleList ? "bg-deepGray" : "";
           const headingStyle = {
-            h3: "text-md pl-5",
-            h4: "pl-8 text-sm",
+            h3: "text-sm pl-5",
+            h4: "pl-8 text-xs",
           };
 
           return (
