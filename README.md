@@ -37,4 +37,3 @@ yarn dev
 - [Read More 버튼과 검색 최적화, 클립패턴](https://otter-log.world/post/seo-clip-pattern)
 - [w3c validator로 마크업 개선하기](https://otter-log.world/post/w3c-validator-markup)
 - [Next에서 번들사이즈 개선하기](https://otter-log.world/post/next-optimization-bundle)
-- [오터로그 CLS 개선하기](https://otter-log.world/post/optimization-cls)
